@@ -458,6 +458,33 @@ body.noscroll{overflow:hidden}
 .ddate .md b{font-family:var(--f-num);font-size:21px;font-weight:700;line-height:1}
 .ddate .md i{font-style:normal;font-size:11.5px;font-weight:600;margin:0 1px;color:inherit;opacity:.75}
 @media (max-width:380px){.drow{grid-template-columns:68px minmax(0,1fr)}.ddate .md b{font-size:18px}.ddate .md i{font-size:10.5px}}
+
+/* v9: no drinking, day-only date, weight-first month cells */
+.tiles.duo2{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.duo2 .tile .t b{font-size:30px}
+.dcells{grid-template-columns:repeat(3,minmax(0,1fr))}
+.drow{grid-template-columns:58px minmax(0,1fr)}
+.ddate .md b{font-size:24px}
+.ddate .md i{font-size:12px}
+@media (max-width:380px){.drow{grid-template-columns:52px minmax(0,1fr)}.ddate .md b{font-size:21px}}
+.cd .n{font-size:11px;font-weight:600}
+.cd .w{font-size:18px!important;line-height:1.1;margin:1px 0 2px}
+.cd .wa,.cd .r{font-size:10.5px!important;font-weight:600!important;opacity:.95}
+@media (max-width:400px){.cd .w{font-size:16px!important}.cd .wa,.cd .r{font-size:10px!important}}
+@media (min-width:520px){.cd .w{font-size:20px!important}.cd .wa,.cd .r{font-size:12px!important}}
+
+/* v10 */
+.dcells{grid-template-columns:minmax(0,1.7fr) minmax(0,1fr) minmax(0,1fr)}
+.dc.w b{font-size:26px}
+.dc.w b small{font-size:12px}
+.dc.wa b,.dc.r b{font-size:17px}
+.ddate .md b{font-size:26px}
+.cd.has{background:var(--c-weight-soft);box-shadow:none}
+.cd.has .n{color:var(--ink)}
+.cd:not(.has):not(.future):not(.blank){background:transparent;box-shadow:inset 0 0 0 1px var(--line)}
+.cd:not(.has):not(.future) .n{color:var(--faint)}
+.cd.future{background:transparent;opacity:.45}
+@media (max-width:380px){.dc.w b{font-size:22px}.dc.wa b,.dc.r b{font-size:15px}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
@@ -490,10 +517,9 @@ body.noscroll{overflow:hidden}
       </div>
     </div>
 
-    <div class="tiles tri">
+    <div class="tiles duo2">
       <div class="tile" style="--tc:var(--c-run);--tc-soft:var(--c-run-soft)"><div class="ico" style="background:var(--c-run)"><svg viewBox="0 0 24 24"><circle cx="15" cy="4.5" r="1.8"/><path d="M8 21l3-6 3 2 1 5M6 12l3-4 4 1 2 4 3 1"/></svg></div><div class="t"><span>本周跑量</span><b id="tWeek">0<small>km</small></b><em id="tWeekSub"></em></div></div>
       <div class="tile" style="--tc:var(--c-month);--tc-soft:var(--c-month-soft)"><div class="ico" style="background:var(--c-month)"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="3"/><path d="M4 10h16M9 3v4M15 3v4"/></svg></div><div class="t"><span>本月跑量</span><b id="tMonth">0<small>km</small></b><em id="tMonthSub"></em></div></div>
-      <div class="tile" style="--tc:var(--c-drink);--tc-soft:var(--c-drink-soft)"><div class="ico" style="background:var(--c-drink)"><svg viewBox="0 0 24 24"><path d="M7 3h10l-1 7a4 4 0 0 1-8 0zM12 14v6M8 20h8"/></svg></div><div class="t"><span>本月喝酒</span><b id="tDrink">0<small>天</small></b><em id="tDrinkSub"></em></div></div>
     </div>
 
     <div class="sh" style="--sc:var(--c-weight);--sc-soft:var(--c-weight-soft)"><span class="sico"><svg viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11M4.5 6h.01M4.5 12h.01M4.5 18h.01"/></svg></span><h2>每日明细</h2><span class="cnt" id="histCount"></span><div class="r"><button class="blk" id="addDay" type="button" aria-label="记录一天"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>记录</button></div></div>
@@ -507,7 +533,6 @@ body.noscroll{overflow:hidden}
         <button type="button" data-m="run" aria-pressed="false"><i style="background:var(--c-run)"></i>跑步</button>
       </div>
       <div class="chart-wrap" id="chartWrap"></div>
-      <div class="legend"><i></i>底部圆点是喝酒的日子</div>
       <div class="tstats" id="trendStats"></div>
     </div>
 
@@ -622,10 +647,6 @@ body.noscroll{overflow:hidden}
         <label class="box"><span>腰围</span><span class="in"><input id="rWaist" type="number" inputmode="decimal" step="0.1" min="30" max="200" placeholder="0.0"><em>cm</em></span></label>
         <label class="box"><span>跑步</span><span class="in"><input id="rRun" type="number" inputmode="decimal" step="0.01" min="0" max="200" placeholder="0"><em>km</em></span></label>
       </div>
-      <div class="seg" id="rDrink" style="margin-top:10px">
-        <button type="button" data-v="0" aria-pressed="true">没喝酒</button>
-        <button type="button" data-v="1" class="drink" aria-pressed="false">喝了酒</button>
-      </div>
       <div class="end" style="margin-top:14px">
         <button class="btn soft" type="button" id="rDelete" hidden>删除这天</button>
         <button class="btn" type="submit" id="rSave" style="flex:1">保存记录</button>
@@ -647,7 +668,7 @@ body.noscroll{overflow:hidden}
       <div class="cal-h"><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span><span>日</span></div>
       <div class="cal" id="cal"></div>
     </div>
-    <div class="mv-legend"><span><i style="background:var(--c-weight)"></i>体重 kg</span><span><i style="background:var(--c-waist)"></i>腰围 cm</span><span><i style="background:var(--c-run)"></i>跑步 km</span><span><i style="background:var(--c-drink);border-radius:50%"></i>喝酒</span></div>
+    <div class="mv-legend"><span><i style="background:var(--c-weight)"></i>体重 kg</span><span><i style="background:var(--c-waist)"></i>腰围 cm</span><span><i style="background:var(--c-run)"></i>跑步 km</span></div>
     <p class="mv-tip">点任意一天可以记录或修改</p>
   </div>
 </div>
@@ -793,14 +814,10 @@ function renderOverview(){
   const prog = (v,g,c) => `<div class="prog"><i style="width:${Math.min(100,v/g*100)}%;background:var(${c})"></i></div>`;
   $('tWeekSub').innerHTML = st.weekGoal ? `目标 ${st.weekGoal} km${prog(wk,st.weekGoal,'--c-run')}` : `跑了 ${S.daily.filter(r=>r.date>=wkS && r.run>0).length} 天`;
   $('tMonthSub').innerHTML = st.monthGoal ? `目标 ${st.monthGoal} km${prog(mo,st.monthGoal,'--c-month')}` : `跑了 ${S.daily.filter(r=>r.date>=moS && r.run>0).length} 天`;
-  const dm = S.daily.filter(r=>r.date>=moS && r.drink);
-  $('tDrink').innerHTML = `${dm.length}<small>天</small>`;
-  $('tDrinkSub').textContent = dm.length ? `最近 ${cn(dm[dm.length-1].date)}` : `${t.getMonth()+1}月还没喝`;
 }
 
 /* ---------- 日常: record form ---------- */
-function setDrink(v){ S.ui.drink = !!v; document.querySelectorAll('#rDrink button').forEach(b=>b.setAttribute('aria-pressed', (b.dataset.v==='1')===S.ui.drink)); }
-document.querySelectorAll('#rDrink button').forEach(b => b.onclick = () => setDrink(b.dataset.v==='1'));
+function setDrink(v){ S.ui.drink = !!v; }
 function fillForm(date){
   const r = S.daily.find(x=>x.date===date);
   $('rWeight').value = r?.weight ?? ''; $('rWaist').value = r?.waist ?? ''; $('rRun').value = r?.run ?? '';
@@ -818,7 +835,7 @@ $('recForm').addEventListener('submit', async e => {
   const date = $('rDate').value; if (!date) return;
   const rec = { date, weight:num($('rWeight').value), waist:num($('rWaist').value), run:num($('rRun').value), drink:S.ui.drink, updatedAt:new Date().toISOString() };
   const note = m => { $('recNote').textContent = m; $('recNote').className='formnote err'; };
-  if (rec.weight==null && rec.waist==null && rec.run==null && !rec.drink) return note('至少填一项：体重、腰围、跑步距离，或标记喝了酒。');
+  if (rec.weight==null && rec.waist==null && rec.run==null) return note('至少填一项：体重、腰围或跑步距离。');
   if (rec.weight!=null && (rec.weight<20||rec.weight>300)) return note('体重看起来不对，请填 20–300 kg 之间的数。');
   if (rec.waist!=null && (rec.waist<30||rec.waist>200)) return note('腰围看起来不对，请填 30–200 cm 之间的数。');
   $('rSave').disabled = true;
@@ -838,7 +855,7 @@ function renderHistory(){
   const GL = '<svg viewBox="0 0 24 24"><path d="M7 3h10l-1 7a4 4 0 0 1-8 0zM12 14v6M8 20h8"/></svg>';
   const cell = (cls, f, k, v, u) => `<div class="dc ${cls} ${v==null?'none':''}" data-f="${f}" role="button" tabindex="0" aria-label="修改${k}"><span>${k}</span><b>${v==null?'＋':v}${v==null?'':`<small>${u}</small>`}</b></div>`;
   $('histList').innerHTML = rows.map(r=>{ const d = pd(r.date);
-    return `<div class="drow ${r.date===sel?'sel':''}" data-d="${r.date}"><div class="ddate ${r.date===tS?'today':''}" data-open role="button" tabindex="0" aria-label="在表单中修改这天"><span class="md"><b>${d.getMonth()+1}</b><i>月</i><b>${d.getDate()}</b><i>日</i></span></div><div class="dcells">${cell('w','weight','体重',r.weight!=null?f1(r.weight):null,'kg')}${cell('wa','waist','腰围',r.waist!=null?f1(r.waist):null,'cm')}${cell('r','run','跑步',r.run?f2(r.run):null,'km')}<div class="dc dr ${r.drink?'yes':''}" data-f="drink" role="button" tabindex="0" aria-label="切换是否喝酒">${GL}<span>${r.drink?'喝酒':'无'}</span></div></div></div>`;
+    return `<div class="drow ${r.date===sel?'sel':''}" data-d="${r.date}"><div class="ddate ${r.date===tS?'today':''}" data-open role="button" tabindex="0" aria-label="在表单中修改这天"><span class="md"><b>${d.getDate()}</b></span></div><div class="dcells">${cell('w','weight','体重',r.weight!=null?f1(r.weight):null,'kg')}${cell('wa','waist','腰围',r.waist!=null?f1(r.waist):null,'cm')}${cell('r','run','跑步',r.run?f2(r.run):null,'km')}</div></div>`;
   }).join('') + `<button class="more" id="moreHist" type="button"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="3"/><path d="M4 10h16M9 3v4M15 3v4"/></svg>${all.length>rows.length ? `展开全部 ${all.length} 天 · 按月查看` : '按月查看'}</button>`;
 }
 const LIM = { weight:[20,300,'体重','kg'], waist:[30,200,'腰围','cm'], run:[0,200,'跑步','km'] };
@@ -910,16 +927,16 @@ function renderMonth(){
   $('mvNext').disabled = S.ui.month >= curM; $('mvNext').style.opacity = S.ui.month >= curM ? .35 : 1;
   const map = new Map(S.daily.filter(r=>r.date.startsWith(S.ui.month)).map(r=>[r.date,r]));
   const recs = [...map.values()].sort(byDateAsc);
-  const ws = recs.filter(r=>r.weight!=null), run = recs.reduce((a,r)=>a+(r.run||0),0), dk = recs.filter(r=>r.drink).length;
+  const ws = recs.filter(r=>r.weight!=null), run = recs.reduce((a,r)=>a+(r.run||0),0); const avgW = ws.length ? ws.reduce((a,r)=>a+r.weight,0)/ws.length : null;
   const wch = ws.length>1 ? ws[ws.length-1].weight-ws[0].weight : null;
   const blk = (c,k,v) => `<div class="ms" style="background:var(${c}-soft)"><span>${k}</span><b>${v}</b></div>`;
-  $('mvSum').innerHTML = blk('--c-weight','体重变化', wch==null?'—':`${wch>0?'+':''}${wch.toFixed(1)}<small>kg</small>`) + blk('--c-run','月跑量', `${f2(run)}<small>km</small>`) + blk('--c-drink','喝酒', `${dk}<small>天</small>`) + blk('--c-month','记录', `${recs.length}<small>天</small>`);
+  $('mvSum').innerHTML = blk('--c-weight','体重变化', wch==null?'—':`${wch>0?'+':''}${wch.toFixed(1)}<small>kg</small>`) + blk('--c-run','月跑量', `${f2(run)}<small>km</small>`) + blk('--c-waist','平均体重', avgW==null?'—':`${avgW.toFixed(1)}<small>kg</small>`) + blk('--c-month','记录', `${recs.length}<small>天</small>`);
   let h = '';
   for (let i=0;i<off;i++) h += '<div class="cd blank"></div>';
   for (let d=1; d<=nDays; d++){
     const dt = `${S.ui.month}-${pad2(d)}`, r = map.get(dt), fut = dt > tS;
-    const cls = ['cd', r?'has':'', dt===tS?'today':'', fut?'future':'', r?.drink?'drank':''].join(' ');
-    h += `<button class="${cls}" type="button" data-cd="${dt}" ${fut?'disabled':''} aria-label="${m}月${d}日"><span class="n">${d}${r?.drink?'<i></i>':''}</span>${r?.weight!=null?`<span class="w">${f1(r.weight)}</span>`:''}${r?.waist!=null?`<span class="wa">${f1(r.waist)}</span>`:''}${r?.run?`<span class="r">${Math.round(r.run*10)/10}</span>`:''}</button>`;
+    const cls = ['cd', r?'has':'', dt===tS?'today':'', fut?'future':''].join(' ');
+    h += `<button class="${cls}" type="button" data-cd="${dt}" ${fut?'disabled':''} aria-label="${m}月${d}日"><span class="n">${d}</span>${r?.weight!=null?`<span class="w">${f1(r.weight)}</span>`:''}${r?.waist!=null?`<span class="wa">${f1(r.waist)}</span>`:''}${r?.run?`<span class="r">${Math.round(r.run*10)/10}</span>`:''}</button>`;
   }
   $('cal').innerHTML = h;
 }
@@ -971,7 +988,7 @@ function renderChart(){
   const drinks = inRange.filter(r=>r.drink);
 
   const Wd = Math.max(280, wrap.clientWidth || 480), H = Wd < 480 ? 220 : 250;
-  const P = {l:36, r:10, t:18, b:44};
+  const P = {l:36, r:10, t:18, b:28};
   const pw = Wd-P.l-P.r, ph = H-P.t-P.b;
   const t0 = start.getTime(), t1 = end.getTime();
   const X = s => P.l + (pd(s).getTime()-t0)/(t1-t0) * pw;
@@ -1001,7 +1018,7 @@ function renderChart(){
     if (weekly && S.settings.weekGoal){ const gy=Y(S.settings.weekGoal); svg += `<line x1="${P.l}" x2="${Wd-P.r}" y1="${gy}" y2="${gy}" stroke="${color}" stroke-dasharray="4 4"/><text x="${Wd-P.r}" y="${gy-5}" text-anchor="end" style="fill:${color}">周目标 ${S.settings.weekGoal}</text>`; }
     if (weekly) svg += `<text x="${P.l}" y="${P.t-6}">按周合计</text>`;
     const tot = pts.reduce((a,r)=>a+r.run,0);
-    $('trendStats').innerHTML = stat('总跑量', `${f2(tot)} km`) + stat('跑步天数', `${pts.length} 天`) + stat('单次最长', pts.length?`${f2(Math.max(...pts.map(r=>r.run)))} km`:'—') + stat('喝酒天数', `${drinks.length} 天`);
+    $('trendStats').innerHTML = stat('总跑量', `${f2(tot)} km`) + stat('跑步天数', `${pts.length} 天`) + stat('单次最长', pts.length?`${f2(Math.max(...pts.map(r=>r.run)))} km`:'—') + stat('平均每次', pts.length?`${f2(tot/pts.length)} km`:'—');
   } else {
     if (!pts.length){ wrap.innerHTML = `<div class="empty"><b>这段时间没有${meta.label}记录</b>换一个时间范围，或在上方补记。</div>`; $('trendStats').innerHTML=''; S.chart=null; return; }
     const vals = pts.map(r=>r[m]); const refs = [];
@@ -1024,13 +1041,10 @@ function renderChart(){
       model.push({x:p[0], y:p[1], label:`${md(pts[i].date)} 周${WK[pd(pts[i].date).getDay()]}`, val:`${f1(pts[i][m])} ${meta.unit}`}); });
     const L = xy[xy.length-1]; svg += `<text x="${Math.min(L[0], Wd-P.r-4)}" y="${L[1]-11}" text-anchor="${L[0]>Wd-50?'end':'middle'}" style="fill:var(--ink);font-family:var(--f-num);font-weight:700;font-size:14px">${f1(vals[vals.length-1])}</text>`;
     const ch = vals[vals.length-1]-vals[0]; const avg = vals.reduce((a,b)=>a+b,0)/vals.length;
-    $('trendStats').innerHTML = stat('区间变化', `<span class="delta ${Math.abs(ch)<.05?'':ch<0?'down':'up'}">${ch>0?'+':''}${ch.toFixed(1)}</span>`) + stat('平均', f1(avg)) + stat('最低 / 最高', `${f1(Math.min(...vals))}/${f1(Math.max(...vals))}`) + stat('喝酒天数', `${drinks.length} 天`);
+    $('trendStats').innerHTML = stat('区间变化', `<span class="delta ${Math.abs(ch)<.05?'':ch<0?'down':'up'}">${ch>0?'+':''}${ch.toFixed(1)}</span>`) + stat('平均', f1(avg)) + stat('最低 / 最高', `${f1(Math.min(...vals))}/${f1(Math.max(...vals))}`) + stat('记录次数', `${vals.length} 次`);
   }
   const by = P.t+ph;
   xt.forEach((s,i)=>{ svg += `<text x="${X(s)}" y="${by+16}" text-anchor="${i===0?'start':i===xt.length-1?'end':'middle'}">${xLabel(s)}</text>`; });
-  const dy = H-9;
-  svg += `<line x1="${P.l}" x2="${Wd-P.r}" y1="${dy}" y2="${dy}" stroke="var(--line)" stroke-dasharray="2 4"/>`;
-  drinks.forEach(r=>{ svg += `<circle cx="${X(r.date).toFixed(1)}" cy="${dy}" r="3.4" fill="var(--c-drink)"/>`; });
   svg += `<line id="guide" x1="0" x2="0" y1="${P.t}" y2="${by}" stroke="var(--faint)" stroke-dasharray="3 3" visibility="hidden"/>`;
   wrap.innerHTML = `<svg viewBox="0 0 ${Wd} ${H}" width="${Wd}" height="${H}" role="img" aria-label="${meta.label}趋势图">${svg}</svg><div class="tip" id="tip" hidden></div>`;
   S.chart = {model, W:Wd};
@@ -1265,12 +1279,12 @@ function renderMine(){
   if (s.targetWeight) sub.push(`目标 ${s.targetWeight} kg`);
   $('profSub').textContent = sub.length ? sub.join(' · ') : '填写身高后可计算 BMI';
   const tot = S.daily.reduce((a,r)=>a+(r.run||0),0);
-  const dr = S.daily.filter(r=>r.drink && r.date.startsWith(y)).length;
+  const yr = S.daily.filter(r=>r.date.startsWith(y)).reduce((a,r)=>a+(r.run||0),0);
   const tile = (c, svg, k, v) => `<div class="tile"><div class="ico" style="background:var(${c})"><svg viewBox="0 0 24 24">${svg}</svg></div><div class="t"><span>${k}</span><b>${v}</b></div></div>`;
   $('kv').innerHTML =
     tile('--c-weight','<path d="M4 19h16M7 16V9M12 16V5M17 16v-4"/>','记录天数',`${S.daily.length}<small>天</small>`) +
     tile('--c-run','<circle cx="15" cy="4.5" r="1.8"/><path d="M8 21l3-6 3 2 1 5M6 12l3-4 4 1 2 4 3 1"/>','累计跑量',`${f2(tot)}<small>km</small>`) +
-    tile('--c-drink','<path d="M7 3h10l-1 7a4 4 0 0 1-8 0zM12 14v6M8 20h8"/>',`${y}年喝酒`,`${dr}<small>天</small>`) +
+    tile('--c-month','<rect x="4" y="5" width="16" height="15" rx="3"/><path d="M4 10h16M9 3v4M15 3v4"/>',`${y}年跑量`,`${f2(yr)}<small>km</small>`) +
     tile('--c-check','<path d="M7 3h7l5 5v11a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M14 3v5h5"/>','检查 / 体检',`${S.exams.length}<small>项</small> ${S.checkups.length}<small>份</small>`);
 }
 async function renderStorage(){
@@ -1284,7 +1298,7 @@ async function saveFile(filename, text, mime){
   $('expFallback').hidden=false; $('expText').value=text; $('expText').focus(); $('expText').select();
 }
 $('expJson').onclick = async () => { const o = backupObj(); o.attachments = []; try{ for (const f of await IDB.all('files')) o.attachments.push({id:f.id, type:f.type, size:f.size, data: await blobToB64(f.blob)}); }catch(e){} saveFile(`Body备份-${ds(today())}.json`, JSON.stringify(o), 'application/json'); };
-$('expCsv').onclick = () => { const rows=[['日期','体重(kg)','腰围(cm)','跑步(km)','是否喝酒']].concat(S.daily.map(r=>[r.date, r.weight??'', r.waist??'', r.run??'', r.drink?'是':'否'])); saveFile(`Body每日记录-${ds(today())}.csv`, '﻿'+rows.map(r=>r.join(',')).join('\n'), 'text/csv'); };
+$('expCsv').onclick = () => { const rows=[['日期','体重(kg)','腰围(cm)','跑步(km)']].concat(S.daily.map(r=>[r.date, r.weight??'', r.waist??'', r.run??''])); saveFile(`Body每日记录-${ds(today())}.csv`, '﻿'+rows.map(r=>r.join(',')).join('\n'), 'text/csv'); };
 $('expCopy').onclick = async () => { try{ await navigator.clipboard.writeText($('expText').value); toast('已复制'); }catch(e){ $('expText').select(); toast('请手动复制选中的内容'); } };
 $('impFile').addEventListener('change', async e => {
   const f = e.target.files[0]; e.target.value=''; if (!f) return;
