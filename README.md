@@ -50,9 +50,11 @@
 
 ## 体检报告自动识别
 
-自动识别异常指标需要你自己的 Claude API Key：
+自动识别异常指标使用 OpenAI（ChatGPT）的 API，需要你自己的 API Key：
 
-1. 在 [console.anthropic.com](https://console.anthropic.com) 创建 API Key。
-2. 在 Body 的 **我的 → 资料与目标** 里填入 Key，点 **保存设置**。
+1. 打开 [platform.openai.com](https://platform.openai.com)，用 ChatGPT 账号登录。
+2. 在 **Billing** 里充值少量余额（API 单独计费，ChatGPT Plus 订阅不包含 API 额度）。
+3. 在 **API keys** 里点 **Create new secret key**，复制以 `sk-` 开头的 Key。
+4. 在 Body 的 **我的 → 资料与目标** 里填入 Key，点 **保存设置**。模型默认用 `gpt-5-mini`，一般不用改。
 
-Key 只保存在你这台设备的浏览器里，导出的备份文件不会包含它。识别时，报告内容会直接从你的浏览器发送到 Anthropic 接口，按 API 用量计费。不填 Key 也可以手动添加异常指标。
+Key 只保存在你这台设备的浏览器里，导出的备份文件不会包含它。识别时，报告内容会从你的浏览器直接发送给 OpenAI，按用量计费，识别一份体检报告通常只要几分钱人民币。不填 Key 也可以手动添加异常指标。
