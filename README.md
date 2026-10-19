@@ -11,15 +11,17 @@
 | `index.html` | 整个应用（页面、样式、逻辑都在这一个文件里） |
 | `manifest.webmanifest` | 让网页可以“添加到主屏幕”，像 App 一样全屏打开 |
 | `sw.js` | 离线缓存，没网也能打开和记录 |
-| `icons/` | 应用图标 |
-| `.nojekyll` | 告诉 GitHub Pages 原样发布文件 |
+| `apple-touch-icon.png` | iPhone 添加到主屏幕时用的图标 |
+| `icon-192.png`、`icon-512.png` | 安卓和电脑用的图标 |
+
+所有文件都在同一层，**没有子文件夹**，全部放在仓库根目录即可。
 
 ## 部署步骤
 
 1. 登录 GitHub，点右上角 **+ → New repository**，仓库名填 `body`（或任意名字），选 **Public**，点 **Create repository**。
    - 免费账号的 GitHub Pages 需要公开仓库。仓库里只有程序文件，**你的健康数据不在仓库里**，不会被公开。
-2. 在新仓库页面点 **uploading an existing file**，把本文件夹里的所有内容（`index.html`、`manifest.webmanifest`、`sw.js`、`README.md`、`.nojekyll`、`icons` 文件夹）拖进去，点 **Commit changes**。
-   - `.nojekyll` 是隐藏文件，网页上传时如果看不到可以跳过，不影响使用。
+2. 在新仓库页面点 **uploading an existing file**，把解压出来的 7 个文件一起拖进去，点 **Commit changes**。
+   - 上传后打开 `你的网址/apple-touch-icon.png`，能看到图标就说明放对了位置。
 3. 进入仓库的 **Settings → Pages**，在 **Build and deployment** 里：
    - Source 选 **Deploy from a branch**
    - Branch 选 **main**，文件夹选 **/ (root)**，点 **Save**
@@ -37,6 +39,7 @@
 ## 添加到手机主屏幕
 
 - **iPhone**：用 Safari 打开网址 → 分享按钮 → **添加到主屏幕**
+- 如果之前添加过、图标不对：先长按删除旧的桌面图标，用 Safari 重新打开网址刷新一次，再重新添加。
 - **安卓**：用 Chrome 打开网址 → 右上角菜单 → **添加到主屏幕 / 安装应用**
 
 ## 数据保存在哪里
