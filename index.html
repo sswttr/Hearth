@@ -1,0 +1,1243 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#F2F2F5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="manifest.webmanifest">
+<title>Body</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024"%3E%3Cdefs%3E%3ClinearGradient id="bg" x1="0" y1="0" x2="1" y2="1"%3E%3Cstop offset="0" stop-color="#0E1B3D"/%3E%3Cstop offset=".62" stop-color="#1D3F91"/%3E%3Cstop offset="1" stop-color="#3B7BF0"/%3E%3C/linearGradient%3E%3CradialGradient id="glow" cx=".78" cy=".85" r=".55"%3E%3Cstop offset="0" stop-color="#7FB2FF" stop-opacity=".45"/%3E%3Cstop offset="1" stop-color="#7FB2FF" stop-opacity="0"/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect width="1024" height="1024" rx="230" fill="url%28#bg%29"/%3E%3Crect width="1024" height="1024" rx="230" fill="url%28#glow%29"/%3E%3Cpath d="M340 250 V774 M340 250 H515 a125 125 0 0 1 0 250 H340 M340 500 H545 a137 137 0 0 1 0 274 H340" fill="none" stroke="#FFFFFF" stroke-width="100" stroke-linejoin="round" stroke-linecap="round"/%3E%3Cpath d="M420 640 H458 L492 588 L536 692 L570 640 H604" fill="none" stroke="#2FD0A0" stroke-width="30" stroke-linejoin="round" stroke-linecap="round"/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024"%3E%3Cdefs%3E%3ClinearGradient id="bg" x1="0" y1="0" x2="1" y2="1"%3E%3Cstop offset="0" stop-color="#0E1B3D"/%3E%3Cstop offset=".62" stop-color="#1D3F91"/%3E%3Cstop offset="1" stop-color="#3B7BF0"/%3E%3C/linearGradient%3E%3CradialGradient id="glow" cx=".78" cy=".85" r=".55"%3E%3Cstop offset="0" stop-color="#7FB2FF" stop-opacity=".45"/%3E%3Cstop offset="1" stop-color="#7FB2FF" stop-opacity="0"/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect width="1024" height="1024" rx="230" fill="url%28#bg%29"/%3E%3Crect width="1024" height="1024" rx="230" fill="url%28#glow%29"/%3E%3Cpath d="M340 250 V774 M340 250 H515 a125 125 0 0 1 0 250 H340 M340 500 H545 a137 137 0 0 1 0 274 H340" fill="none" stroke="#FFFFFF" stroke-width="100" stroke-linejoin="round" stroke-linecap="round"/%3E%3Cpath d="M420 640 H458 L492 588 L536 692 L570 640 H604" fill="none" stroke="#2FD0A0" stroke-width="30" stroke-linejoin="round" stroke-linecap="round"/%3E%3C/svg%3E">
+<meta name="apple-mobile-web-app-title" content="Body">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Noto+Sans+SC:wght@400;500;700;900&display=swap">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font-size:14px}img{max-width:100%}[hidden]{display:none!important}</style>
+<style>
+/* Layout: iOS-style app (max 560px). Large page titles, soft grey ground, white cards with big radii,
+   coloured rounded-square icons per metric, plain bold section headers, floating frosted tab bar. */
+:root{
+  --bg:#F2F2F5; --card:#FFFFFF; --fill:#F2F2F5; --fill-2:#E8E8EC; --line:#ECECEF;
+  --ink:#111114; --ink-2:#3A3A40; --muted:#8A8A92; --faint:#B4B4BB;
+  --blue:#2F7BF6; --blue-soft:#E6EFFE;
+  --c-weight:#2F7BF6; --c-waist:#F5A524; --c-run:#1FB58A; --c-month:#2EAD57; --c-drink:#F0507A;
+  --c-exam:#14A3B8; --c-check:#8B5CF6; --c-dark:#3A3A40;
+  --good:#1FA463; --warn:#E38B00; --bad:#EF4444; --low:#2F7BF6;
+  --good-soft:#E3F6EC; --warn-soft:#FFF2DB; --bad-soft:#FDE6E6; --low-soft:#E6EFFE; --drink-soft:#FDE7EE; --check-soft:#EFE9FE;
+  --btn:#111114; --btn-ink:#FFFFFF;
+  --nav-bg:rgba(255,255,255,.78); --nav-line:rgba(0,0,0,.06); --nav-sel:#E9E9ED;
+  --shadow:0 1px 2px rgba(17,17,20,.03);
+  --f-num:"Barlow Condensed","DIN Condensed","Noto Sans SC",sans-serif;
+  --f-body:-apple-system,BlinkMacSystemFont,"PingFang SC","Noto Sans SC","Microsoft YaHei",sans-serif;
+  --r-card:24px; --r-tile:20px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#000000; --card:#1C1C1E; --fill:#2C2C2E; --fill-2:#3A3A3C; --line:#2C2C2E;
+  --ink:#F5F5F7; --ink-2:#D1D1D6; --muted:#8E8E93; --faint:#636366;
+  --blue:#4C8DFF; --blue-soft:#16264A;
+  --c-weight:#4C8DFF; --c-waist:#FFB534; --c-run:#2FD0A0; --c-month:#3CC46A; --c-drink:#FF6B92;
+  --c-exam:#2BC0D6; --c-check:#A07CFF; --c-dark:#636366;
+  --good:#34D07F; --warn:#FFAA2B; --bad:#FF6464; --low:#4C8DFF;
+  --good-soft:#123222; --warn-soft:#3A2A0C; --bad-soft:#3E1818; --low-soft:#16264A; --drink-soft:#3D1724; --check-soft:#271B45;
+  --btn:#F5F5F7; --btn-ink:#111114;
+  --nav-bg:rgba(36,36,38,.78); --nav-line:rgba(255,255,255,.08); --nav-sel:#3A3A3C;
+  --shadow:none;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#000000; --card:#1C1C1E; --fill:#2C2C2E; --fill-2:#3A3A3C; --line:#2C2C2E;
+  --ink:#F5F5F7; --ink-2:#D1D1D6; --muted:#8E8E93; --faint:#636366;
+  --blue:#4C8DFF; --blue-soft:#16264A;
+  --c-weight:#4C8DFF; --c-waist:#FFB534; --c-run:#2FD0A0; --c-month:#3CC46A; --c-drink:#FF6B92;
+  --c-exam:#2BC0D6; --c-check:#A07CFF; --c-dark:#636366;
+  --good:#34D07F; --warn:#FFAA2B; --bad:#FF6464; --low:#4C8DFF;
+  --good-soft:#123222; --warn-soft:#3A2A0C; --bad-soft:#3E1818; --low-soft:#16264A; --drink-soft:#3D1724; --check-soft:#271B45;
+  --btn:#F5F5F7; --btn-ink:#111114;
+  --nav-bg:rgba(36,36,38,.78); --nav-line:rgba(255,255,255,.08); --nav-sel:#3A3A3C;
+  --shadow:none;
+  color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 calc(110px + env(safe-area-inset-bottom,0px))}
+.wrap{max-width:560px;margin:0 auto}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.big{font-family:var(--f-num);font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.005em}
+.muted{color:var(--muted)} .faint{color:var(--faint)}
+
+/* top bar */
+.topbar{display:flex;align-items:center;gap:12px;padding-top:14px}
+.topbar .sp{flex:1}
+.cbtn{width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--card);display:grid;place-items:center;cursor:pointer;box-shadow:0 2px 8px -4px rgba(0,0,0,.15);color:var(--ink);flex:none}
+.cbtn svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.cbtn:active{transform:scale(.96)}
+.cbtn.sync-ok{color:var(--good)} .cbtn.sync-local{color:var(--warn)}
+.avatar{width:46px;height:46px;border-radius:50%;background:radial-gradient(circle at 50% 40%,#0B1530 0%,#123E8A 62%,#9CC3FF 100%);color:#fff;display:grid;place-items:center;font-weight:700;font-size:17px;border:2px solid var(--card);box-shadow:0 2px 8px -3px rgba(0,0,0,.35);cursor:pointer;flex:none}
+.avatar.lg{width:64px;height:64px;font-size:24px}
+.pagetitle{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:18px 2px 16px}
+.pagetitle h1{margin:0;font-size:34px;font-weight:900;letter-spacing:.01em;line-height:1.1}
+.pagetitle span{color:var(--muted);font-size:14px}
+
+.page{display:grid;gap:12px}
+.card{background:var(--card);border-radius:var(--r-card);box-shadow:var(--shadow)}
+.cpad{padding:20px 22px}
+.gap{height:10px}
+
+/* hero */
+.hero .lbl{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:15px}
+.hero .lbl .chip{font-size:12px;background:var(--fill);padding:2px 8px;border-radius:999px;color:var(--muted)}
+.hero .val{font-size:56px;line-height:1.05;margin:6px 0 8px}
+.hero .val small{font-family:var(--f-body);font-size:18px;font-weight:600;color:var(--muted);margin-left:6px}
+.hero .meta{display:flex;flex-wrap:wrap;gap:6px 24px;color:var(--muted);font-size:14.5px}
+.hero .meta b{font-weight:500;color:var(--ink-2)}
+.delta.down{color:var(--good)!important} .delta.up{color:var(--warn)!important}
+
+/* tiles */
+.tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.tile{background:var(--card);border-radius:var(--r-tile);padding:16px 16px;display:flex;align-items:center;gap:12px;min-width:0;box-shadow:var(--shadow)}
+.ico{width:40px;height:40px;border-radius:11px;display:grid;place-items:center;flex:none;color:#fff}
+.ico svg{width:22px;height:22px;stroke:#fff;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.tile .t{min-width:0;display:flex;flex-direction:column}
+.tile .t span{color:var(--muted);font-size:14px;line-height:1.3}
+.tile .t b{font-size:19px;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tile .t b small{font-size:13px;color:var(--muted);font-weight:500;margin-left:2px}
+.tile .t em{font-style:normal;font-size:12px;color:var(--muted)}
+.prog{height:4px;background:var(--fill);border-radius:2px;margin-top:4px;overflow:hidden}
+.prog i{display:block;height:100%;border-radius:2px}
+
+/* section header */
+.sh{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:18px 6px 2px;flex-wrap:wrap}
+.sh h2{margin:0;font-size:19px;font-weight:700;display:flex;align-items:baseline;gap:6px}
+.sh h2 small{font-size:15px;font-weight:500;color:var(--muted)}
+.sh .r{color:var(--muted);font-size:14.5px;display:flex;align-items:center;gap:4px}
+.tbtn{border:0;background:transparent;color:var(--blue);font-size:15px;font-weight:500;cursor:pointer;padding:4px 2px;display:inline-flex;align-items:center;gap:2px}
+.tbtn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round}
+.rng{display:flex;gap:2px}
+.rng button{border:0;background:transparent;color:var(--muted);font-size:14px;padding:3px 8px;border-radius:999px;cursor:pointer}
+.rng button[aria-pressed="true"]{background:var(--fill-2);color:var(--ink);font-weight:600}
+
+/* rows */
+.rows{display:grid}
+.row{display:flex;align-items:center;gap:14px;padding:16px 20px;cursor:pointer;min-width:0;background:none;border:0;width:100%;text-align:left}
+.rows .row+.row,.rows .rowwrap+.rowwrap{border-top:1px solid var(--line)}
+.rowwrap .row{border-top:0}
+.circ{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;flex:none;color:#fff;font-weight:700}
+.circ svg{width:22px;height:22px;stroke:#fff;fill:none;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
+.circ.date{background:var(--fill);color:var(--ink);flex-direction:column;line-height:1;gap:2px}
+.circ.date b{font-family:var(--f-num);font-size:19px}
+.circ.date small{font-size:10px;color:var(--muted);font-weight:500}
+.row .tx{flex:1;min-width:0;display:flex;flex-direction:column}
+.row .tx b{font-size:16.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .tx span{font-size:13.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .rv{font-size:17px;font-weight:500;font-variant-numeric:tabular-nums;white-space:nowrap;text-align:right;display:flex;align-items:center;gap:6px}
+.row .rv small{color:var(--muted);font-size:13px}
+.row .chev{width:16px;height:16px;stroke:var(--faint);fill:none;stroke-width:2.2;stroke-linecap:round;transition:transform .2s}
+.rowwrap.open .chev{transform:rotate(90deg)}
+.row.sel{background:var(--blue-soft)}
+.rows .row:first-child{border-radius:var(--r-card) var(--r-card) 0 0}
+.rows .row:last-child{border-radius:0 0 var(--r-card) var(--r-card)}
+.rows .row:only-child{border-radius:var(--r-card)}
+.dk{color:var(--c-drink)}
+.detail{padding:0 20px 18px 80px}
+@media (max-width:420px){.detail{padding:0 18px 18px}}
+.detail .note{font-size:14.5px;white-space:pre-wrap;color:var(--ink-2);margin-bottom:8px}
+
+/* form */
+.fgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.box{background:var(--fill);border-radius:14px;padding:10px 12px 8px;display:flex;flex-direction:column;min-width:0;cursor:text}
+.box>span{font-size:12.5px;color:var(--muted)}
+.box .in{display:flex;align-items:baseline;gap:4px}
+.box input,.box select{border:0;background:transparent;outline:0;width:100%;min-width:0;padding:0;font-family:var(--f-num);font-weight:700;font-size:26px;line-height:1.2;font-variant-numeric:tabular-nums}
+.box input::placeholder{color:var(--faint)}
+.box em{font-style:normal;color:var(--muted);font-size:13px}
+.box.text input,.box.text select{font-family:var(--f-body);font-weight:500;font-size:16px;padding:3px 0}
+.box:focus-within{box-shadow:inset 0 0 0 1.5px var(--blue)}
+.frow{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+.frow label{font-size:16px;font-weight:600}
+.datepill{background:var(--fill);border:0;border-radius:999px;padding:7px 14px;font-size:15px;font-weight:500;outline:0}
+.seg{display:flex;background:var(--fill);border-radius:12px;padding:3px;gap:3px}
+.seg button{flex:1;border:0;background:transparent;border-radius:9px;padding:8px 10px;cursor:pointer;color:var(--muted);font-size:14.5px;font-weight:500;white-space:nowrap;display:inline-flex;align-items:center;justify-content:center;gap:6px}
+.seg button[aria-pressed="true"]{background:var(--card);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.seg button.drink[aria-pressed="true"]{background:var(--c-drink);color:#fff}
+.seg button i{width:8px;height:8px;border-radius:50%;display:inline-block}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:50px;padding:0 22px;border-radius:999px;border:0;background:var(--btn);color:var(--btn-ink);font-weight:600;cursor:pointer;white-space:nowrap;font-size:16px}
+.btn:active{transform:scale(.98)}
+.btn[disabled]{opacity:.5;cursor:default}
+.btn.full{width:100%}
+.btn.sm{height:36px;padding:0 16px;font-size:14px}
+.btn.soft{background:var(--fill);color:var(--ink)}
+.btn.blue{background:var(--blue);color:#fff}
+.btn.danger{background:var(--bad-soft);color:var(--bad)}
+.btn.armed,.linkbtn.armed{background:var(--bad)!important;color:#fff!important}
+.linkbtn{background:none;border:0;color:var(--bad);cursor:pointer;padding:4px 8px;border-radius:999px;font-size:14px}
+.formnote{font-size:13.5px;color:var(--muted);min-height:18px;margin-top:8px}
+.formnote.err{color:var(--bad)}
+.stack{display:grid;gap:10px}
+textarea.ta{width:100%;min-height:76px;background:var(--fill);border:0;border-radius:14px;padding:10px 12px;resize:vertical;outline:0}
+textarea.ta:focus{box-shadow:inset 0 0 0 1.5px var(--blue)}
+.drop{border:1.5px dashed var(--fill-2);border-radius:14px;padding:16px;text-align:center;color:var(--muted);font-size:14px;cursor:pointer;display:block}
+.drop.over{border-color:var(--blue);color:var(--blue)}
+.picked{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;justify-content:center}
+.picked span{font-size:12.5px;background:var(--fill);border-radius:999px;padding:2px 10px;color:var(--ink)}
+.check{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--muted)}
+.end{display:flex;gap:8px;justify-content:flex-end;align-items:center;flex-wrap:wrap}
+.g2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+@media (max-width:400px){.fgrid{grid-template-columns:repeat(2,minmax(0,1fr))}.fgrid .box:last-child{grid-column:1/-1}.g2{grid-template-columns:1fr}.hero .val{font-size:48px}}
+
+/* chart */
+.chart-wrap{position:relative;margin-top:12px}
+.chart-wrap svg{display:block;width:100%;overflow:visible}
+.chart-wrap svg text{font-size:11px;fill:var(--muted);font-family:var(--f-body)}
+.tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--bg);font-size:12.5px;padding:6px 10px;border-radius:10px;white-space:nowrap;transform:translate(-50%,-118%)}
+.tip b{font-family:var(--f-num);font-size:15px}
+.tstats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:14px}
+.tstats div{background:var(--fill);border-radius:14px;padding:10px 12px;display:flex;flex-direction:column;min-width:0}
+.tstats span{font-size:12px;color:var(--muted)}
+.tstats b{font-family:var(--f-num);font-size:20px;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+@media (max-width:480px){.tstats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.empty{text-align:center;color:var(--muted);font-size:14.5px;padding:26px 16px}
+.empty b{display:block;color:var(--ink);font-size:16px;margin-bottom:4px}
+.demo-tag{font-size:12px;padding:2px 8px;border-radius:999px;background:var(--warn-soft);color:var(--warn);font-weight:500}
+.legend{display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--muted);margin-top:8px}
+.legend i{width:7px;height:7px;border-radius:50%;background:var(--c-drink)}
+
+/* files */
+.files{display:flex;gap:8px;flex-wrap:wrap}
+.file{display:inline-flex;align-items:center;gap:8px;background:var(--fill);border-radius:12px;padding:5px 12px 5px 5px;text-decoration:none;color:var(--ink);font-size:13.5px;max-width:240px}
+.file .th{width:34px;height:34px;border-radius:8px;background:var(--card);display:grid;place-items:center;font-size:10px;font-weight:700;color:var(--muted);overflow:hidden;flex:none}
+.file .th img{width:100%;height:100%;object-fit:cover}
+.file span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* abnormal */
+.abn{margin-top:14px}
+.abn-h{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+.abn-h b{font-size:15px}
+.abn-sum{font-size:14px;color:var(--muted);margin:0 0 6px}
+.flag-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.flag-row:last-child{border-bottom:0}
+.flag-row .nm b{font-weight:600;font-size:15px}
+.flag-row .nm small{display:block;color:var(--muted);font-size:12.5px}
+.flag-row .vr{grid-column:1/2;font-size:13.5px;color:var(--muted)}
+.flag-row .vr b{font-family:var(--f-num);font-size:18px;color:var(--ink);font-weight:700;margin-right:3px}
+.flag-row .act{grid-row:1/3;grid-column:2;display:flex;align-items:center;gap:2px}
+.tag{display:inline-flex;align-items:center;gap:2px;font-size:12.5px;padding:3px 10px;border-radius:999px;font-weight:600;white-space:nowrap}
+.tag.hi{background:var(--bad-soft);color:var(--bad)} .tag.lo{background:var(--low-soft);color:var(--low)} .tag.ab{background:var(--warn-soft);color:var(--warn)} .tag.ok{background:var(--good-soft);color:var(--good)} .tag.gr{background:var(--fill);color:var(--muted)}
+.xbtn{border:0;background:none;color:var(--faint);cursor:pointer;width:28px;height:28px;border-radius:50%;font-size:14px}
+.xbtn:hover{background:var(--fill);color:var(--ink)}
+.status{font-size:14px;color:var(--muted);display:flex;align-items:center;gap:8px;padding:6px 0}
+.spin{width:15px;height:15px;border:2px solid var(--fill-2);border-top-color:var(--blue);border-radius:50%;animation:sp .8s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.mini-add{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:10px}
+.mini-add .box input,.mini-add .box select{font-family:var(--f-body);font-size:15px;font-weight:500}
+.watch{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.watch .w{background:var(--fill);border-radius:12px;padding:8px 12px;font-size:13.5px;display:flex;gap:8px;align-items:center}
+
+/* settings */
+.prof{display:flex;align-items:center;gap:16px}
+.prof b{font-size:21px;font-weight:700;display:block}
+.prof span{color:var(--muted);font-size:14px}
+.opt{display:flex;align-items:center;gap:14px;padding:16px 20px}
+.opt+.opt{border-top:1px solid var(--line)}
+.opt .tx{flex:1;min-width:0}
+.opt .tx b{display:block;font-size:16px;font-weight:600}
+.opt .tx span{font-size:13.5px;color:var(--muted)}
+.inset{margin:0 20px 16px;padding:12px 14px;border-radius:14px;background:var(--fill);font-size:14px;display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.inset textarea{width:100%;min-height:130px;font-family:ui-monospace,Menlo,monospace;font-size:12px;background:var(--card);border:0;border-radius:10px;padding:10px}
+
+/* nav */
+nav.tabs{white-space:nowrap;position:fixed;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:9;display:flex;gap:4px;padding:6px;border-radius:999px;background:var(--nav-bg);border:1px solid var(--nav-line);backdrop-filter:blur(20px) saturate(1.6);-webkit-backdrop-filter:blur(20px) saturate(1.6);box-shadow:0 10px 30px -10px rgba(0,0,0,.25);width:min(360px,calc(100% - 32px))}
+nav.tabs button{flex:1;border:0;background:transparent;border-radius:999px;padding:8px 6px 6px;cursor:pointer;color:var(--ink);font-size:12px;font-weight:500;display:flex;flex-direction:column;align-items:center;gap:2px}
+nav.tabs button svg{width:25px;height:25px}
+nav.tabs button[aria-selected="true"]{background:var(--nav-sel);color:var(--blue)}
+.toast{position:fixed;left:50%;bottom:calc(100px + env(safe-area-inset-bottom,0px));transform:translateX(-50%) translateY(16px);opacity:0;background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:999px;font-size:14px;transition:.25s;z-index:20;pointer-events:none;max-width:calc(100% - 32px)}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.banner{padding:12px 16px;border-radius:16px;background:var(--warn-soft);color:var(--warn);font-size:14px;margin-top:12px}
+.disclaim{font-size:12.5px;color:var(--faint);margin:8px 6px 0}
+
+/* ===== v4: block styling ===== */
+:root{--c-weight-soft:#E8F0FE;--c-waist-soft:#FEF3DC;--c-run-soft:#DFF6EE;--c-month-soft:#E2F5E8;--c-drink-soft:#FDE6EC;--c-exam-soft:#DDF3F6;--c-check-soft:#EEE8FE;--c-dark-soft:#EDEDF0;--bad-soft2:#FDE6E6;
+  --hero-blue:linear-gradient(140deg,#0E1B3D 0%,#1D3F91 70%,#2F6DE0 100%);--hero-violet:linear-gradient(140deg,#21123F 0%,#4B2A96 70%,#7C4DEB 100%);--hero-ink:linear-gradient(140deg,#16161A 0%,#2C2C34 100%)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--c-weight-soft:#15284A;--c-waist-soft:#3A2B0E;--c-run-soft:#0F3329;--c-month-soft:#123020;--c-drink-soft:#3D1724;--c-exam-soft:#0E3036;--c-check-soft:#271B45;--c-dark-soft:#2C2C2E;--bad-soft2:#3E1818}}
+:root[data-theme="dark"]{--c-weight-soft:#15284A;--c-waist-soft:#3A2B0E;--c-run-soft:#0F3329;--c-month-soft:#123020;--c-drink-soft:#3D1724;--c-exam-soft:#0E3036;--c-check-soft:#271B45;--c-dark-soft:#2C2C2E;--bad-soft2:#3E1818}
+#page-set .sh[style*="--bad"]{--sc-soft:var(--bad-soft2)!important}
+
+body{font-family:var(--f-body);letter-spacing:.01em}
+.pagetitle h1{font-family:"Noto Sans SC",var(--f-body);font-weight:900;font-size:36px;letter-spacing:.02em}
+.pagetitle span{background:var(--card);padding:6px 12px;border-radius:12px;font-size:13.5px;font-weight:500;color:var(--ink-2)}
+
+/* section header = block */
+.sh{background:var(--sc-soft);border-radius:18px;padding:10px 12px;margin:14px 0 0;gap:10px;align-items:center;flex-wrap:nowrap;min-height:56px}
+.sh .sico{width:36px;height:36px;border-radius:11px;background:var(--sc);display:grid;place-items:center;flex:none}
+.sh .sico svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.sh h2{font-family:"Noto Sans SC",var(--f-body);font-size:18px;font-weight:700;color:var(--ink);white-space:nowrap}
+.sh .cnt:empty{display:none}
+.sh .cnt{font-family:var(--f-num);font-weight:700;font-size:16px;background:var(--card);color:var(--ink);padding:1px 9px;border-radius:8px}
+.sh .r{margin-left:auto;display:flex;align-items:center;gap:6px;min-width:0}
+.hintchip{font-size:12.5px;color:var(--ink-2);background:var(--card);padding:4px 10px;border-radius:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.blk{border:0;background:var(--sc);color:#fff;font-weight:600;font-size:14px;padding:7px 12px 7px 9px;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;gap:3px}
+.blk svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:2.6;stroke-linecap:round}
+.sh .rng{background:var(--card);border-radius:10px;padding:3px}
+.sh .rng button{border-radius:7px;font-size:13px;padding:4px 7px;color:var(--muted)}
+.sh .rng button[aria-pressed="true"]{background:var(--sc);color:#fff}
+.sh + .card,.sh + .dlist,.sh + form.card{margin-top:-4px}
+.page{gap:10px}
+
+/* hero blocks */
+.hero-blue,.hero-violet,.hero-ink{color:#fff;border:0}
+.hero-blue{background:var(--hero-blue)} .hero-violet{background:var(--hero-violet)} .hero-ink{background:var(--hero-ink)}
+.hero-blue .lbl,.hero-violet .lbl{color:rgba(255,255,255,.75)}
+.hero-blue .lbl .chip,.hero-violet .lbl .chip{background:rgba(255,255,255,.16);color:#fff}
+.hero-blue .val small,.hero-violet .val small{color:rgba(255,255,255,.7)}
+.hero .meta{gap:8px}
+.hero-blue .meta span,.hero-violet .meta span{background:rgba(255,255,255,.12);padding:5px 10px;border-radius:10px;color:rgba(255,255,255,.8);font-size:13.5px}
+.hero-blue .meta b,.hero-violet .meta b{color:#fff}
+.hero-blue .delta.down,.hero-amber .delta.down{color:#7BF0B3!important} .hero-blue .delta.up{color:#FFD27A!important}
+.hero .val{font-size:64px}
+.hero-ink b{color:#fff} .hero-ink span{color:rgba(255,255,255,.7)!important}
+
+/* tiles tinted */
+.tile{background:var(--tc-soft,var(--card));flex-direction:column;align-items:flex-start;gap:10px;padding:14px}
+.tile .t span{font-size:13px;color:var(--ink-2)}
+.tile .t b{font-family:var(--f-num);font-weight:700;font-size:30px;line-height:1.05}
+.tile .t b small{font-family:var(--f-body);font-size:13px;font-weight:500}
+.tile .t em{color:var(--ink-2);opacity:.8;margin-top:2px}
+.tile .prog{background:var(--card)}
+.tile .ico{width:36px;height:36px;border-radius:10px}
+.tile .ico svg{width:20px;height:20px}
+
+/* daily rows as blocks */
+.dlist{display:grid;gap:8px}
+.drow{display:grid;grid-template-columns:54px minmax(0,1fr);gap:10px;background:var(--card);border-radius:18px;padding:10px;border:0;width:100%;text-align:left;cursor:pointer;align-items:stretch}
+.drow.sel{box-shadow:inset 0 0 0 2px var(--blue)}
+.ddate{background:var(--fill);border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1;gap:3px;padding:6px 0}
+.ddate b{font-family:var(--f-num);font-size:24px;font-weight:700}
+.ddate small{font-size:11px;color:var(--muted)}
+.ddate.today{background:var(--ink);color:var(--bg)} .ddate.today small{color:var(--bg);opacity:.75}
+.dcells{display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) 46px;gap:6px}
+.dc{border-radius:12px;padding:6px 8px;display:flex;flex-direction:column;justify-content:center;min-width:0}
+.dc span{font-size:11px;color:var(--ink-2);opacity:.8;line-height:1.2}
+.dc b{font-family:var(--f-num);font-size:20px;font-weight:700;line-height:1.15;white-space:nowrap}
+.dc b small{font-family:var(--f-body);font-size:10.5px;font-weight:500;color:var(--muted);margin-left:1px}
+.dc.w{background:var(--c-weight-soft)} .dc.wa{background:var(--c-waist-soft)} .dc.r{background:var(--c-run-soft)}
+.dc.none b{color:var(--faint)}
+.dc.dr{align-items:center;background:var(--fill)}
+.dc.dr.yes{background:var(--c-drink);color:#fff}
+.dc.dr.yes span{color:#fff;opacity:.9}
+.dc.dr svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.dc.dr:not(.yes) svg{stroke:var(--faint)}
+.more{width:100%;border:0;background:var(--card);border-radius:14px;padding:12px;font-weight:600;color:var(--blue);cursor:pointer}
+.dlist .empty{background:var(--card);border-radius:18px}
+@media (max-width:380px){.dcells{grid-template-columns:repeat(3,minmax(0,1fr)) 38px}.dc{padding:5px 6px}.dc b{font-size:18px}}
+
+/* form inputs */
+.box input,.box select,.box textarea{color:var(--ink);-webkit-text-fill-color:var(--ink);opacity:1}
+.box input::placeholder{color:var(--faint);-webkit-text-fill-color:var(--faint)}
+.datepill{color:var(--ink);-webkit-text-fill-color:var(--ink)}
+.fgrid .box:nth-child(1){background:var(--c-weight-soft)} .fgrid .box:nth-child(2){background:var(--c-waist-soft)} .fgrid .box:nth-child(3){background:var(--c-run-soft)}
+#setForm .fgrid .box,#setForm .g2 .box{background:var(--fill)}
+.box>span{color:var(--ink-2)}
+.tstats div{background:var(--c-run-soft)}
+.seg button i{width:9px;height:9px;border-radius:3px}
+
+/* rows blocks for exam / checkups */
+.rows{gap:8px;display:grid}
+.card:has(> .rows){background:transparent;box-shadow:none}
+.rows .rowwrap,.rows>.empty{background:var(--card);border-radius:18px}
+.rows .rowwrap+.rowwrap{border-top:0}
+.rows .row{border-radius:18px!important}
+.circ{border-radius:14px}
+.opt .circ{width:42px;height:42px;border-radius:12px}
+
+
+/* v5: two big blocks + three tiles */
+:root{--hero-amber:linear-gradient(140deg,#6B3500 0%,#B86A06 65%,#F0A534 100%)}
+.duo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.hero-amber{background:var(--hero-amber);color:#fff;border:0}
+.hero-amber .lbl{color:rgba(255,255,255,.8)} .hero-amber .lbl .chip{background:rgba(255,255,255,.18);color:#fff}
+.hero-amber .val small{color:rgba(255,255,255,.75)}
+.hero-amber .meta span{background:rgba(255,255,255,.14);padding:5px 10px;border-radius:10px;color:rgba(255,255,255,.88);font-size:13.5px}
+.hero-amber .meta b{color:#fff}
+.hero-amber .delta.up{color:#FFE7A8!important}
+.big2{padding:18px;min-width:0;display:flex;flex-direction:column}
+.big2 .lbl{font-size:14px}
+.big2 .val{font-size:52px;margin:8px 0 10px}
+.big2 .val small{font-size:15px;margin-left:4px}
+.big2 .meta{margin-top:auto;gap:6px;flex-direction:column;align-items:flex-start}
+.big2 .meta span{font-size:12.5px!important;padding:4px 9px!important}
+.tiles.tri{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.tri .tile{padding:12px;gap:8px}
+.tri .tile .ico{width:32px;height:32px;border-radius:9px}
+.tri .tile .ico svg{width:18px;height:18px}
+.tri .tile .t span{font-size:12.5px}
+.tri .tile .t b{font-size:28px}
+.tri .tile .t em{font-size:11.5px}
+@media (max-width:400px){.big2{padding:16px}.big2 .val{font-size:42px}.tri .tile .t b{font-size:24px}.duo,.tiles.tri{gap:8px}}
+
+
+/* v6: inline cell editing */
+.drow{cursor:default}
+.dc[data-f]{cursor:pointer;transition:box-shadow .15s,transform .05s}
+.dc[data-f]:hover{box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--ink) 25%,transparent)}
+.dc[data-f]:active{transform:scale(.97)}
+.dc.none b{color:var(--faint);font-weight:500}
+.dc.edit{box-shadow:inset 0 0 0 2px var(--blue)!important;background:var(--card)!important}
+.dc.edit input{width:100%;border:0;background:transparent;outline:0;padding:0;font-family:var(--f-num);font-weight:700;font-size:20px;line-height:1.15;color:var(--ink);-webkit-text-fill-color:var(--ink);-moz-appearance:textfield}
+.dc.edit input::-webkit-outer-spin-button,.dc.edit input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.dc.edit input::placeholder{color:var(--faint);-webkit-text-fill-color:var(--faint);font-size:14px}
+.ddate{cursor:pointer}
+
+
+/* v7: record sheet */
+.sheet-bg{position:fixed;inset:0;z-index:30;background:rgba(0,0,0,.38);display:flex;align-items:flex-end;justify-content:center;padding:0 max(0px,env(safe-area-inset-right,0px)) 0 max(0px,env(safe-area-inset-left,0px));animation:fadeIn .18s ease}
+.sheet{background:var(--card);width:100%;max-width:560px;border-radius:26px 26px 0 0;padding:18px max(18px,env(safe-area-inset-left,0px)) calc(20px + env(safe-area-inset-bottom,0px));box-shadow:0 -10px 40px -10px rgba(0,0,0,.35);animation:slideUp .22s ease;max-height:92vh;overflow:auto}
+@media (min-width:600px){.sheet-bg{align-items:center}.sheet{border-radius:26px;padding-bottom:20px}}
+.sheet-h{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.sheet-h .sico{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;flex:none}
+.sheet-h .sico svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.sheet-h b{display:block;font-family:"Noto Sans SC",var(--f-body);font-size:19px;font-weight:700}
+.sheet-h small{display:block;font-size:13px;color:var(--muted)}
+.xclose{margin-left:auto;width:36px;height:36px;border-radius:50%;border:0;background:var(--fill);cursor:pointer;display:grid;place-items:center}
+.xclose svg{width:18px;height:18px;stroke:var(--ink-2);fill:none;stroke-width:2.2;stroke-linecap:round}
+@keyframes slideUp{from{transform:translateY(40px);opacity:.4}to{transform:none;opacity:1}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+body.noscroll{overflow:hidden}
+.toast{z-index:40}
+
+.brand{display:flex;align-items:center;gap:8px}
+.brand svg{width:46px;height:46px;display:block;border-radius:9px;box-shadow:0 2px 8px -3px rgba(14,27,61,.5)}
+.brand b{font-family:"Barlow Condensed",var(--f-body);font-size:26px;font-weight:700;letter-spacing:.02em}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+  <div class="topbar">
+    <button class="cbtn" id="plusBtn" type="button" aria-label="新增"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+    <div class="brand"><svg viewBox="0 0 1024 1024" aria-label="Body" role="img"><defs><linearGradient id="bbg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#101A33"/><stop offset="1" stop-color="#26324F"/></linearGradient></defs><rect width="1024" height="1024" rx="230" fill="url(#bbg)"/><g transform="translate(-19,10)" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="52"><path d="M150 330 V596" stroke="#FFFFFF"/><circle cx="220" cy="526" r="70" stroke="#FFFFFF"/><circle cx="442" cy="526" r="70" stroke="#3A4766"/><path d="M442 456 A70 70 0 1 1 372.5 534" stroke="#2FD0A0"/><circle cx="664" cy="526" r="70" stroke="#FFFFFF"/><path d="M734 330 V596" stroke="#FFFFFF"/><path d="M806 458 L860 574 M914 458 L846 676" stroke="#FFFFFF"/></g><g transform="translate(-19,10)"><rect x="124" y="730" width="230" height="22" rx="11" fill="#4C8DFF"/><rect x="370" y="730" width="170" height="22" rx="11" fill="#FFB534"/><rect x="556" y="730" width="130" height="22" rx="11" fill="#2FD0A0"/><rect x="702" y="730" width="96" height="22" rx="11" fill="#FF6B92"/></g></svg></div><div class="sp"></div>
+    <button class="cbtn" id="sync" type="button" aria-label="同步状态" title="连接中"><svg viewBox="0 0 24 24"><path d="M7 18a5 5 0 0 1-.6-9.96A6 6 0 0 1 18 9a4.5 4.5 0 0 1-1 8.9H7z"/><path id="syncMark" d="M9.5 13.5l2 2 3.5-4"/></svg></button>
+    <button class="avatar" id="avatarBtn" type="button" aria-label="我的">我</button>
+  </div>
+  <div class="banner" id="banner" hidden></div>
+
+  <!-- ===================== 日常 ===================== -->
+  <section class="page" id="page-daily">
+    <div class="pagetitle"><h1>身体信息</h1><span id="todayLabel"></span></div>
+
+    <div class="duo">
+      <div class="card hero hero-blue big2">
+        <div class="lbl">体重 <span class="chip" id="hWeightDate">暂无</span></div>
+        <div class="val big" id="hWeight">—</div>
+        <div class="meta" id="hWeightMeta"><span>暂无记录</span></div>
+      </div>
+      <div class="card hero hero-amber big2">
+        <div class="lbl">腰围 <span class="chip" id="tWaistDate">暂无</span></div>
+        <div class="val big" id="tWaist">—</div>
+        <div class="meta" id="tWaistSub"><span>暂无记录</span></div>
+      </div>
+    </div>
+
+    <div class="tiles tri">
+      <div class="tile" style="--tc:var(--c-run);--tc-soft:var(--c-run-soft)"><div class="ico" style="background:var(--c-run)"><svg viewBox="0 0 24 24"><circle cx="15" cy="4.5" r="1.8"/><path d="M8 21l3-6 3 2 1 5M6 12l3-4 4 1 2 4 3 1"/></svg></div><div class="t"><span>本周跑量</span><b id="tWeek">0<small>km</small></b><em id="tWeekSub"></em></div></div>
+      <div class="tile" style="--tc:var(--c-month);--tc-soft:var(--c-month-soft)"><div class="ico" style="background:var(--c-month)"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="3"/><path d="M4 10h16M9 3v4M15 3v4"/></svg></div><div class="t"><span>本月跑量</span><b id="tMonth">0<small>km</small></b><em id="tMonthSub"></em></div></div>
+      <div class="tile" style="--tc:var(--c-drink);--tc-soft:var(--c-drink-soft)"><div class="ico" style="background:var(--c-drink)"><svg viewBox="0 0 24 24"><path d="M7 3h10l-1 7a4 4 0 0 1-8 0zM12 14v6M8 20h8"/></svg></div><div class="t"><span>本月喝酒</span><b id="tDrink">0<small>天</small></b><em id="tDrinkSub"></em></div></div>
+    </div>
+
+    <div class="sh" style="--sc:var(--c-weight);--sc-soft:var(--c-weight-soft)"><span class="sico"><svg viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11M4.5 6h.01M4.5 12h.01M4.5 18h.01"/></svg></span><h2>每日明细</h2><span class="cnt" id="histCount"></span><div class="r"><button class="blk" id="addDay" type="button" aria-label="记录一天"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>记录</button></div></div>
+    <div class="dlist" id="histList"></div>
+
+    <div class="sh" style="--sc:var(--c-run);--sc-soft:var(--c-run-soft)"><span class="sico"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg></span><h2>趋势</h2><span class="demo-tag" id="demoTag" hidden>示例</span><div class="r"><div class="rng" id="rangePills"><button data-r="30" aria-pressed="true">30天</button><button data-r="90" aria-pressed="false">90天</button><button data-r="365" aria-pressed="false">1年</button><button data-r="all" aria-pressed="false">全部</button></div></div></div>
+    <div class="card cpad">
+      <div class="seg" id="metricPills">
+        <button type="button" data-m="weight" aria-pressed="true"><i style="background:var(--c-weight)"></i>体重</button>
+        <button type="button" data-m="waist" aria-pressed="false"><i style="background:var(--c-waist)"></i>腰围</button>
+        <button type="button" data-m="run" aria-pressed="false"><i style="background:var(--c-run)"></i>跑步</button>
+      </div>
+      <div class="chart-wrap" id="chartWrap"></div>
+      <div class="legend"><i></i>底部圆点是喝酒的日子</div>
+      <div class="tstats" id="trendStats"></div>
+    </div>
+
+  </section>
+
+  <!-- ===================== 检查 ===================== -->
+  <section class="page" id="page-med" hidden>
+    <div class="pagetitle"><h1>医院检查</h1><span>检查项目 · 体检报告</span></div>
+
+    <div class="card cpad hero hero-violet">
+      <div class="lbl">最近一次体检 <span class="chip" id="hChkDate">暂无</span></div>
+      <div class="val big" id="hChk">—</div>
+      <div class="meta" id="hChkMeta"><span>上传体检报告后，Claude 会整理出异常指标</span></div>
+    </div>
+    <div class="tiles">
+      <div class="tile" style="--tc:var(--c-exam);--tc-soft:var(--c-exam-soft)"><div class="ico" style="background:var(--c-exam)"><svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="3"/><path d="M9 4V2.8h6V4M12 9v6M9 12h6"/></svg></div><div class="t"><span>检查项目</span><b id="tExams">0<small>项</small></b></div></div>
+      <div class="tile" style="--tc:var(--c-check);--tc-soft:var(--c-check-soft)"><div class="ico" style="background:var(--c-check)"><svg viewBox="0 0 24 24"><path d="M7 3h7l5 5v11a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></div><div class="t"><span>体检报告</span><b id="tChecks">0<small>份</small></b></div></div>
+    </div>
+
+    <div class="sh" style="--sc:var(--c-exam);--sc-soft:var(--c-exam-soft)"><span class="sico"><svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="3"/><path d="M9 4V2.8h6V4M12 9v6M9 12h6"/></svg></span><h2>检查项目</h2><span class="cnt" id="examCount"></span><div class="r"><button class="blk" id="examToggle" type="button"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>添加</button></div></div>
+    <form class="card cpad stack" id="examForm" hidden autocomplete="off">
+      <label class="box text"><span>项目名称</span><input id="eName" list="examNames" placeholder="如：胃镜、甲状腺彩超" required></label>
+      <div class="g2">
+        <label class="box text"><span>检查时间</span><input id="eDate" type="date" required></label>
+        <label class="box text"><span>医院 / 科室（可选）</span><input id="eHosp" placeholder="如：市一院 消化内科"></label>
+      </div>
+      <textarea class="ta" id="eNote" placeholder="结论或备注（可选）：医生的结论、复查时间等"></textarea>
+      <label class="drop" id="eDrop"><input type="file" id="eFiles" multiple accept="image/*,application/pdf" hidden>＋ 添加检查附件（照片或 PDF）<span class="picked" id="ePicked"></span></label>
+      <div class="end"><button type="button" class="btn soft sm" id="examCancel">取消</button><button class="btn sm" type="submit" id="examSave">保存检查</button></div>
+      <div class="formnote" id="examNote" style="margin:0"></div>
+    </form>
+    <datalist id="examNames"><option>胃镜</option><option>肠镜</option><option>甲状腺彩超</option><option>腹部彩超</option><option>心脏彩超</option><option>心电图</option><option>胸部CT</option><option>头颅核磁</option><option>血常规</option><option>肝功能</option><option>血脂</option><option>糖化血红蛋白</option><option>尿常规</option><option>骨密度</option></datalist>
+    <div class="card"><div class="rows" id="examList"></div></div>
+
+    <div class="sh" style="--sc:var(--c-check);--sc-soft:var(--c-check-soft)"><span class="sico"><svg viewBox="0 0 24 24"><path d="M7 3h7l5 5v11a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></span><h2>体检报告</h2><span class="cnt" id="chkCount"></span><div class="r"><button class="blk" id="chkToggle" type="button"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>上传</button></div></div>
+    <form class="card cpad stack" id="chkForm" hidden autocomplete="off">
+      <div class="g2">
+        <label class="box text"><span>体检时间</span><input id="cDate" type="date" required></label>
+        <label class="box text"><span>体检机构（可选）</span><input id="cOrg" placeholder="如：某某体检中心"></label>
+      </div>
+      <label class="box text"><span>备注（可选）</span><input id="cNote" placeholder="如：单位年度体检"></label>
+      <label class="drop" id="cDrop"><input type="file" id="cFiles" multiple accept="image/*,application/pdf" hidden>＋ 添加体检报告（PDF 或照片）<span class="picked" id="cPicked"></span></label>
+      <label class="check"><input type="checkbox" id="cAuto" checked> 上传后自动识别异常指标</label>
+      <div class="end"><button type="button" class="btn soft sm" id="chkCancel">取消</button><button class="btn sm" type="submit" id="chkSave">保存报告</button></div>
+      <div class="formnote" id="chkNote" style="margin:0"></div>
+    </form>
+    <div id="watchBox"></div>
+    <div class="card"><div class="rows" id="chkList"></div></div>
+    <p class="disclaim">异常指标由 Claude 根据附件整理，可能有遗漏或误读，请以报告原件和医生意见为准。</p>
+  </section>
+
+  <!-- ===================== 我的 ===================== -->
+  <section class="page" id="page-set" hidden>
+    <div class="pagetitle"><h1>我的</h1><span>资料 · 目标 · 备份</span></div>
+
+    <div class="card cpad prof hero-ink">
+      <div class="avatar lg" id="profAvatar">我</div>
+      <div><b id="profName">未设置称呼</b><span id="profSub">填写身高后可计算 BMI</span></div>
+    </div>
+    <div class="tiles" id="kv"></div>
+
+    <div class="sh" style="--sc:var(--c-month);--sc-soft:var(--c-month-soft)"><span class="sico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.5"/></svg></span><h2>资料与目标</h2><div class="r"></div></div>
+    <form class="card cpad stack" id="setForm" autocomplete="off">
+      <div class="g2">
+        <label class="box text"><span>称呼</span><input id="sName" placeholder="如：小曾"></label>
+        <label class="box text"><span>性别（用于腰围风险线）</span><select id="sSex"><option value="">不设置</option><option value="m">男</option><option value="f">女</option></select></label>
+      </div>
+      <div class="fgrid">
+        <label class="box"><span>身高</span><span class="in"><input id="sHeight" type="number" step="0.1" inputmode="decimal" placeholder="—"><em>cm</em></span></label>
+        <label class="box"><span>目标体重</span><span class="in"><input id="sTW" type="number" step="0.1" inputmode="decimal" placeholder="—"><em>kg</em></span></label>
+        <label class="box"><span>目标腰围</span><span class="in"><input id="sTWa" type="number" step="0.1" inputmode="decimal" placeholder="—"><em>cm</em></span></label>
+      </div>
+      <div class="g2">
+        <label class="box"><span>每周跑量目标</span><span class="in"><input id="sWG" type="number" step="0.5" inputmode="decimal" placeholder="—"><em>km</em></span></label>
+        <label class="box"><span>每月跑量目标</span><span class="in"><input id="sMG" type="number" step="1" inputmode="decimal" placeholder="—"><em>km</em></span></label>
+      </div>
+      <label class="box text"><span>Claude API Key（用于识别体检报告，只保存在这台设备）</span><input id="sKey" type="password" autocomplete="off" spellcheck="false" placeholder="sk-ant-…"></label>
+      <label class="box text"><span>识别用的模型（可不填）</span><input id="sModel" autocomplete="off" spellcheck="false" placeholder="claude-sonnet-5-5"></label>
+      <button class="btn full" type="submit">保存设置</button>
+      <div class="formnote" id="setNote" style="margin:0"></div>
+    </form>
+
+    <div class="sh" style="--sc:var(--c-weight);--sc-soft:var(--c-weight-soft)"><span class="sico"><svg viewBox="0 0 24 24"><path d="M7 18a5 5 0 0 1-.6-9.96A6 6 0 0 1 18 9a4.5 4.5 0 0 1-1 8.9H7z"/></svg></span><h2>数据备份</h2><div class="r"><span class="hintchip">仅自己可见</span></div></div>
+    <div class="card">
+      <div class="opt"><div class="circ" style="background:var(--c-weight)"><svg viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></div><div class="tx"><b>导出完整备份</b><span>JSON，含全部记录、异常指标和附件</span></div><button class="btn soft sm" id="expJson" type="button">导出</button></div>
+      <div class="opt"><div class="circ" style="background:var(--c-month)"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M4 10h16M4 15h16M10 4v16"/></svg></div><div class="tx"><b>导出每日记录</b><span>CSV，可用 Excel 打开</span></div><button class="btn soft sm" id="expCsv" type="button">导出</button></div>
+      <div class="inset" id="expFallback" hidden><span class="muted">当前环境不能直接保存文件，请复制下面的内容另存：</span><textarea id="expText" readonly></textarea><button class="btn soft sm" id="expCopy" type="button">复制</button></div>
+      <div class="opt"><div class="circ" style="background:var(--c-waist)"><svg viewBox="0 0 24 24"><path d="M12 20V9M7 14l5-5 5 5M5 4h14"/></svg></div><div class="tx"><b>从备份恢复</b><span>同一天的记录会被备份覆盖</span></div><label class="btn soft sm" style="cursor:pointer">选择文件<input type="file" id="impFile" accept="application/json,.json" hidden></label></div>
+      <div class="inset" id="impPreview" hidden></div>
+      <div class="opt"><div class="circ" style="background:var(--c-dark)"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v12c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12c0 1.7 3.1 3 7 3s7-1.3 7-3"/></svg></div><div class="tx"><b>附件存储</b><span id="storageLine">正在读取…</span></div></div>
+    </div>
+
+    <div class="sh" style="--sc:var(--bad);--sc-soft:var(--bad-soft)"><span class="sico"><svg viewBox="0 0 24 24"><path d="M5 7h14M10 7V4h4v3M7 7l1 13h8l1-13"/></svg></span><h2>清理</h2><div class="r"></div></div>
+    <div class="card">
+      <div class="opt"><div class="circ" style="background:var(--bad)"><svg viewBox="0 0 24 24"><path d="M5 7h14M10 7V4h4v3M7 7l1 13h8l1-13"/></svg></div><div class="tx"><b>清空每日记录</b><span>检查与体检报告不受影响，建议先导出</span></div><button class="btn danger sm" id="wipeDaily" type="button">清空</button></div>
+    </div>
+  </section>
+</div>
+
+<nav class="tabs" role="tablist">
+  <button role="tab" data-page="daily" aria-selected="true"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="3" fill="currentColor"/><rect x="8" y="6" width="8" height="2.2" rx="1.1" fill="var(--nav-bg)"/><rect x="8" y="10.5" width="8" height="2.2" rx="1.1" fill="var(--nav-bg)"/></svg>身体信息</button>
+  <button role="tab" data-page="med" aria-selected="false"><svg viewBox="0 0 24 24"><path d="M12 2.5l9 4.5-9 4.5-9-4.5z" fill="currentColor"/><path d="M3 11.5l9 4.5 9-4.5M3 16l9 4.5 9-4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg>医院检查</button>
+  <button role="tab" data-page="set" aria-selected="false"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4.5" fill="currentColor"/><path d="M3.5 21.5c.8-4.5 4.3-7 8.5-7s7.7 2.5 8.5 7z" fill="currentColor"/></svg>我的</button>
+</nav>
+<div class="sheet-bg" id="sheet" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+    <div class="sheet-h"><span class="sico" style="background:var(--c-weight)"><svg viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16zM14 6l4 4"/></svg></span><div><b id="sheetTitle">记录一天</b><small id="recHint">已有数据会自动带出</small></div><button class="xclose" id="sheetClose" type="button" aria-label="关闭"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+    <form id="recForm" autocomplete="off">
+      <div class="frow"><label for="rDate">日期</label><input class="datepill" type="date" id="rDate" required></div>
+      <div class="fgrid">
+        <label class="box"><span>体重</span><span class="in"><input id="rWeight" type="number" inputmode="decimal" step="0.1" min="20" max="300" placeholder="0.0"><em>kg</em></span></label>
+        <label class="box"><span>腰围</span><span class="in"><input id="rWaist" type="number" inputmode="decimal" step="0.1" min="30" max="200" placeholder="0.0"><em>cm</em></span></label>
+        <label class="box"><span>跑步</span><span class="in"><input id="rRun" type="number" inputmode="decimal" step="0.01" min="0" max="200" placeholder="0"><em>km</em></span></label>
+      </div>
+      <div class="seg" id="rDrink" style="margin-top:10px">
+        <button type="button" data-v="0" aria-pressed="true">没喝酒</button>
+        <button type="button" data-v="1" class="drink" aria-pressed="false">喝了酒</button>
+      </div>
+      <div class="end" style="margin-top:14px">
+        <button class="btn soft" type="button" id="rDelete" hidden>删除这天</button>
+        <button class="btn" type="submit" id="rSave" style="flex:1">保存记录</button>
+      </div>
+      <div class="formnote" id="recNote"></div>
+    </form>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+(() => {
+'use strict';
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const pad2 = n => String(n).padStart(2,'0');
+const ds = d => `${d.getFullYear()}-${pad2(d.getMonth()+1)}-${pad2(d.getDate())}`;
+const pd = s => { const [y,m,d] = s.split('-').map(Number); return new Date(y, m-1, d); };
+const addDays = (d,n) => { const x = new Date(d); x.setDate(x.getDate()+n); return x; };
+const today = () => { const d = new Date(); d.setHours(0,0,0,0); return d; };
+const weekStart = d => addDays(d, -((d.getDay()+6)%7));
+const num = v => (v === '' || v == null || isNaN(+v)) ? null : +v;
+const f1 = v => v == null ? '—' : (+v).toFixed(1);
+const f2 = v => v == null ? '—' : (Math.round(v*100)/100).toString();
+const md = s => { const d = pd(s); return `${d.getMonth()+1}/${d.getDate()}`; };
+const cn = s => { const d = pd(s); return `${d.getMonth()+1}月${d.getDate()}日`; };
+const WK = ['日','一','二','三','四','五','六'];
+const fmtSize = b => b > 1048576 ? (b/1048576).toFixed(1)+' MB' : Math.max(1,Math.round(b/1024))+' KB';
+const CHEV = '<svg class="chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>';
+function toast(msg){ const t=$('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(toast._t); toast._t=setTimeout(()=>t.classList.remove('show'),2200); }
+function armConfirm(btn, label, fn){
+  if (btn.classList.contains('armed')) { btn.classList.remove('armed'); btn.textContent = btn.dataset.orig; fn(); return; }
+  btn.dataset.orig = btn.textContent; btn.classList.add('armed'); btn.textContent = label;
+  setTimeout(()=>{ if(btn.classList.contains('armed')){ btn.classList.remove('armed'); btn.textContent = btn.dataset.orig; } }, 3500);
+}
+const uid8 = () => Date.now().toString(36) + Math.random().toString(36).slice(2,8);
+
+const S = {
+  mode:'pending', base:null, assets:null, sample:null, downloads:null, limits:null,
+  settings:{}, daily:[], exams:[], checkups:[],
+  ui:{ page:'daily', metric:'weight', range:'30', drink:false, demo:false, open:{}, addAb:null },
+  fileCache:{}, busy:{}, errs:{},
+};
+try { const p = localStorage.getItem('bl.page'); if (p) S.ui.page = p; const m = localStorage.getItem('bl.metric'); if (m) S.ui.metric = m; const r = localStorage.getItem('bl.range'); if (r) S.ui.range = r; } catch(e){}
+
+/* ---------- device storage (IndexedDB) ---------- */
+const IDB = (() => {
+  let dbp;
+  const open = () => dbp || (dbp = new Promise((res,rej)=>{ const r = indexedDB.open('body-app',1);
+    r.onupgradeneeded = () => { const d=r.result; d.createObjectStore('kv'); d.createObjectStore('daily',{keyPath:'date'}); d.createObjectStore('exams',{keyPath:'id'}); d.createObjectStore('checkups',{keyPath:'id'}); d.createObjectStore('files',{keyPath:'id'}); };
+    r.onsuccess=()=>res(r.result); r.onerror=()=>rej(r.error); }));
+  const tx = async (st, mode, fn) => { const d = await open(); return new Promise((res,rej)=>{ const t=d.transaction(st,mode); const req=fn(t.objectStore(st)); t.oncomplete=()=>res(req ? req.result : undefined); t.onerror=()=>rej(t.error); t.onabort=()=>rej(t.error); }); };
+  return { all:st=>tx(st,'readonly',o=>o.getAll()), get:(st,k)=>tx(st,'readonly',o=>o.get(k)), put:(st,v,k)=>tx(st,'readwrite',o=>k===undefined?o.put(v):o.put(v,k)), del:(st,k)=>tx(st,'readwrite',o=>o.delete(k)) };
+})();
+const guard = async p => { try { return await p; } catch(e){ throw (e && e.name==='QuotaExceededError') ? {code:'quota_exceeded'} : e; } };
+const byDate = (a,b)=>a.date<b.date?-1:1;
+const store = {
+  async setDaily(rec){ await guard(IDB.put('daily',rec)); S.daily = S.daily.filter(r=>r.date!==rec.date).concat(rec).sort(byDate); renderAll(); },
+  async delDaily(date){ await IDB.del('daily',date); S.daily = S.daily.filter(r=>r.date!==date); renderAll(); },
+  async setItem(kind, obj){ await guard(IDB.put(kind,obj)); S[kind] = S[kind].filter(x=>x.id!==obj.id).concat(obj); renderAll(); },
+  async delItem(kind, id){ await IDB.del(kind,id); S[kind] = S[kind].filter(x=>x.id!==id); renderAll(); },
+  async setSettings(obj){ obj = {...obj, apiKey: obj.apiKey ?? S.settings.apiKey ?? '', model: obj.model ?? S.settings.model ?? ''}; await guard(IDB.put('kv',obj,'settings')); S.settings = obj; renderAll(); },
+};
+const blobToB64 = b => new Promise((res,rej)=>{ const r=new FileReader(); r.onload=()=>res(String(r.result).split(',')[1]||''); r.onerror=()=>rej(r.error); r.readAsDataURL(b); });
+const b64ToBlob = (d,type) => { const bin=atob(d); const u=new Uint8Array(bin.length); for(let i=0;i<bin.length;i++) u[i]=bin.charCodeAt(i); return new Blob([u],{type:type||'application/octet-stream'}); };
+const assetsLocal = {
+  async upload(blob){ const id='f'+uid8(); await guard(IDB.put('files',{id, blob, type:blob.type, size:blob.size, createdAt:Date.now()})); S.blobUrls[id]=URL.createObjectURL(blob); return {id, url:S.blobUrls[id], sizeBytes:blob.size, contentType:blob.type||'application/octet-stream'}; },
+  async list(){ const all = await IDB.all('files'); return {assets:all.map(f=>({id:f.id})), usage:{files:all.length, bytes:all.reduce((a,f)=>a+(f.size||0),0)}}; },
+  async delete(id){ await IDB.del('files',id); if (S.blobUrls[id]) URL.revokeObjectURL(S.blobUrls[id]); delete S.blobUrls[id]; return {deleted:true}; },
+};
+const downloadsLocal = { async save({filename, data}){ const url=URL.createObjectURL(data instanceof Blob?data:new Blob([data])); const a=document.createElement('a'); a.href=url; a.download=filename; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(url),5000); } };
+const DEFAULT_MODEL = 'claude-sonnet-5-5';
+const sampleLocal = {
+  async limits(){ return {maxPromptBytes:400000, images:{maxCount:20, maxInputBytes:5e6, mediaTypes:['image/jpeg','image/png']}}; },
+  async json(prompt, opts={}){
+    const key = S.settings.apiKey; if (!key) throw {code:'no_key'};
+    const content = [];
+    for (const b of (opts.images ? [].concat(opts.images) : [])) content.push({type:'image', source:{type:'base64', media_type:b.type||'image/jpeg', data: await blobToB64(b)}});
+    content.push({type:'text', text: prompt});
+    let r;
+    try{ r = await fetch('https://api.anthropic.com/v1/messages',{method:'POST', headers:{'content-type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'}, body: JSON.stringify({model:S.settings.model||DEFAULT_MODEL, max_tokens:4096, messages:[{role:'user', content}]})}); }
+    catch(e){ throw {code:'network'}; }
+    const j = await r.json().catch(()=>null);
+    if (!r.ok) throw {code: r.status===401?'bad_key': r.status===429?'rate_limited':'api_error', message: j?.error?.message || ('HTTP '+r.status)};
+    const text = (j?.content||[]).filter(c=>c.type==='text').map(c=>c.text).join('');
+    const x=text.indexOf('{'), y=text.lastIndexOf('}'); if (x<0||y<x) throw {code:'invalid_json'};
+    try{ return JSON.parse(text.slice(x,y+1)); }catch(e){ throw {code:'invalid_json'}; }
+  },
+};
+function saveErr(err){ const c = err?.code; if (c==='quota_exceeded') return '存储空间已满，请先导出备份并清理旧数据。'; if (c==='invalid_argument') return '当前账号没有写入权限，数据未保存。'; return '保存失败，请稍后再试。'; }
+
+/* ---------- navigation ---------- */
+function showPage(p){
+  S.ui.page = p;
+  ['daily','med','set'].forEach(k => { $('page-'+k).hidden = k!==p; });
+  document.querySelectorAll('nav.tabs button').forEach(b => b.setAttribute('aria-selected', b.dataset.page===p));
+  $('plusBtn').style.visibility = p==='set' ? 'hidden' : 'visible';
+  try{ localStorage.setItem('bl.page', p); }catch(e){}
+  if (p === 'daily') requestAnimationFrame(renderChart);
+  if (p === 'set') renderStorage();
+  window.scrollTo({top:0});
+}
+document.querySelectorAll('nav.tabs button').forEach(b => b.onclick = () => showPage(b.dataset.page));
+$('avatarBtn').onclick = () => showPage('set');
+$('plusBtn').onclick = () => {
+  if (S.ui.page==='daily') openSheet();
+  else if (S.ui.page==='med'){ openForm('examForm', true); $('examForm').scrollIntoView({behavior:'smooth',block:'start'}); }
+};
+
+/* ---------- derived ---------- */
+function latest(field){ for (let i=S.daily.length-1;i>=0;i--) if (S.daily[i][field]!=null) return S.daily[i]; return null; }
+function valueNear(field, dateStr){ let r=null; for (const x of S.daily){ if (x.date>dateStr) break; if (x[field]!=null) r=x; } return r; }
+function sumRun(from, to){ let s=0; for (const r of S.daily) if (r.date>=from && r.date<=to && r.run) s+=r.run; return s; }
+
+/* ---------- 日常: overview ---------- */
+function renderOverview(){
+  const t = today(), tS = ds(t), st = S.settings;
+  $('todayLabel').textContent = `${t.getMonth()+1}月${t.getDate()}日 周${WK[t.getDay()]}`;
+  const initial = (st.name||'我').trim().slice(0,1) || '我';
+  $('avatarBtn').textContent = initial; $('profAvatar').textContent = initial;
+
+  const W = latest('weight');
+  if (W){
+    $('hWeight').innerHTML = `${f1(W.weight)}<small>kg</small>`;
+    $('hWeightDate').textContent = W.date===tS ? '今天' : cn(W.date);
+    const meta = [];
+    const prev = valueNear('weight', ds(addDays(pd(W.date), -7)));
+    if (prev && prev.date!==W.date){ const d=W.weight-prev.weight; const c=Math.abs(d)<.05?'':d<0?'down':'up'; meta.push(`较上周 <b class="delta ${c}">${d>0?'+':''}${d.toFixed(1)} kg</b>`); }
+    if (st.height){ const bmi=W.weight/Math.pow(st.height/100,2); const cat=bmi<18.5?'偏瘦':bmi<24?'正常':bmi<28?'超重':'肥胖'; meta.push(`BMI <b>${bmi.toFixed(1)} ${cat}</b>`); }
+    if (st.targetWeight) meta.push(`距目标 <b>${(W.weight-st.targetWeight).toFixed(1)} kg</b>`);
+    $('hWeightMeta').innerHTML = meta.length ? meta.map(x=>`<span>${x}</span>`).join('') : '<span>填写身高可看 BMI</span>';
+  } else { $('hWeight').innerHTML='—'; $('hWeightDate').textContent='暂无'; $('hWeightMeta').innerHTML='<span>暂无记录</span>'; }
+
+  const Wa = latest('waist');
+  $('tWaist').innerHTML = Wa ? `${f1(Wa.waist)}<small>cm</small>` : '—';
+  const line = st.sex==='m'?90:st.sex==='f'?85:null;
+  $('tWaistDate').textContent = Wa ? (Wa.date===tS ? '今天' : cn(Wa.date)) : '暂无';
+  const wm = [];
+  if (Wa){ const pw = valueNear('waist', ds(addDays(pd(Wa.date), -7))); if (pw && pw.date!==Wa.date){ const d=Wa.waist-pw.waist; wm.push(`较上周 <b class="delta ${Math.abs(d)<.05?'':d<0?'down':'up'}">${d>0?'+':''}${d.toFixed(1)} cm</b>`); }
+    if (line) wm.push(Wa.waist>=line ? `<b class="delta up">超过风险线 ${line}</b>` : `低于风险线 <b>${line}</b>`);
+    if (st.targetWaist) wm.push(`距目标 <b>${(Wa.waist-st.targetWaist).toFixed(1)} cm</b>`); }
+  $('tWaistSub').innerHTML = (wm.length ? wm : [Wa ? '设置性别可看风险线' : '暂无记录']).map(x=>`<span>${x}</span>`).join('');
+
+  const wkS = ds(weekStart(t)), moS = ds(new Date(t.getFullYear(), t.getMonth(), 1));
+  const wk = sumRun(wkS, tS), mo = sumRun(moS, tS);
+  $('tWeek').innerHTML = `${f2(wk)}<small>km</small>`;
+  $('tMonth').innerHTML = `${f2(mo)}<small>km</small>`;
+  const prog = (v,g,c) => `<div class="prog"><i style="width:${Math.min(100,v/g*100)}%;background:var(${c})"></i></div>`;
+  $('tWeekSub').innerHTML = st.weekGoal ? `目标 ${st.weekGoal} km${prog(wk,st.weekGoal,'--c-run')}` : `跑了 ${S.daily.filter(r=>r.date>=wkS && r.run>0).length} 天`;
+  $('tMonthSub').innerHTML = st.monthGoal ? `目标 ${st.monthGoal} km${prog(mo,st.monthGoal,'--c-month')}` : `跑了 ${S.daily.filter(r=>r.date>=moS && r.run>0).length} 天`;
+  const dm = S.daily.filter(r=>r.date>=moS && r.drink);
+  $('tDrink').innerHTML = `${dm.length}<small>天</small>`;
+  $('tDrinkSub').textContent = dm.length ? `最近 ${cn(dm[dm.length-1].date)}` : `${t.getMonth()+1}月还没喝`;
+}
+
+/* ---------- 日常: record form ---------- */
+function setDrink(v){ S.ui.drink = !!v; document.querySelectorAll('#rDrink button').forEach(b=>b.setAttribute('aria-pressed', (b.dataset.v==='1')===S.ui.drink)); }
+document.querySelectorAll('#rDrink button').forEach(b => b.onclick = () => setDrink(b.dataset.v==='1'));
+function fillForm(date){
+  const r = S.daily.find(x=>x.date===date);
+  $('rWeight').value = r?.weight ?? ''; $('rWaist').value = r?.waist ?? ''; $('rRun').value = r?.run ?? '';
+  setDrink(r?.drink);
+  $('rSave').textContent = r ? '更新记录' : '保存记录';
+  $('rDelete').hidden = !r;
+  $('sheetTitle').textContent = r ? `修改 ${cn(date)}` : '记录一天'; $('recHint').textContent = r ? '改好后点“更新记录”' : '选择日期，已有数据会自动带出';
+  $('recNote').textContent = ''; $('recNote').className='formnote';
+  renderHistory();
+}
+$('rDate').value = ds(today()); $('rDate').max = ds(today());
+$('rDate').addEventListener('change', () => fillForm($('rDate').value));
+$('recForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const date = $('rDate').value; if (!date) return;
+  const rec = { date, weight:num($('rWeight').value), waist:num($('rWaist').value), run:num($('rRun').value), drink:S.ui.drink, updatedAt:new Date().toISOString() };
+  const note = m => { $('recNote').textContent = m; $('recNote').className='formnote err'; };
+  if (rec.weight==null && rec.waist==null && rec.run==null && !rec.drink) return note('至少填一项：体重、腰围、跑步距离，或标记喝了酒。');
+  if (rec.weight!=null && (rec.weight<20||rec.weight>300)) return note('体重看起来不对，请填 20–300 kg 之间的数。');
+  if (rec.waist!=null && (rec.waist<30||rec.waist>200)) return note('腰围看起来不对，请填 30–200 cm 之间的数。');
+  $('rSave').disabled = true;
+  try { await store.setDaily(rec); toast(`${cn(date)} 已保存`); S.ui.demo=false; fillForm(date); closeSheet(); }
+  catch(err){ note(saveErr(err)); }
+  finally { $('rSave').disabled = false; }
+});
+$('rDelete').onclick = function(){ const d=$('rDate').value; armConfirm(this,'确认删除', async()=>{ try{ await store.delDaily(d); toast('已删除'); fillForm(d); closeSheet(); }catch(err){ toast(saveErr(err)); } }); };
+
+/* ---------- 日常: history ---------- */
+function renderHistory(){
+  if (S.editing) return;
+  if (!S.ui.histN) S.ui.histN = 14;
+  const all = S.daily.slice().reverse(); const rows = all.slice(0, S.ui.histN);
+  $('histCount').textContent = S.daily.length ? String(S.daily.length) : '';
+  if (!rows.length){ $('histList').innerHTML = `<div class="empty"><b>还没有记录</b>点右上角的“记录”填入今天的数据，就会按天出现在这里。</div>`; return; }
+  const sel = $('rDate').value, tS = ds(today());
+  const GL = '<svg viewBox="0 0 24 24"><path d="M7 3h10l-1 7a4 4 0 0 1-8 0zM12 14v6M8 20h8"/></svg>';
+  const cell = (cls, f, k, v, u) => `<div class="dc ${cls} ${v==null?'none':''}" data-f="${f}" role="button" tabindex="0" aria-label="修改${k}"><span>${k}</span><b>${v==null?'＋':v}${v==null?'':`<small>${u}</small>`}</b></div>`;
+  $('histList').innerHTML = rows.map(r=>{ const d = pd(r.date);
+    return `<div class="drow ${r.date===sel?'sel':''}" data-d="${r.date}"><div class="ddate ${r.date===tS?'today':''}" data-open role="button" tabindex="0" aria-label="在表单中修改这天"><b>${d.getDate()}</b><small>${d.getMonth()+1}月 周${WK[d.getDay()]}</small></div><div class="dcells">${cell('w','weight','体重',r.weight!=null?f1(r.weight):null,'kg')}${cell('wa','waist','腰围',r.waist!=null?f1(r.waist):null,'cm')}${cell('r','run','跑步',r.run?f2(r.run):null,'km')}<div class="dc dr ${r.drink?'yes':''}" data-f="drink" role="button" tabindex="0" aria-label="切换是否喝酒">${GL}<span>${r.drink?'喝酒':'无'}</span></div></div></div>`;
+  }).join('') + (all.length>rows.length ? `<button class="more" id="moreHist" type="button">再显示 ${Math.min(30, all.length-rows.length)} 天</button>` : '');
+}
+const LIM = { weight:[20,300,'体重','kg'], waist:[30,200,'腰围','cm'], run:[0,200,'跑步','km'] };
+async function saveField(date, f, val){
+  const cur = S.daily.find(x=>x.date===date) || {date, weight:null, waist:null, run:null, drink:false};
+  const rec = {date, weight:cur.weight??null, waist:cur.waist??null, run:cur.run??null, drink:!!cur.drink, [f]:val, updatedAt:new Date().toISOString()};
+  try{ await store.setDaily(rec); toast(`${cn(date)} 已保存`); if ($('rDate').value===date) fillForm(date); }
+  catch(err){ toast(saveErr(err)); }
+}
+function editCell(dc){
+  const date = dc.closest('[data-d]').dataset.d, f = dc.dataset.f;
+  if (f==='drink'){ const cur=S.daily.find(x=>x.date===date); saveField(date,'drink',!cur?.drink); return; }
+  if (S.editing) return;
+  const cur = S.daily.find(x=>x.date===date); const [mn,mx,label,unit] = LIM[f];
+  S.editing = true; dc.classList.add('edit'); dc.classList.remove('none');
+  const b = dc.querySelector('b');
+  b.innerHTML = `<input type="number" inputmode="decimal" step="${f==='run'?'0.01':'0.1'}" min="${mn}" max="${mx}" value="${cur?.[f] ?? ''}" placeholder="${unit}" aria-label="${label}">`;
+  const inp = b.querySelector('input'); inp.focus(); inp.select();
+  let done = false;
+  const finish = async (save) => {
+    if (done) return; done = true; S.editing = false;
+    const raw = inp.value.trim(); const v = raw==='' ? null : +raw;
+    const old = cur?.[f] ?? null;
+    if (save && !(v===old || (f==='run' && !v && !old))){
+      if (v!=null && (isNaN(v) || v<mn || v>mx)) { toast(`${label}请填 ${mn}–${mx} ${unit} 之间的数`); renderHistory(); return; }
+      renderHistory(); await saveField(date, f, f==='run' && v===0 ? null : v);
+    } else renderHistory();
+  };
+  inp.addEventListener('keydown', e => { if (e.key==='Enter'){ e.preventDefault(); finish(true); } else if (e.key==='Escape'){ finish(false); } else if (e.key==='Tab'){ /* move to next cell */ } });
+  inp.addEventListener('blur', () => finish(true));
+}
+$('histList').addEventListener('click', e => {
+  if (e.target.closest('#moreHist')){ S.ui.histN += 30; renderHistory(); return; }
+  if (e.target.closest('input')) return;
+  const dc = e.target.closest('.dc[data-f]'); if (dc){ editCell(dc); return; }
+  const op = e.target.closest('[data-open]'); if (!op) return;
+  openSheet(op.closest('[data-d]').dataset.d);
+});
+$('histList').addEventListener('keydown', e => { if ((e.key==='Enter'||e.key===' ') && e.target.matches('[role=button]')){ e.preventDefault(); e.target.click(); } });
+
+
+/* ---------- record sheet ---------- */
+function openSheet(date){
+  $('rDate').value = date || ds(today()); fillForm($('rDate').value);
+  $('sheet').hidden = false; document.body.classList.add('noscroll');
+  setTimeout(()=>{ try{ $('rWeight').focus({preventScroll:true}); }catch(e){} }, 250);
+}
+function closeSheet(){ $('sheet').hidden = true; document.body.classList.remove('noscroll'); }
+$('addDay').onclick = () => openSheet();
+$('sheetClose').onclick = closeSheet;
+$('sheet').addEventListener('click', e => { if (e.target === $('sheet')) closeSheet(); });
+document.addEventListener('keydown', e => { if (e.key==='Escape' && !$('sheet').hidden) closeSheet(); });
+
+/* ---------- 日常: chart ---------- */
+document.querySelectorAll('#metricPills button').forEach(b => b.onclick = () => { S.ui.metric=b.dataset.m; try{localStorage.setItem('bl.metric',S.ui.metric)}catch(e){} renderChart(); });
+document.querySelectorAll('#rangePills button').forEach(b => b.onclick = () => { S.ui.range=b.dataset.r; try{localStorage.setItem('bl.range',S.ui.range)}catch(e){} renderChart(); });
+function demoData(){
+  const out=[], t=today(); let w=78.6, wa=91.5;
+  for (let i=89;i>=0;i--){ const d=addDays(t,-i); w+= (Math.sin(i*1.7)*0.25) - 0.035; wa += (Math.sin(i*2.3)*0.15) - 0.03;
+    const dow=d.getDay(); const run = [2,4,6].includes(dow) ? +(4+((i*7)%5)+ (dow===6?4:0)).toFixed(1) : null;
+    out.push({date:ds(d), weight: i%3===1?null:+w.toFixed(1), waist: i%7===0?+wa.toFixed(1):null, run, drink: dow===5 && i%2===0 }); }
+  return out;
+}
+function niceTicks(lo, hi, n=4){
+  if (lo===hi){ lo-=1; hi+=1; }
+  const span = hi-lo, raw = span/n, mag = Math.pow(10, Math.floor(Math.log10(raw)));
+  const step = [1,2,2.5,5,10].map(m=>m*mag).find(s=>s>=raw) || raw;
+  const a = Math.floor(lo/step)*step, b = Math.ceil(hi/step)*step, t=[];
+  for (let v=a; v<=b+step/1e6; v+=step) t.push(+v.toFixed(6));
+  return t;
+}
+const META = { weight:{label:'体重', unit:'kg', color:'--c-weight'}, waist:{label:'腰围', unit:'cm', color:'--c-waist'}, run:{label:'跑步距离', unit:'km', color:'--c-run'} };
+const stat = (k,v) => `<div><span>${k}</span><b>${v}</b></div>`;
+function renderChart(){
+  const wrap = $('chartWrap'); if ($('page-daily').hidden) return;
+  document.querySelectorAll('#metricPills button').forEach(b=>b.setAttribute('aria-pressed', b.dataset.m===S.ui.metric));
+  document.querySelectorAll('#rangePills button').forEach(b=>b.setAttribute('aria-pressed', b.dataset.r===S.ui.range));
+  const m = S.ui.metric, meta = META[m];
+  const usingDemo = !S.daily.length && S.ui.demo;
+  $('demoTag').hidden = !usingDemo;
+  const data = usingDemo ? demoData() : S.daily;
+  if (!data.length){
+    wrap.innerHTML = `<div class="empty"><b>趋势会从第一条记录开始</b>记下今天的体重或跑步后，这里会画出曲线。<div style="margin-top:14px"><button class="btn soft sm" id="demoBtn" type="button">先看看示例</button></div></div>`;
+    $('demoBtn').onclick = () => { S.ui.demo=true; renderChart(); };
+    $('trendStats').innerHTML=''; S.chart=null; return;
+  }
+  const end = today();
+  let start = S.ui.range==='all' ? pd(data[0].date) : addDays(end, -(+S.ui.range-1));
+  if ((end-start)/864e5 < 6) start = addDays(end,-6);
+  const sS = ds(start), eS = ds(end);
+  const inRange = data.filter(r=>r.date>=sS && r.date<=eS);
+  const pts = inRange.filter(r=>r[m]!=null && (m!=='run' || r[m]>0));
+  const drinks = inRange.filter(r=>r.drink);
+
+  const Wd = Math.max(280, wrap.clientWidth || 480), H = Wd < 480 ? 220 : 250;
+  const P = {l:36, r:10, t:18, b:44};
+  const pw = Wd-P.l-P.r, ph = H-P.t-P.b;
+  const t0 = start.getTime(), t1 = end.getTime();
+  const X = s => P.l + (pd(s).getTime()-t0)/(t1-t0) * pw;
+  const color = `var(${meta.color})`;
+  let svg = '', model = [];
+  const nDays = Math.round((t1-t0)/864e5)+1;
+  const xt = []; const nT = Wd<480?4:5;
+  for (let i=0;i<nT;i++) xt.push(ds(addDays(start, Math.round(i*(nDays-1)/(nT-1)))));
+  const xLabel = s => nDays>200 ? `${pd(s).getFullYear()%100}/${pd(s).getMonth()+1}` : md(s);
+
+  if (m === 'run'){
+    const weekly = nDays > 120; let bars = [];
+    if (weekly){
+      const map = new Map();
+      for (const r of inRange){ if (!r.run) continue; const k = ds(weekStart(pd(r.date))); map.set(k,(map.get(k)||0)+r.run); }
+      for (let d = weekStart(start); d<=end; d=addDays(d,7)) { const k=ds(d); bars.push({date:k, v:map.get(k)||0, label:`${md(k)} 当周`}); }
+    } else bars = pts.map(r=>({date:r.date, v:r.run, label:`${md(r.date)} 周${WK[pd(r.date).getDay()]}`}));
+    const maxV = Math.max(1, ...bars.map(b=>b.v), (weekly? S.settings.weekGoal||0 : 0));
+    const yt = niceTicks(0, maxV, 4); const y0 = yt[0], y1 = yt[yt.length-1];
+    const Y = v => P.t + ph - (v-y0)/(y1-y0)*ph;
+    yt.forEach(v=>{ svg += `<line x1="${P.l}" x2="${Wd-P.r}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--line)"/><text x="${P.l-8}" y="${Y(v)+3.5}" text-anchor="end">${v}</text>`; });
+    const slot = weekly ? pw/Math.max(1,Math.ceil(nDays/7)) : pw/nDays;
+    const bw = Math.max(3, Math.min(18, slot*0.62));
+    bars.forEach(b=>{ if (!b.v) return; const cx = weekly ? X(b.date)+slot/2 : X(b.date); const x = Math.min(Math.max(cx-bw/2, P.l), Wd-P.r-bw); const y=Y(b.v);
+      svg += `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${bw.toFixed(1)}" height="${(P.t+ph-y).toFixed(1)}" rx="${Math.min(4,bw/2)}" fill="${color}"/>`;
+      model.push({x:cx, y, label:b.label, val:`${f2(b.v)} km`}); });
+    if (weekly && S.settings.weekGoal){ const gy=Y(S.settings.weekGoal); svg += `<line x1="${P.l}" x2="${Wd-P.r}" y1="${gy}" y2="${gy}" stroke="${color}" stroke-dasharray="4 4"/><text x="${Wd-P.r}" y="${gy-5}" text-anchor="end" style="fill:${color}">周目标 ${S.settings.weekGoal}</text>`; }
+    if (weekly) svg += `<text x="${P.l}" y="${P.t-6}">按周合计</text>`;
+    const tot = pts.reduce((a,r)=>a+r.run,0);
+    $('trendStats').innerHTML = stat('总跑量', `${f2(tot)} km`) + stat('跑步天数', `${pts.length} 天`) + stat('单次最长', pts.length?`${f2(Math.max(...pts.map(r=>r.run)))} km`:'—') + stat('喝酒天数', `${drinks.length} 天`);
+  } else {
+    if (!pts.length){ wrap.innerHTML = `<div class="empty"><b>这段时间没有${meta.label}记录</b>换一个时间范围，或在上方补记。</div>`; $('trendStats').innerHTML=''; S.chart=null; return; }
+    const vals = pts.map(r=>r[m]); const refs = [];
+    if (m==='weight' && S.settings.targetWeight) refs.push({v:S.settings.targetWeight, t:`目标 ${S.settings.targetWeight}`});
+    if (m==='waist'){ if (S.settings.targetWaist) refs.push({v:S.settings.targetWaist, t:`目标 ${S.settings.targetWaist}`}); const ln = S.settings.sex==='m'?90:S.settings.sex==='f'?85:null; if (ln) refs.push({v:ln, t:`风险线 ${ln}`, warn:true}); }
+    let lo = Math.min(...vals), hi = Math.max(...vals);
+    refs.forEach(r=>{ if (Math.abs(r.v - (lo+hi)/2) < Math.max(6,(hi-lo)*1.5)) { lo=Math.min(lo,r.v); hi=Math.max(hi,r.v); } else r.skip=true; });
+    const padv = Math.max(0.5,(hi-lo)*0.12); const yt = niceTicks(lo-padv, hi+padv, 4); const y0=yt[0], y1=yt[yt.length-1];
+    const Y = v => P.t + ph - (v-y0)/(y1-y0)*ph;
+    yt.forEach(v=>{ svg += `<line x1="${P.l}" x2="${Wd-P.r}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--line)"/><text x="${P.l-8}" y="${Y(v)+3.5}" text-anchor="end">${+v.toFixed(1)}</text>`; });
+    refs.filter(r=>!r.skip).forEach(r=>{ const c = r.warn?'var(--bad)':color; svg += `<line x1="${P.l}" x2="${Wd-P.r}" y1="${Y(r.v)}" y2="${Y(r.v)}" stroke="${c}" stroke-dasharray="4 4" opacity=".7"/><text x="${Wd-P.r}" y="${Y(r.v)-5}" text-anchor="end" style="fill:${c}">${r.t}</text>`; });
+    const xy = pts.map(r=>[X(r.date), Y(r[m])]);
+    const line = xy.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+','+p[1].toFixed(1)).join('');
+    const gid = 'g'+m;
+    svg += `<defs><linearGradient id="${gid}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${color}" stop-opacity=".22"/><stop offset="1" stop-color="${color}" stop-opacity="0"/></linearGradient></defs>`;
+    if (xy.length>1) svg += `<path d="${line}L${xy[xy.length-1][0].toFixed(1)},${P.t+ph}L${xy[0][0].toFixed(1)},${P.t+ph}Z" fill="url(#${gid})"/>`;
+    svg += `<path d="${line}" fill="none" stroke="${color}" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>`;
+    const rDot = pts.length > 45 ? 0 : 2.5;
+    xy.forEach((p,i)=>{ const last = i===xy.length-1; if (last || rDot) svg += `<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="${last?5:rDot}" fill="${last?color:'var(--card)'}" stroke="${last?'var(--card)':color}" stroke-width="${last?2.5:1.6}"/>`;
+      model.push({x:p[0], y:p[1], label:`${md(pts[i].date)} 周${WK[pd(pts[i].date).getDay()]}`, val:`${f1(pts[i][m])} ${meta.unit}`}); });
+    const L = xy[xy.length-1]; svg += `<text x="${Math.min(L[0], Wd-P.r-4)}" y="${L[1]-11}" text-anchor="${L[0]>Wd-50?'end':'middle'}" style="fill:var(--ink);font-family:var(--f-num);font-weight:700;font-size:14px">${f1(vals[vals.length-1])}</text>`;
+    const ch = vals[vals.length-1]-vals[0]; const avg = vals.reduce((a,b)=>a+b,0)/vals.length;
+    $('trendStats').innerHTML = stat('区间变化', `<span class="delta ${Math.abs(ch)<.05?'':ch<0?'down':'up'}">${ch>0?'+':''}${ch.toFixed(1)}</span>`) + stat('平均', f1(avg)) + stat('最低 / 最高', `${f1(Math.min(...vals))}/${f1(Math.max(...vals))}`) + stat('喝酒天数', `${drinks.length} 天`);
+  }
+  const by = P.t+ph;
+  xt.forEach((s,i)=>{ svg += `<text x="${X(s)}" y="${by+16}" text-anchor="${i===0?'start':i===xt.length-1?'end':'middle'}">${xLabel(s)}</text>`; });
+  const dy = H-9;
+  svg += `<line x1="${P.l}" x2="${Wd-P.r}" y1="${dy}" y2="${dy}" stroke="var(--line)" stroke-dasharray="2 4"/>`;
+  drinks.forEach(r=>{ svg += `<circle cx="${X(r.date).toFixed(1)}" cy="${dy}" r="3.4" fill="var(--c-drink)"/>`; });
+  svg += `<line id="guide" x1="0" x2="0" y1="${P.t}" y2="${by}" stroke="var(--faint)" stroke-dasharray="3 3" visibility="hidden"/>`;
+  wrap.innerHTML = `<svg viewBox="0 0 ${Wd} ${H}" width="${Wd}" height="${H}" role="img" aria-label="${meta.label}趋势图">${svg}</svg><div class="tip" id="tip" hidden></div>`;
+  S.chart = {model, W:Wd};
+}
+$('chartWrap').addEventListener('pointermove', e => {
+  if (!S.chart || !S.chart.model.length) return;
+  const rect = $('chartWrap').getBoundingClientRect(); const x = (e.clientX-rect.left) * (S.chart.W/rect.width);
+  let best=null, bd=1e9; for (const p of S.chart.model){ const d=Math.abs(p.x-x); if (d<bd){bd=d;best=p;} }
+  const tip=$('tip'), g=document.getElementById('guide'); if (!tip||!best) return;
+  if (bd > 40){ tip.hidden=true; g&&g.setAttribute('visibility','hidden'); return; }
+  tip.hidden=false; tip.innerHTML = `${best.label} · <b>${best.val}</b>`;
+  const k = rect.width/S.chart.W;
+  tip.style.left = Math.min(Math.max(best.x*k, 80), rect.width-80)+'px'; tip.style.top = best.y*k+'px';
+  if (g){ g.setAttribute('x1',best.x); g.setAttribute('x2',best.x); g.setAttribute('visibility','visible'); }
+});
+$('chartWrap').addEventListener('pointerleave', () => { const t=$('tip'); if(t) t.hidden=true; const g=document.getElementById('guide'); g&&g.setAttribute('visibility','hidden'); });
+let rzT; window.addEventListener('resize', () => { clearTimeout(rzT); rzT=setTimeout(renderChart, 120); });
+
+/* ---------- attachments ---------- */
+const fileUrl = f => (S.blobUrls && S.blobUrls[f.id]) || f.url || '#';
+function filesHtml(files){
+  if (!files?.length) return '';
+  return `<div class="files">${files.map(f=>{ const isImg = (f.type||'').startsWith('image/'); const ext = (f.name.split('.').pop()||'').slice(0,4).toUpperCase();
+    return `<a class="file" href="${esc(fileUrl(f))}" target="_blank" rel="noopener"><span class="th">${isImg?`<img src="${esc(fileUrl(f))}" alt="" loading="lazy">`:esc(ext||'FILE')}</span><span>${esc(f.name)}</span></a>`; }).join('')}</div>`;
+}
+function setupDrop(dropId, inputId, pickedId){
+  const drop=$(dropId), input=$(inputId), picked=$(pickedId); drop._files=[];
+  const show = () => { picked.innerHTML = drop._files.map(f=>`<span>${esc(f.name)} · ${fmtSize(f.size)}</span>`).join(''); };
+  input.addEventListener('change', () => { drop._files = drop._files.concat([...input.files]); input.value=''; show(); });
+  drop.addEventListener('dragover', e=>{ e.preventDefault(); drop.classList.add('over'); });
+  drop.addEventListener('dragleave', ()=>drop.classList.remove('over'));
+  drop.addEventListener('drop', e=>{ e.preventDefault(); drop.classList.remove('over'); drop._files = drop._files.concat([...e.dataTransfer.files].filter(f=>/^image\/|pdf$/.test(f.type))); show(); });
+  drop.reset = () => { drop._files=[]; show(); };
+}
+setupDrop('eDrop','eFiles','ePicked'); setupDrop('cDrop','cFiles','cPicked');
+async function uploadFiles(files, noteEl){
+  const out=[];
+  for (let i=0;i<files.length;i++){
+    const f=files[i]; noteEl.textContent = `正在上传附件 ${i+1}/${files.length}：${f.name}`;
+    if (S.assets){
+      try{ const r = await S.assets.upload(f); out.push({id:r.id, name:f.name, type:r.contentType||f.type, size:r.sizeBytes||f.size}); S.fileCache[r.id]=f; }
+      catch(err){ const c = err?.code; throw new Error(c==='too_large'?`${f.name} 超过 20 MB，请压缩后再传。`: c==='quota_exceeded'?'附件空间已满，请删除一些旧附件。':`${f.name} 上传失败（${c||'未知原因'}）。`); }
+    } else { const id = 'local-'+uid8(); out.push({id, name:f.name, type:f.type, size:f.size, url:URL.createObjectURL(f)}); S.fileCache[id]=f; }
+  }
+  return out;
+}
+async function removeFiles(files){ if (!S.assets || !files) return; for (const f of files){ if (f.id && !f.url) { try{ await S.assets.delete(f.id); }catch(e){} } } }
+
+/* ---------- 检查: forms ---------- */
+function openForm(id, open){ const f=$(id); f.hidden = open===undefined ? !f.hidden : !open; if (!f.hidden){ const d = f.querySelector('input[type=date]'); if (d && !d.value) d.value = ds(today()); } }
+$('examToggle').onclick = () => openForm('examForm');
+$('examCancel').onclick = () => openForm('examForm', false);
+$('chkToggle').onclick = () => openForm('chkForm');
+$('chkCancel').onclick = () => openForm('chkForm', false);
+$('examForm').addEventListener('submit', async e => {
+  e.preventDefault(); const btn=$('examSave'); btn.disabled=true;
+  try{
+    const files = await uploadFiles($('eDrop')._files, $('examNote'));
+    const obj = { id: uid8(), name:$('eName').value.trim(), date:$('eDate').value, hospital:$('eHosp').value.trim(), note:$('eNote').value.trim(), files, createdAt:new Date().toISOString() };
+    await store.setItem('exams', obj); S.ui.open[obj.id]=true;
+    $('examForm').reset(); $('eDrop').reset(); $('examNote').textContent=''; openForm('examForm',false); toast('检查已保存');
+  }catch(err){ $('examNote').textContent = err.message || saveErr(err); }
+  finally{ btn.disabled=false; }
+});
+$('chkForm').addEventListener('submit', async e => {
+  e.preventDefault(); const btn=$('chkSave');
+  const picked = $('cDrop')._files; if (!picked.length){ $('chkNote').textContent='请先选择体检报告附件。'; return; }
+  btn.disabled=true;
+  try{
+    const files = await uploadFiles(picked, $('chkNote'));
+    const obj = { id: uid8(), date:$('cDate').value, org:$('cOrg').value.trim(), note:$('cNote').value.trim(), files, abnormal:[], summary:'', analyzedAt:null, createdAt:new Date().toISOString() };
+    await store.setItem('checkups', obj); S.ui.open[obj.id]=true;
+    const auto = $('cAuto').checked;
+    $('chkForm').reset(); $('cAuto').checked = true; $('cDrop').reset(); $('chkNote').textContent=''; openForm('chkForm',false); toast('体检报告已保存');
+    if (auto && S.sample) analyze(obj.id);
+  }catch(err){ $('chkNote').textContent = err.message || saveErr(err); }
+  finally{ btn.disabled=false; }
+});
+
+/* ---------- 检查: lists ---------- */
+const EXAM_COLORS = ['--c-exam','--c-weight','--c-run','--c-waist','--c-check','--c-month','--c-drink'];
+const hashColor = s => { let h=0; for (const ch of String(s)) h=(h*31+ch.charCodeAt(0))>>>0; return EXAM_COLORS[h%EXAM_COLORS.length]; };
+const flagClass = f => /高|↑|升/.test(f||'') ? 'hi' : /低|↓|降/.test(f||'') ? 'lo' : 'ab';
+const flagTag = f => { const c=flagClass(f); return `<span class="tag ${c}">${c==='hi'?'↑ ':c==='lo'?'↓ ':''}${esc(f||'异常')}</span>`; };
+const normName = n => String(n||'').replace(/[\s（）()]/g,'').toLowerCase();
+
+function renderMedHead(){
+  $('tExams').innerHTML = `${S.exams.length}<small>项</small>`; $('tChecks').innerHTML = `${S.checkups.length}<small>份</small>`;
+  $('examCount').textContent = S.exams.length?String(S.exams.length):''; $('chkCount').textContent = S.checkups.length?String(S.checkups.length):'';
+  const L = S.checkups.slice().sort((a,b)=>a.date<b.date?1:-1)[0];
+  if (!L){ $('hChk').innerHTML='—'; $('hChkDate').textContent='暂无'; $('hChkMeta').innerHTML='<span>上传体检报告后，Claude 会整理出异常指标</span>'; return; }
+  $('hChkDate').textContent = L.date;
+  const ab = L.abnormal||[];
+  if (!L.analyzedAt && !ab.length){ $('hChk').innerHTML = `待识别`; $('hChkMeta').innerHTML = `<span>${esc(L.org||'体检报告')}</span><span>在下方展开报告即可识别</span>`; return; }
+  $('hChk').innerHTML = `${ab.length}<small>项异常</small>`;
+  const hi = ab.filter(a=>flagClass(a.flag)==='hi').length, lo = ab.filter(a=>flagClass(a.flag)==='lo').length;
+  $('hChkMeta').innerHTML = `<span>偏高 <b>${hi}</b></span><span>偏低 <b>${lo}</b></span><span>其他 <b>${ab.length-hi-lo}</b></span>`;
+}
+function renderExams(){
+  const L = S.exams.slice().sort((a,b)=>a.date<b.date?1:-1);
+  if (!L.length){ $('examList').innerHTML = `<div class="empty"><b>还没有检查记录</b>胃镜、彩超、CT 之类的专项检查，可以连同报告照片一起存在这里。</div>`; return; }
+  $('examList').innerHTML = L.map(x=>{ const open = !!S.ui.open[x.id]; const n=(x.files||[]).length;
+    return `<div class="rowwrap ${open?'open':''}"><button class="row" data-open="${x.id}" type="button"><div class="circ" style="background:var(${hashColor(x.name)})"><svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="3"/><path d="M9 4V2.8h6V4M12 9v6M9 12h6"/></svg></div><div class="tx"><b>${esc(x.name)}</b><span>${x.date}${x.hospital?' · '+esc(x.hospital):''}</span></div><div class="rv"><small>${n?n+' 个附件':''}</small>${CHEV}</div></button>
+      ${open?`<div class="detail">${x.note?`<div class="note">${esc(x.note)}</div>`:''}${filesHtml(x.files)}${!x.note&&!n?'<div class="muted" style="font-size:14px">没有备注和附件</div>':''}<div class="end" style="margin-top:10px"><button class="linkbtn" data-delexam="${x.id}" type="button">删除</button></div></div>`:''}</div>`; }).join('');
+}
+$('examList').addEventListener('click', e => {
+  const o=e.target.closest('[data-open]'); if (o){ S.ui.open[o.dataset.open]=!S.ui.open[o.dataset.open]; renderExams(); return; }
+  const b=e.target.closest('[data-delexam]'); if(!b) return;
+  armConfirm(b,'确认删除', async()=>{ const x=S.exams.find(z=>z.id===b.dataset.delexam); try{ await store.delItem('exams', x.id); await removeFiles(x.files); toast('已删除'); }catch(err){ toast(saveErr(err)); } });
+});
+
+function renderCheckups(){
+  renderMedHead();
+  const L = S.checkups.slice().sort((a,b)=>a.date<b.date?1:-1);
+  const cnt = new Map();
+  for (const c of L) { const seen=new Set(); for (const a of (c.abnormal||[])) { const k=normName(a.name); if (seen.has(k)) continue; seen.add(k); const e=cnt.get(k)||{name:a.name,n:0,last:null}; e.n++; if(!e.last) e.last={...a}; cnt.set(k,e);} }
+  const rec = [...cnt.values()].filter(e=>e.n>=2).sort((a,b)=>b.n-a.n);
+  $('watchBox').innerHTML = rec.length ? `<div class="card cpad"><b style="font-size:16px">反复出现的异常</b><div class="muted" style="font-size:13.5px">多次体检都有，复查时值得重点问问医生</div><div class="watch">${rec.map(e=>`<div class="w"><b>${esc(e.name)}</b>${flagTag(e.last.flag)}<span class="muted">${e.n} 次</span></div>`).join('')}</div></div>` : '';
+  if (!L.length){ $('chkList').innerHTML = `<div class="empty"><b>还没有体检报告</b>上传 PDF 或手机拍的报告照片，Claude 会把超出参考范围的指标整理出来。</div>`; return; }
+  if (S.ui.open._init===undefined){ S.ui.open._init=true; S.ui.open[L[0].id]=true; }
+  $('chkList').innerHTML = L.map(c=>{
+    const open = !!S.ui.open[c.id]; const busy = S.busy[c.id]; const ab = c.abnormal||[];
+    const badge = busy ? '<span class="tag gr">识别中</span>' : (!c.analyzedAt && !ab.length) ? '<span class="tag gr">未识别</span>' : ab.length ? `<span class="tag hi">${ab.length} 项异常</span>` : '<span class="tag ok">无异常</span>';
+    let body = '';
+    if (open){
+      let abn;
+      if (busy) abn = `<div class="status"><span class="spin"></span>${esc(busy)}</div>`;
+      else if (!c.analyzedAt && !ab.length) abn = `<div class="end" style="justify-content:flex-start">${S.sample?`<button class="btn blue sm" data-an="${c.id}" type="button">识别异常指标</button>`:''}<button class="btn soft sm" data-addab="${c.id}" type="button">手动添加</button></div>`;
+      else abn = `<div class="abn-h"><b>${ab.length?`异常指标 ${ab.length} 项`:'未发现异常指标'}</b><span class="end">${S.sample?`<button class="tbtn" data-an="${c.id}" type="button">重新识别</button>`:''}<button class="tbtn" data-addab="${c.id}" type="button">添加</button></span></div>
+        ${c.summary?`<p class="abn-sum">${esc(c.summary)}</p>`:''}
+        <div>${ab.map((a,i)=>`<div class="flag-row"><div class="nm"><b>${esc(a.name)}</b>${a.category||a.note?`<small>${esc([a.category,a.note].filter(Boolean).join(' · '))}</small>`:''}</div><div class="act">${flagTag(a.flag)}<button class="xbtn" data-rmab="${c.id}|${i}" type="button" aria-label="移除">✕</button></div><div class="vr"><b>${esc(a.value||'—')}</b>${esc(a.unit||'')}${a.ref?`<span style="margin-left:10px">参考 ${esc(a.ref)}</span>`:''}</div></div>`).join('')}</div>`;
+      const addForm = S.ui.addAb===c.id ? `<div class="mini-add" data-form="${c.id}"><label class="box text"><span>指标名称</span><input data-k="name"></label><label class="box text"><span>检测值</span><input data-k="value"></label><label class="box text"><span>参考范围</span><input data-k="ref"></label><label class="box text"><span>情况</span><select data-k="flag"><option>偏高</option><option>偏低</option><option>阳性</option><option>异常</option></select></label><button class="btn sm" data-saveab="${c.id}" type="button" style="grid-column:1/-1">添加这项</button></div>` : '';
+      body = `<div class="detail">${c.note?`<div class="note">${esc(c.note)}</div>`:''}${filesHtml(c.files)}<div class="abn">${abn}${addForm}${S.errs[c.id]?`<div class="formnote err">${esc(S.errs[c.id])}</div>`:''}</div><div class="end" style="margin-top:8px"><button class="linkbtn" data-delchk="${c.id}" type="button">删除这份报告</button></div></div>`;
+    }
+    return `<div class="rowwrap ${open?'open':''}"><button class="row" data-open="${c.id}" type="button"><div class="circ" style="background:var(--c-check)"><svg viewBox="0 0 24 24"><path d="M7 3h7l5 5v11a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></div><div class="tx"><b>${esc(c.org||'体检报告')}</b><span>${c.date}${(c.files||[]).length?` · ${(c.files||[]).length} 个附件`:''}</span></div><div class="rv">${badge}${CHEV}</div></button>${body}</div>`;
+  }).join('');
+}
+$('chkList').addEventListener('click', async e => {
+  const t = e.target.closest('button'); if (!t) return;
+  if (t.dataset.open){ S.ui.open[t.dataset.open]=!S.ui.open[t.dataset.open]; renderCheckups(); }
+  else if (t.dataset.an) analyze(t.dataset.an);
+  else if (t.dataset.addab) { S.ui.addAb = S.ui.addAb===t.dataset.addab ? null : t.dataset.addab; renderCheckups(); }
+  else if (t.dataset.saveab) {
+    const box = document.querySelector(`[data-form="${t.dataset.saveab}"]`); const v = k => box.querySelector(`[data-k="${k}"]`).value.trim();
+    if (!v('name')) { toast('请填写指标名称'); return; }
+    const c = S.checkups.find(x=>x.id===t.dataset.saveab);
+    const obj = {...c, abnormal:[...(c.abnormal||[]), {name:v('name'), value:v('value'), ref:v('ref'), flag:v('flag'), unit:'', note:'手动添加'}], analyzedAt: c.analyzedAt || new Date().toISOString()};
+    S.ui.addAb=null; try{ await store.setItem('checkups',obj); toast('已添加'); }catch(err){ toast(saveErr(err)); }
+  }
+  else if (t.dataset.rmab) { const [id,i] = t.dataset.rmab.split('|'); const c=S.checkups.find(x=>x.id===id); const ab=(c.abnormal||[]).slice(); ab.splice(+i,1); try{ await store.setItem('checkups',{...c,abnormal:ab}); }catch(err){ toast(saveErr(err)); } }
+  else if (t.dataset.delchk) armConfirm(t,'确认删除', async()=>{ const c=S.checkups.find(z=>z.id===t.dataset.delchk); try{ await store.delItem('checkups',c.id); await removeFiles(c.files); toast('已删除'); }catch(err){ toast(saveErr(err)); } });
+});
+
+/* ---------- report analysis ---------- */
+function loadScript(src){ return new Promise((res,rej)=>{ const s=document.createElement('script'); s.src=src; s.onload=res; s.onerror=()=>rej(new Error('load')); document.head.appendChild(s); }); }
+let pdfReady;
+function loadPdf(){
+  if (!pdfReady) pdfReady = (async()=>{ const base='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/'; await loadScript(base+'pdf.min.js'); await loadScript(base+'pdf.worker.min.js'); window.pdfjsLib.GlobalWorkerOptions.workerSrc = base+'pdf.worker.min.js'; return window.pdfjsLib; })();
+  return pdfReady;
+}
+async function canvasJpeg(cv){ return await new Promise(r=>cv.toBlob(r,'image/jpeg',0.85)); }
+async function imageToJpeg(blob){
+  const bmp = await createImageBitmap(blob); const s = Math.min(1, 2000/Math.max(bmp.width,bmp.height));
+  const cv=document.createElement('canvas'); cv.width=Math.round(bmp.width*s); cv.height=Math.round(bmp.height*s);
+  const cx=cv.getContext('2d'); cx.fillStyle='#fff'; cx.fillRect(0,0,cv.width,cv.height); cx.drawImage(bmp,0,0,cv.width,cv.height); return canvasJpeg(cv);
+}
+async function getBlob(f){ if (S.fileCache[f.id]) return S.fileCache[f.id]; const r = await fetch(fileUrl(f)); if (!r.ok) throw new Error('fetch'); return await r.blob(); }
+async function analyze(id){
+  const c = S.checkups.find(x=>x.id===id); if (!c || S.busy[id]) return;
+  delete S.errs[id]; S.ui.open[id]=true;
+  const setBusy = m => { S.busy[id]=m; renderCheckups(); };
+  try{
+    if (!S.limits) S.limits = await S.sample.limits().catch(()=>({maxPromptBytes:200000}));
+    const maxImg = S.limits.images?.maxCount || 0;
+    const texts=[], images=[]; let skipped=0;
+    for (const f of (c.files||[])){
+      setBusy(`正在读取 ${f.name}…`);
+      const blob = await getBlob(f);
+      if ((f.type||blob.type).includes('pdf')){
+        const lib = await loadPdf(); const doc = await lib.getDocument({data: new Uint8Array(await blob.arrayBuffer())}).promise;
+        let txt=''; for (let p=1;p<=doc.numPages;p++){ const tc = await (await doc.getPage(p)).getTextContent(); let lastY=null; for (const it of tc.items){ const y=it.transform?.[5]; txt += (lastY!==null && Math.abs(y-lastY)>2 ? '\n' : ' ') + it.str; lastY=y; } txt += `\n--- 第${p}页结束 ---\n`; }
+        if (txt.replace(/\s|-|第\d+页结束/g,'').length > 200*Math.min(doc.numPages,3)/3) texts.push(`【${f.name}】\n${txt}`);
+        else { for (let p=1;p<=doc.numPages;p++){ if (images.length>=maxImg){ skipped++; continue; } setBusy(`正在处理 ${f.name} 第 ${p}/${doc.numPages} 页…`); const page=await doc.getPage(p); const vp0=page.getViewport({scale:1}); const vp=page.getViewport({scale:Math.min(2.2, 1800/vp0.width)}); const cv=document.createElement('canvas'); cv.width=vp.width; cv.height=vp.height; const cx=cv.getContext('2d'); cx.fillStyle='#fff'; cx.fillRect(0,0,cv.width,cv.height); await page.render({canvasContext:cx, viewport:vp}).promise; images.push(await canvasJpeg(cv)); } }
+      } else if ((f.type||blob.type).startsWith('image/')){
+        if (images.length>=maxImg){ skipped++; continue; }
+        images.push(await imageToJpeg(blob));
+      }
+    }
+    if (!texts.length && !images.length) throw new Error(maxImg ? '附件里没有能读取的内容。' : '这份报告是图片，当前环境不能把图片发给 Claude，请手动添加异常指标。');
+    let body = texts.join('\n\n'); const cap = Math.floor((S.limits.maxPromptBytes||200000)/3) - 2000; if (body.length>cap) body = body.slice(0,cap);
+    const prompt = `你是一名严谨的体检报告整理助手。下面是一份体检报告的内容${images.length?`（含 ${images.length} 张报告页面图片）`:''}${texts.length?'（含从 PDF 提取的文字）':''}。
+请找出所有【超出参考范围】或【被报告标注为异常/阳性/↑/↓/H/L】的检验指标，以及影像、超声、心电图等检查中的阳性发现（如结节、脂肪肝、息肉等）。
+要求：
+1. 只依据报告内容，不要推测或编造报告中没有的数据。正常的指标不要列出。
+2. 同一指标只列一次。
+3. 只输出 JSON，格式：
+{"summary":"一到两句话的总体概述（中文，不超过60字）","items":[{"name":"指标或检查发现名称","value":"检测值或描述","unit":"单位，没有则为空","ref":"参考范围，没有则为空","flag":"偏高|偏低|阳性|异常 四选一","category":"所属类别，如 血常规/肝功能/血脂/甲状腺彩超","note":"不超过25字的简短说明"}]}
+若没有任何异常，items 为空数组。${skipped?`\n（注：因数量限制，有 ${skipped} 页未提供。）`:''}
+${body ? '\n报告文字：\n'+body : ''}`;
+    setBusy('Claude 正在阅读报告，整理异常指标…');
+    const res = await S.sample.json(prompt, { images: images.length?images:undefined, modelTier:'default' });
+    const items = Array.isArray(res?.items) ? res.items.filter(x=>x && x.name).map(x=>({ name:String(x.name).slice(0,80), value:String(x.value??'').slice(0,80), unit:String(x.unit??'').slice(0,20), ref:String(x.ref??'').slice(0,60), flag:String(x.flag??'异常').slice(0,8), category:String(x.category??'').slice(0,30), note:String(x.note??'').slice(0,60) })) : [];
+    const fresh = S.checkups.find(x=>x.id===id) || c;
+    delete S.busy[id];
+    await store.setItem('checkups', {...fresh, abnormal:items, summary:String(res?.summary||'').slice(0,200), analyzedAt:new Date().toISOString()});
+    toast(items.length ? `识别出 ${items.length} 项异常` : '未发现异常指标');
+    if (skipped) S.errs[id] = `附件页数较多，有 ${skipped} 页未能识别，可手动补充。`;
+  }catch(err){
+    delete S.busy[id];
+    const code = err?.code;
+    S.errs[id] = code==='no_key' ? '请先在“我的”页填写 Claude API Key，才能自动识别。' : code==='bad_key' ? 'API Key 无效，请在“我的”页检查。' : code==='network' ? '网络连接失败，请检查网络后重试。' : code==='api_error' ? ('Claude 接口出错：'+(err.message||'未知原因')) : code==='not_granted' ? '没有获得调用 Claude 的许可，可以在页面权限里开启后重试。' : code==='rate_limited' ? '请求太频繁，请过一会儿再试。' : code==='invalid_json' ? 'Claude 返回的结果无法解析，请重试一次。' : code==='images_unavailable' ? '当前环境不能发送图片给 Claude，请手动添加。' : (err?.message && !code ? err.message : '识别没有完成，请稍后重试。');
+  }
+  renderCheckups();
+}
+
+/* ---------- 我的 ---------- */
+function fillSettings(){
+  const s=S.settings; if (document.activeElement && $('setForm').contains(document.activeElement)) return;
+  $('sName').value=s.name||''; $('sSex').value=s.sex||''; $('sHeight').value=s.height??''; $('sTW').value=s.targetWeight??''; $('sTWa').value=s.targetWaist??''; $('sWG').value=s.weekGoal??''; $('sMG').value=s.monthGoal??''; $('sKey').value=s.apiKey||''; $('sModel').value=s.model||'';
+}
+$('setForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const obj = { name:$('sName').value.trim(), sex:$('sSex').value, height:num($('sHeight').value), targetWeight:num($('sTW').value), targetWaist:num($('sTWa').value), weekGoal:num($('sWG').value), monthGoal:num($('sMG').value), apiKey:$('sKey').value.trim(), model:$('sModel').value.trim(), updatedAt:new Date().toISOString() };
+  try{ await store.setSettings(obj); $('setNote').textContent=''; toast('设置已保存'); }catch(err){ $('setNote').textContent = saveErr(err); }
+});
+function renderMine(){
+  const s=S.settings, y = String(today().getFullYear());
+  $('profName').textContent = s.name || '未设置称呼';
+  const W = latest('weight'); const sub=[];
+  if (s.height) sub.push(`身高 ${s.height} cm`);
+  if (W && s.height) sub.push(`BMI ${(W.weight/Math.pow(s.height/100,2)).toFixed(1)}`);
+  if (s.targetWeight) sub.push(`目标 ${s.targetWeight} kg`);
+  $('profSub').textContent = sub.length ? sub.join(' · ') : '填写身高后可计算 BMI';
+  const tot = S.daily.reduce((a,r)=>a+(r.run||0),0);
+  const dr = S.daily.filter(r=>r.drink && r.date.startsWith(y)).length;
+  const tile = (c, svg, k, v) => `<div class="tile"><div class="ico" style="background:var(${c})"><svg viewBox="0 0 24 24">${svg}</svg></div><div class="t"><span>${k}</span><b>${v}</b></div></div>`;
+  $('kv').innerHTML =
+    tile('--c-weight','<path d="M4 19h16M7 16V9M12 16V5M17 16v-4"/>','记录天数',`${S.daily.length}<small>天</small>`) +
+    tile('--c-run','<circle cx="15" cy="4.5" r="1.8"/><path d="M8 21l3-6 3 2 1 5M6 12l3-4 4 1 2 4 3 1"/>','累计跑量',`${f2(tot)}<small>km</small>`) +
+    tile('--c-drink','<path d="M7 3h10l-1 7a4 4 0 0 1-8 0zM12 14v6M8 20h8"/>',`${y}年喝酒`,`${dr}<small>天</small>`) +
+    tile('--c-check','<path d="M7 3h7l5 5v11a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M14 3v5h5"/>','检查 / 体检',`${S.exams.length}<small>项</small> ${S.checkups.length}<small>份</small>`);
+}
+async function renderStorage(){
+  if (!S.assets){ $('storageLine').textContent = S.mode==='cloud' ? '当前视图不能上传附件' : '未连接云端，附件只在本次浏览中可见'; return; }
+  try{ const {usage} = await S.assets.list(); $('storageLine').textContent = `${usage.files} 个文件，共 ${fmtSize(usage.bytes)}，保存在这台设备`; }
+  catch(e){ $('storageLine').textContent = '暂时无法读取存储用量'; }
+}
+function backupObj(){ const strip = a => a.map(x=>({...x, files:(x.files||[]).map(({url,...f})=>f)})); return { app:'Body', version:1, exportedAt:new Date().toISOString(), settings:(({apiKey,...r})=>r)(S.settings||{}), daily:S.daily, exams:strip(S.exams), checkups:strip(S.checkups) }; }
+async function saveFile(filename, text, mime){
+  if (S.downloads){ try{ await S.downloads.save({filename, data:new Blob([text],{type:mime})}); toast('已导出'); return; }catch(e){ if (e?.code==='cancelled' || e?.code==='declined') return; } }
+  $('expFallback').hidden=false; $('expText').value=text; $('expText').focus(); $('expText').select();
+}
+$('expJson').onclick = async () => { const o = backupObj(); o.attachments = []; try{ for (const f of await IDB.all('files')) o.attachments.push({id:f.id, type:f.type, size:f.size, data: await blobToB64(f.blob)}); }catch(e){} saveFile(`Body备份-${ds(today())}.json`, JSON.stringify(o), 'application/json'); };
+$('expCsv').onclick = () => { const rows=[['日期','体重(kg)','腰围(cm)','跑步(km)','是否喝酒']].concat(S.daily.map(r=>[r.date, r.weight??'', r.waist??'', r.run??'', r.drink?'是':'否'])); saveFile(`Body每日记录-${ds(today())}.csv`, '﻿'+rows.map(r=>r.join(',')).join('\n'), 'text/csv'); };
+$('expCopy').onclick = async () => { try{ await navigator.clipboard.writeText($('expText').value); toast('已复制'); }catch(e){ $('expText').select(); toast('请手动复制选中的内容'); } };
+$('impFile').addEventListener('change', async e => {
+  const f = e.target.files[0]; e.target.value=''; if (!f) return;
+  const box=$('impPreview'); box.hidden=false;
+  try{
+    const o = JSON.parse(await f.text()); if (!Array.isArray(o.daily)) throw 0;
+    const daily = o.daily.filter(r=>/^\d{4}-\d{2}-\d{2}$/.test(r?.date));
+    const exams = (o.exams||[]).filter(x=>x?.id&&x.date), checks=(o.checkups||[]).filter(x=>x?.id&&x.date);
+    box.innerHTML = `<span id="impMsg">备份里有 <b>${daily.length}</b> 天记录、<b>${exams.length}</b> 项检查、<b>${checks.length}</b> 份体检报告。</span><span class="end"><button class="btn soft sm" id="impNo" type="button">取消</button><button class="btn sm" id="impYes" type="button">恢复</button></span>`;
+    $('impNo').onclick = () => box.hidden=true;
+    $('impYes').onclick = async () => {
+      $('impYes').disabled=true; let n=0;
+      try{
+        if (o.settings && typeof o.settings==='object') await store.setSettings(o.settings);
+        for (const r of daily){ await store.setDaily({date:r.date, weight:num(r.weight), waist:num(r.waist), run:num(r.run), drink:!!r.drink, updatedAt:r.updatedAt||new Date().toISOString()}); n++; if(n%20===0) $('impMsg').textContent=`正在恢复… ${n}/${daily.length}`; }
+        for (const x of exams) await store.setItem('exams', x);
+        for (const x of checks) await store.setItem('checkups', x);
+        if (Array.isArray(o.attachments)) for (const a of o.attachments){ try{ const blob=b64ToBlob(a.data,a.type); await IDB.put('files',{id:a.id, blob, type:a.type, size:blob.size, createdAt:Date.now()}); S.blobUrls[a.id]=URL.createObjectURL(blob); }catch(e){} }
+        renderAll();
+        box.hidden=true; toast('恢复完成');
+      }catch(err){ box.innerHTML = `<span>恢复到一半出错了（已恢复 ${n} 天）：${esc(saveErr(err))}</span>`; }
+    };
+  }catch(err){ box.innerHTML = `<span>这个文件不是 Body 的备份，请选择导出的 JSON 文件。</span>`; }
+});
+$('wipeDaily').onclick = function(){ armConfirm(this, `删除 ${S.daily.length} 天`, async () => { const all=S.daily.map(r=>r.date); try{ for (const d of all) await store.delDaily(d); toast('每日记录已清空'); }catch(err){ toast(saveErr(err)); } }); };
+
+/* ---------- render + boot ---------- */
+function renderAll(){ renderOverview(); renderHistory(); renderChart(); renderExams(); renderCheckups(); renderMine(); }
+function setSync(kind, title){ const b=$('sync'); b.className='cbtn '+(kind==='ok'?'sync-ok':kind==='local'?'sync-local':''); b.title=title; b.setAttribute('aria-label', title); $('syncMark').setAttribute('d', kind==='ok'?'M9.5 13.5l2 2 3.5-4':kind==='local'?'M12 10.5v3M12 15.8v.2':''); }
+$('sync').onclick = () => toast($('sync').title);
+setSync('', '连接中…');
+showPage(S.ui.page);
+fillForm($('rDate').value);
+renderAll();
+
+(async () => {
+  S.blobUrls = S.blobUrls || {}; S.assets = assetsLocal; S.downloads = downloadsLocal; S.sample = sampleLocal;
+  try{
+    try{ await navigator.storage?.persist?.(); }catch(e){}
+    const [settings, daily, exams, checkups, files] = await Promise.all([IDB.get('kv','settings'), IDB.all('daily'), IDB.all('exams'), IDB.all('checkups'), IDB.all('files')]);
+    S.settings = settings || {}; S.daily = daily.sort(byDate); S.exams = exams; S.checkups = checkups;
+    for (const f of files) S.blobUrls[f.id] = URL.createObjectURL(f.blob);
+    S.mode='device'; setSync('ok','数据保存在这台设备的浏览器里');
+    fillSettings(); fillForm($('rDate').value);
+  }catch(e){
+    S.mode='local'; setSync('local','浏览器存储不可用');
+    $('banner').hidden=false; $('banner').textContent='这个浏览器不允许保存数据（可能是无痕模式），关闭页面后记录会丢失。';
+  }
+  if (S.ui.page==='set') renderStorage();
+  renderAll();
+})();
+})();
+if ('serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(()=>{}));
+</script>
+
+</body>
+</html>
