@@ -505,6 +505,22 @@ body.noscroll{overflow:hidden}
 .drow.sel{box-shadow:none}
 .datepill,textarea.ta,.mini-add .box input,.mini-add .box select,.box.text input,.box.text select{font-size:16px!important}
 @media (max-width:400px){.big2 .val{font-size:40px}.duo2 .tile{padding:12px;gap:10px}.duo2 .tile .ico{width:34px;height:34px}.duo2 .tile .t b{font-size:24px}}
+
+/* v12: compact app bar with page title, no logo */
+.brand{display:none}
+.pagetitle{display:none}
+.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:8;padding:12px 0 10px;margin-bottom:6px;gap:8px;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.tb-title{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.15}
+.tb-title small{font-size:12.5px;font-weight:500;color:var(--muted);letter-spacing:.02em}
+.tb-title h1{margin:2px 0 0;font-family:"Noto Sans SC",var(--f-body);font-size:24px;font-weight:800;letter-spacing:.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cbtn.sm{width:40px;height:40px}
+.cbtn.sm svg{width:20px;height:20px}
+.topbar .avatar{width:40px;height:40px;font-size:15px}
+#page-med .hero{padding:16px 18px}
+#page-med .hero .val{font-size:44px;margin:6px 0 8px;line-height:1}
+#page-med .hero .meta span{font-size:12.5px!important;padding:4px 9px!important}
+.prof{padding:16px 18px}.prof .avatar.lg{width:54px;height:54px;font-size:21px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
@@ -513,9 +529,9 @@ body.noscroll{overflow:hidden}
 
 <div class="wrap">
   <div class="topbar">
-    <button class="cbtn" id="plusBtn" type="button" aria-label="新增"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
-    <div class="brand"><svg viewBox="0 0 1024 1024" aria-label="Body" role="img"><defs><linearGradient id="bbg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#101A33"/><stop offset="1" stop-color="#26324F"/></linearGradient></defs><rect width="1024" height="1024" rx="230" fill="url(#bbg)"/><g transform="translate(-19,10)" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="52"><path d="M150 330 V596" stroke="#FFFFFF"/><circle cx="220" cy="526" r="70" stroke="#FFFFFF"/><circle cx="442" cy="526" r="70" stroke="#3A4766"/><path d="M442 456 A70 70 0 1 1 372.5 534" stroke="#2FD0A0"/><circle cx="664" cy="526" r="70" stroke="#FFFFFF"/><path d="M734 330 V596" stroke="#FFFFFF"/><path d="M806 458 L860 574 M914 458 L846 676" stroke="#FFFFFF"/></g><g transform="translate(-19,10)"><rect x="124" y="730" width="230" height="22" rx="11" fill="#4C8DFF"/><rect x="370" y="730" width="170" height="22" rx="11" fill="#FFB534"/><rect x="556" y="730" width="130" height="22" rx="11" fill="#2FD0A0"/><rect x="702" y="730" width="96" height="22" rx="11" fill="#FF6B92"/></g></svg></div><div class="sp"></div>
-    <button class="cbtn" id="sync" type="button" aria-label="同步状态" title="连接中"><svg viewBox="0 0 24 24"><path d="M7 18a5 5 0 0 1-.6-9.96A6 6 0 0 1 18 9a4.5 4.5 0 0 1-1 8.9H7z"/><path id="syncMark" d="M9.5 13.5l2 2 3.5-4"/></svg></button>
+    <div class="tb-title"><small id="tbSub"></small><h1 id="tbTitle">身体信息</h1></div>
+    <button class="cbtn sm" id="plusBtn" type="button" aria-label="新增"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+    <button class="cbtn sm" id="sync" type="button" aria-label="同步状态" title="连接中"><svg viewBox="0 0 24 24"><path d="M7 18a5 5 0 0 1-.6-9.96A6 6 0 0 1 18 9a4.5 4.5 0 0 1-1 8.9H7z"/><path id="syncMark" d="M9.5 13.5l2 2 3.5-4"/></svg></button>
     <button class="avatar" id="avatarBtn" type="button" aria-label="我的">我</button>
   </div>
   <div class="banner" id="banner" hidden></div>
@@ -777,6 +793,8 @@ function saveErr(err){ const c = err?.code; if (c==='quota_exceeded') return '�
 /* ---------- navigation ---------- */
 function showPage(p){
   S.ui.page = p;
+  $('tbTitle').textContent = {daily:'身体信息', med:'医院检查', set:'我的'}[p];
+  $('tbSub').textContent = p==='daily' ? $('todayLabel').textContent : p==='med' ? '检查项目 · 体检报告' : '资料 · 目标 · 备份';
   ['daily','med','set'].forEach(k => { $('page-'+k).hidden = k!==p; });
   document.querySelectorAll('nav.tabs button').forEach(b => b.setAttribute('aria-selected', b.dataset.page===p));
   $('plusBtn').style.visibility = p==='set' ? 'hidden' : 'visible';
@@ -802,6 +820,7 @@ const metaLines = a => `<span>${a[0]}</span>` + (a.length>1 ? `<span>${a.slice(1
 function renderOverview(){
   const t = today(), tS = ds(t), st = S.settings;
   $('todayLabel').textContent = `${t.getMonth()+1}月${t.getDate()}日 周${WK[t.getDay()]}`;
+  if (S.ui.page==='daily') $('tbSub').textContent = $('todayLabel').textContent;
   const initial = (st.name||'我').trim().slice(0,1) || '我';
   $('avatarBtn').textContent = initial; $('profAvatar').textContent = initial;
 
