@@ -1130,6 +1130,14 @@ span.xc{cursor:default}
 .pclip:active{background:var(--line)}
 .ins-ph .addmini{order:0;margin-right:2px}
 .ins-ph .sum2{text-align:right}
+
+/* v42: native pdf fallback + group row bg */
+.vw-frame{width:100%;flex:1;min-height:70vh;border:0;border-radius:6px;background:#fff}
+.vw-alt{color:rgba(255,255,255,.75);font-size:13px;margin-top:6px}
+.xgrp .xgbg{grid-column:1/6!important;margin-right:-6px}
+.xhead.ex,.xrow.ex{grid-template-columns:56px minmax(0,1fr) minmax(0,1.5fr) 36px 32px 22px}
+@media (max-width:370px){.xhead.ex,.xrow.ex{grid-template-columns:52px minmax(0,1fr) minmax(0,1.35fr) 32px 28px 20px}}
+.xrow.ex .xsel{justify-content:end;place-items:center end;margin-right:-6px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
@@ -2128,6 +2136,8 @@ $('chkList').addEventListener('click', async e => {
 /* ---------- report analysis ---------- */
 function loadScript(src){ return new Promise((res,rej)=>{ const s=document.createElement('script'); s.src=src; s.onload=res; s.onerror=()=>rej(new Error('load')); document.head.appendChild(s); }); }
 let pdfReady;
+const PDF_BASE='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/';
+const pdfOpts = buf => ({data:new Uint8Array(buf), cMapUrl:PDF_BASE+'cmaps/', cMapPacked:true, standardFontDataUrl:PDF_BASE+'standard_fonts/', isEvalSupported:false});
 function loadPdf(){
   if (!pdfReady) pdfReady = (async()=>{ const base='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/'; await loadScript(base+'pdf.min.js'); await loadScript(base+'pdf.worker.min.js'); window.pdfjsLib.GlobalWorkerOptions.workerSrc = base+'pdf.worker.min.js'; return window.pdfjsLib; })();
   return pdfReady;
@@ -2151,7 +2161,7 @@ async function analyze(id){
       setBusy(`正在读取 ${f.name}…`);
       const blob = await getBlob(f);
       if ((f.type||blob.type).includes('pdf')){
-        const lib = await loadPdf(); const doc = await lib.getDocument({data: new Uint8Array(await blob.arrayBuffer())}).promise;
+        const lib = await loadPdf(); const doc = await lib.getDocument(pdfOpts(await blob.arrayBuffer())).promise;
         let txt=''; for (let p=1;p<=doc.numPages;p++){ const tc = await (await doc.getPage(p)).getTextContent(); let lastY=null; for (const it of tc.items){ const y=it.transform?.[5]; txt += (lastY!==null && Math.abs(y-lastY)>2 ? '\n' : ' ') + it.str; lastY=y; } txt += `\n--- 第${p}页结束 ---\n`; }
         if (txt.replace(/\s|-|第\d+页结束/g,'').length > 200*Math.min(doc.numPages,3)/3) texts.push(`【${f.name}】\n${txt}`);
         else { for (let p=1;p<=doc.numPages;p++){ if (images.length>=maxImg){ skipped++; continue; } setBusy(`正在处理 ${f.name} 第 ${p}/${doc.numPages} 页…`); const page=await doc.getPage(p); const vp0=page.getViewport({scale:1}); const vp=page.getViewport({scale:Math.min(2.2, 1800/vp0.width)}); const cv=document.createElement('canvas'); cv.width=vp.width; cv.height=vp.height; const cx=cv.getContext('2d'); cx.fillStyle='#fff'; cx.fillRect(0,0,cv.width,cv.height); await page.render({canvasContext:cx, viewport:vp}).promise; images.push(await canvasJpeg(cv)); } }
@@ -2549,9 +2559,12 @@ async function openViewer(f, list){
   if (!isPdf && (f.type||'').startsWith('image/')){ body.innerHTML = `<img src="${esc(fileUrl(f))}" alt="${esc(f.name)}">`; return; }
   if (!isPdf){ body.innerHTML = `<div class="vw-msg">这个文件不能在这里预览。<br><a href="${esc(fileUrl(f))}" target="_blank" rel="noopener">在新窗口打开</a></div>`; return; }
   body.innerHTML = '<div class="vw-msg"><span class="spin"></span> 正在打开 PDF…</div>';
+  let blob;
+  try{ blob = await getBlob(f); if (!blob || !blob.size || /text\/html/.test(blob.type)) throw new Error('nofile'); }
+  catch(err){ if (tok===vwToken) body.innerHTML = `<div class="vw-msg">这个附件的文件不在这台设备上。<br><span style="font-size:13px;opacity:.75">可以在保险详情里重新上传一次附件。</span></div>`; return; }
   try{
-    const blob = await getBlob(f); const lib = await loadPdf();
-    const doc = await lib.getDocument({data:new Uint8Array(await blob.arrayBuffer())}).promise;
+    const lib = await loadPdf();
+    const doc = await lib.getDocument(pdfOpts(await blob.arrayBuffer())).promise;
     if (tok !== vwToken) return; body.innerHTML = '';
     const dpr = Math.min(window.devicePixelRatio||1, 2), W = Math.min(body.clientWidth - 16, 900);
     for (let i=1; i<=Math.min(doc.numPages, 40); i++){
@@ -2561,7 +2574,9 @@ async function openViewer(f, list){
       body.appendChild(c); await page.render({canvasContext:c.getContext('2d'), viewport:vp}).promise;
       if (doc.numPages>1){ const t=document.createElement('div'); t.className='vw-pg'; t.textContent=`${i} / ${doc.numPages}`; body.appendChild(t); }
     }
-  }catch(err){ if (tok===vwToken) body.innerHTML = `<div class="vw-msg">PDF 暂时无法在这里显示。<br><a href="${esc(fileUrl(f))}" target="_blank" rel="noopener">在新窗口打开</a></div>`; }
+  }catch(err){ if (tok!==vwToken) return;
+    const u = URL.createObjectURL(blob.type==='application/pdf' ? blob : new Blob([blob],{type:'application/pdf'}));
+    body.innerHTML = `<iframe class="vw-frame" src="${u}" title="${esc(f.name)}"></iframe><a class="vw-alt" href="${u}" target="_blank" rel="noopener">显示不全？在新窗口打开</a>`; }
 }
 function closeViewer(){ vwToken++; $('viewer').hidden = true; $('vwBody').innerHTML=''; if (!anyOverlay()) document.body.classList.remove('noscroll'); }
 $('vwClose').onclick = closeViewer;
@@ -2757,7 +2772,7 @@ $('cFiles').addEventListener('change', async () => {
   if (!pdf || $('cDate').value) { if (!pdf && !$('cDate').value) $('cDateHint').textContent = '识别后自动填写'; return; }
   $('cDateHint').textContent = '读取中…';
   try{
-    const lib = await loadPdf(); const doc = await lib.getDocument({data:new Uint8Array(await pdf.arrayBuffer())}).promise;
+    const lib = await loadPdf(); const doc = await lib.getDocument(pdfOpts(await pdf.arrayBuffer())).promise;
     let txt = ''; for (let i=1;i<=Math.min(doc.numPages,3);i++){ const tc = await (await doc.getPage(i)).getTextContent(); txt += tc.items.map(x=>x.str).join(' ') + '\n'; }
     const d = findReportDate(txt);
     if (d && !$('cDate').value){ $('cDate').value = d; $('cDateHint').textContent = '已从附件读取'; } else if (!d) $('cDateHint').textContent = '识别后自动填写';
