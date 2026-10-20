@@ -1138,6 +1138,12 @@ span.xc{cursor:default}
 .xhead.ex,.xrow.ex{grid-template-columns:56px minmax(0,1fr) minmax(0,1.5fr) 36px 32px 22px}
 @media (max-width:370px){.xhead.ex,.xrow.ex{grid-template-columns:52px minmax(0,1fr) minmax(0,1.35fr) 32px 28px 20px}}
 .xrow.ex .xsel{justify-content:end;place-items:center end;margin-right:-6px}
+
+/* v43: natural spacing for select column */
+.xhead.ex,.xrow.ex{grid-template-columns:54px minmax(0,1fr) minmax(0,1.45fr) 36px 40px 18px!important;column-gap:5px}
+@media (max-width:370px){.xhead.ex,.xrow.ex{grid-template-columns:50px minmax(0,1fr) minmax(0,1.3fr) 32px 36px 16px!important}}
+.xrow.ex .xsel{margin-right:0!important;place-items:center!important;justify-content:center!important}
+.xgrp .xgbg{margin-right:0!important}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
