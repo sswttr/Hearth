@@ -1,12 +1,12 @@
 {
-  "name": "Body",
-  "short_name": "Body",
-  "description": "记录体重、腰围、跑量、喝酒和医院检查",
+  "name": "Hearth",
+  "short_name": "Hearth",
+  "description": "全家的身体记录、宝宝成长、保险和医院检查",
   "lang": "zh-CN",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#F2F2F5",
+  "background_color": "#1B1430",
   "theme_color": "#F2F2F5",
   "icons": [
     {
