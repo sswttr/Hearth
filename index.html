@@ -2236,6 +2236,20 @@ async function saveFile(filename, text, mime){
   $('expFallback').hidden=false; $('expText').value=text; $('expText').focus(); $('expText').select();
 }
 $('expJson').onclick = async () => { const o = backupObj(); o.attachments = []; try{ for (const f of await IDB.all('files')) o.attachments.push({id:f.id, type:f.type, size:f.size, data: await blobToB64(f.blob)}); }catch(e){} saveFile(`Hearth备份-${ds(today())}.json`, JSON.stringify(o), 'application/json'); };
+/* cloud version: full backup also carries attachment files */
+if (typeof IDB === 'undefined') $('expJson').onclick = async () => {
+  const btn = $('expJson'); btn.disabled = true; const o = backupObj(); o.attachments = [];
+  const all = [...S.exams, ...S.checkups, ...S.policies].flatMap(x => x.files||[]);
+  const b64 = b => new Promise((res,rej)=>{ const r=new FileReader(); r.onload=()=>res(String(r.result).split(',')[1]||''); r.onerror=()=>rej(r.error); r.readAsDataURL(b); });
+  let n = 0;
+  for (const f of all){ n++; toast(`正在打包附件 ${n}/${all.length}…`);
+    try{ const blob = await getBlob(f); o.attachments.push({id:f.id, name:f.name, type:f.type||blob.type, size:blob.size, data: await b64(blob)}); }catch(e){} }
+  const text = JSON.stringify(o);
+  try{ if (S.downloads){ await S.downloads.save({filename:`Hearth完整备份-${ds(today())}.json`, data:new Blob([text],{type:'application/json'})}); toast(`已导出，含 ${o.attachments.length} 个附件`); } }
+  catch(e){ if (!(e?.code==='cancelled' || e?.code==='declined')) toast('导出失败：'+(e?.message||e?.code||'')); }
+  btn.disabled = false;
+};
+
 $('expCsv').onclick = () => { const rows=[['日期','体重(kg)','腰围(cm)','跑步(km)']].concat(S.daily.map(r=>[r.date, r.weight??'', r.waist??'', r.run??''])); saveFile(`Hearth每日记录-${ds(today())}.csv`, '﻿'+rows.map(r=>r.join(',')).join('\n'), 'text/csv'); };
 $('expCopy').onclick = async () => { try{ await navigator.clipboard.writeText($('expText').value); toast('已复制'); }catch(e){ $('expText').select(); toast('请手动复制选中的内容'); } };
 $('impFile').addEventListener('change', async e => {
