@@ -12,6 +12,7 @@
 <title>Hearth</title>
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=4">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<script>try{ if ((localStorage.getItem("hearth-look")||"glass")==="glass") document.documentElement.classList.add("glass"); }catch(e){ document.documentElement.classList.add("glass"); }</script>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1024 1024%22%3E%3Cdefs%3E%3ClinearGradient id=%22bg%22 x1=%220%22 y1=%220%22 x2=%220%22 y2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22#1B1430%22/%3E%3Cstop offset=%221%22 stop-color=%22#3A1E3C%22/%3E%3C/linearGradient%3E%3CradialGradient id=%22gl%22 cx=%22.5%22 cy=%22.54%22 r=%22.46%22%3E%3Cstop offset=%220%22 stop-color=%22#FF7A45%22 stop-opacity=%22.38%22/%3E%3Cstop offset=%221%22 stop-color=%22#FF7A45%22 stop-opacity=%220%22/%3E%3C/radialGradient%3E%3ClinearGradient id=%22w%22 x1=%220%22 y1=%221%22 x2=%221%22 y2=%220%22%3E%3Cstop offset=%220%22 stop-color=%22#F0507A%22/%3E%3Cstop offset=%22.55%22 stop-color=%22#FF8A3D%22/%3E%3Cstop offset=%221%22 stop-color=%22#FFD36B%22/%3E%3C/linearGradient%3E%3CradialGradient id=%22hl%22 cx=%22.36%22 cy=%22.3%22 r=%22.4%22%3E%3Cstop offset=%220%22 stop-color=%22#FFFFFF%22 stop-opacity=%22.35%22/%3E%3Cstop offset=%221%22 stop-color=%22#FFFFFF%22 stop-opacity=%220%22/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect width=%221024%22 height=%221024%22 rx=%22230%22 fill=%22url(#bg)%22/%3E%3Crect width=%221024%22 height=%221024%22 rx=%22230%22 fill=%22url(#gl)%22/%3E%3Cpath id=%22h%22 d=%22M512 788 C362 690 268 604 268 486 C268 398 334 334 414 334 C458 334 494 354 512 388 C530 354 566 334 610 334 C690 334 756 398 756 486 C756 604 662 690 512 788 Z%22 fill=%22url(#w)%22/%3E%3Cpath d=%22M512 788 C362 690 268 604 268 486 C268 398 334 334 414 334 C458 334 494 354 512 388 C530 354 566 334 610 334 C690 334 756 398 756 486 C756 604 662 690 512 788 Z%22 fill=%22url(#hl)%22/%3E%3C/svg%3E">
 <meta name="apple-mobile-web-app-title" content="Hearth">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1144,6 +1145,65 @@ span.xc{cursor:default}
 @media (max-width:370px){.xhead.ex,.xrow.ex{grid-template-columns:50px minmax(0,1fr) minmax(0,1.3fr) 32px 36px 16px!important}}
 .xrow.ex .xsel{margin-right:0!important;place-items:center!important;justify-content:center!important}
 .xgrp .xgbg{margin-right:0!important}
+
+/* ===== v44: Liquid Glass theme (html.glass) ===== */
+html.glass{--g-bg:#F4F0F6;--g-card:rgba(255,255,255,.5);--g-card-strong:rgba(255,255,255,.78);--g-edge:rgba(255,255,255,.75);--g-hi:rgba(255,255,255,.95);--g-fill:rgba(255,255,255,.55);--g-line:rgba(70,40,90,.09);--g-shadow:0 12px 32px -20px rgba(60,30,80,.38),0 2px 6px -3px rgba(60,30,80,.10);--fill:rgba(255,255,255,.55);--line:rgba(70,40,90,.09)}
+@media (prefers-color-scheme:dark){html.glass:not([data-theme="light"]){--g-bg:#0F0B17;--g-card:rgba(40,32,52,.52);--g-card-strong:rgba(36,28,48,.82);--g-edge:rgba(255,255,255,.12);--g-hi:rgba(255,255,255,.18);--g-fill:rgba(255,255,255,.07);--g-line:rgba(255,255,255,.08);--g-shadow:0 14px 34px -18px rgba(0,0,0,.7);--fill:rgba(255,255,255,.07);--line:rgba(255,255,255,.08)}}
+html.glass[data-theme="dark"]{--g-bg:#0F0B17;--g-card:rgba(40,32,52,.52);--g-card-strong:rgba(36,28,48,.82);--g-edge:rgba(255,255,255,.12);--g-hi:rgba(255,255,255,.18);--g-fill:rgba(255,255,255,.07);--g-line:rgba(255,255,255,.08);--g-shadow:0 14px 34px -18px rgba(0,0,0,.7);--fill:rgba(255,255,255,.07);--line:rgba(255,255,255,.08)}
+/* ambient backdrop the glass refracts */
+html.glass{background:var(--g-bg)!important}
+html.glass body{background:transparent!important}
+html.glass body::before{content:"";position:fixed;inset:-10vmax;height:auto;z-index:-1;pointer-events:none;
+ background:
+  radial-gradient(38vmax 34vmax at 8% 6%,rgba(255,140,175,.75),transparent 70%),
+  radial-gradient(36vmax 30vmax at 96% 12%,rgba(255,190,130,.7),transparent 70%),
+  radial-gradient(40vmax 36vmax at 4% 58%,rgba(165,145,255,.6),transparent 70%),
+  radial-gradient(42vmax 36vmax at 98% 72%,rgba(115,195,255,.6),transparent 70%),
+  radial-gradient(36vmax 30vmax at 40% 104%,rgba(255,165,120,.55),transparent 70%);
+}
+@media (prefers-color-scheme:dark){html.glass:not([data-theme="light"]) body::before{opacity:.55}}
+html.glass[data-theme="dark"] body::before{opacity:.55}
+/* glass surfaces */
+html.glass .grp,html.glass .card:not([class*="hero"]):not(.prof),html.glass .ins-p,html.glass .cmx,html.glass .tile:not([style*="--tc-soft"]){
+ background:var(--g-card)!important;
+ border:1px solid var(--g-edge);box-shadow:inset 0 1px 0 var(--g-hi),inset 0 -1px 0 rgba(255,255,255,.08),var(--g-shadow)!important;border-radius:28px}
+html.glass .grp .card:not([class*="hero"]),html.glass .grp .grp{background:transparent!important;border:0;box-shadow:none!important;-webkit-backdrop-filter:none;backdrop-filter:none}
+/* colored hero panels: keep color, add glass sheen */
+html.glass [class*="hero-"],html.glass .ins-hero,html.glass .watchc,html.glass .prof{position:relative;box-shadow:inset 0 1px 0 rgba(255,255,255,.35),inset 0 0 0 1px rgba(255,255,255,.10),0 16px 34px -20px rgba(40,10,60,.55)!important;border-radius:24px}
+html.glass .ins-hero::after,html.glass .watchc::after,html.glass .hero-blue::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(160deg,rgba(255,255,255,.22) 0%,rgba(255,255,255,0) 38%)}
+html.glass .hero-amber.wlite{background:rgba(236,226,255,.62)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 8px 22px -16px rgba(60,30,90,.35)!important}
+/* inner cells become frosted chips */
+html.glass .xc,html.glass .dc,html.glass .rows .rowwrap,html.glass .polrow{-webkit-tap-highlight-color:transparent}
+html.glass .xc:not([style]):not(.hi):not(.ok),html.glass .ddate{background:var(--g-fill)!important;box-shadow:inset 0 1px 0 var(--g-hi),inset 0 0 0 .5px var(--g-edge)}
+html.glass .xc[style],html.glass .dc{box-shadow:inset 0 1px 0 rgba(255,255,255,.7)}
+html.glass .xgrp .xgbg{background:rgba(120,210,225,.32);box-shadow:inset 0 1px 0 rgba(255,255,255,.8),inset 0 0 0 .5px rgba(255,255,255,.6)}
+html.glass #examList .xgrp .xrow > .xc:not(#_){box-shadow:none!important;background:transparent!important;border-radius:0!important}
+html.glass .xgrp .xgbg{border-radius:14px}
+/* top bar: transparent, floating glass buttons */
+html.glass .topbar{background:transparent!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;box-shadow:none!important;border:0!important}
+html.glass .topbar::before{content:"";position:absolute;inset:calc(-1 * env(safe-area-inset-top,0px) - 14px) -40px -12px;z-index:-1;pointer-events:none;-webkit-backdrop-filter:blur(16px) saturate(170%);backdrop-filter:blur(16px) saturate(170%);background:linear-gradient(to bottom,color-mix(in srgb,var(--g-bg) 85%,transparent) 0%,color-mix(in srgb,var(--g-bg) 60%,transparent) 75%,transparent 100%);-webkit-mask:linear-gradient(#000 70%,transparent);mask:linear-gradient(#000 70%,transparent)}
+html.glass .cbtn{background:var(--g-card)!important;border:1px solid var(--g-edge)!important;-webkit-backdrop-filter:blur(20px) saturate(180%);backdrop-filter:blur(20px) saturate(180%);box-shadow:inset 0 1px 0 var(--g-hi),0 6px 16px -10px rgba(60,30,80,.4)!important}
+html.glass .avatar{box-shadow:inset 0 1px 0 rgba(255,255,255,.4),0 0 0 2px rgba(255,255,255,.6),0 6px 16px -8px rgba(30,20,80,.5)!important}
+/* floating capsule tab bar */
+html.glass nav.tabs{left:14px!important;right:14px!important;bottom:calc(10px + env(safe-area-inset-bottom,0px))!important;max-width:520px;margin:0 auto;border-radius:32px!important;padding:6px!important;
+ background:var(--g-card)!important;-webkit-backdrop-filter:blur(30px) saturate(190%);backdrop-filter:blur(30px) saturate(190%);border:1px solid var(--g-edge)!important;
+ box-shadow:inset 0 1px 0 var(--g-hi),0 18px 40px -18px rgba(50,20,80,.45),0 2px 8px -4px rgba(50,20,80,.15)!important}
+html.glass nav.tabs button{border-radius:26px!important;padding:6px 4px 4px!important;transition:background .25s ease,box-shadow .25s ease}
+html.glass nav.tabs button[aria-selected="true"]{background:var(--g-card-strong)!important;box-shadow:inset 0 1px 0 var(--g-hi),inset 0 0 0 .5px var(--g-edge),0 4px 12px -6px rgba(50,20,80,.35)}
+html.glass body{padding-bottom:calc(100px + env(safe-area-inset-bottom,0px))!important}
+/* overlays */
+html.glass .sheet{background:var(--g-card-strong)!important;-webkit-backdrop-filter:blur(40px) saturate(180%);backdrop-filter:blur(40px) saturate(180%);border:1px solid var(--g-edge);border-bottom:0;box-shadow:inset 0 1px 0 var(--g-hi),0 -20px 50px -20px rgba(40,10,60,.45)!important}
+html.glass .mv{background:var(--g-bg)!important}
+html.glass .mv::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(40vmax 34vmax at 8% 6%,rgba(255,150,180,.45),transparent 70%),radial-gradient(40vmax 34vmax at 96% 80%,rgba(140,190,255,.4),transparent 70%)}
+html.glass .whomenu,html.glass .xbar{-webkit-backdrop-filter:blur(30px) saturate(180%);backdrop-filter:blur(30px) saturate(180%)}
+html.glass .whomenu{background:var(--g-card-strong)!important;border:1px solid var(--g-edge)!important}
+html.glass .xbar{background:rgba(20,16,30,.72)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.15),0 14px 30px -14px rgba(0,0,0,.5)}
+html.glass .seg{background:var(--g-fill);box-shadow:inset 0 0 0 .5px var(--g-edge)}
+html.glass .seg button[aria-pressed="true"]{background:var(--g-card-strong);box-shadow:inset 0 1px 0 var(--g-hi),0 3px 10px -6px rgba(50,20,80,.4)}
+html.glass .box,html.glass input:not([type=checkbox]):not([type=radio]),html.glass select,html.glass textarea{background-color:var(--g-fill)}
+html.glass .sh .sico{box-shadow:inset 0 1px 0 rgba(255,255,255,.45)}
+html.glass .btn:not(.soft){box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 6px 16px -10px rgba(0,0,0,.4)}
+html.glass .btn.soft,html.glass .chip2,html.glass .addmini,html.glass .xback{background:var(--g-fill)!important;box-shadow:inset 0 1px 0 var(--g-hi),inset 0 0 0 .5px var(--g-edge)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
@@ -1251,6 +1311,10 @@ span.xc{cursor:default}
       </div>
     </section>
 
+    <section class="grp">
+    <div class="sh soft" style="--sc:#A35BD6;--sc-soft:#F3E8FC"><span class="sico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 0 0 16z" fill="currentColor"/></svg></span><h2>外观</h2></div>
+    <div class="seg" id="lookSeg"><button type="button" data-look="glass" aria-pressed="true">液态玻璃</button><button type="button" data-look="classic" aria-pressed="false">经典</button></div>
+    </section>
     <section class="grp">
     <div class="sh soft" style="--sc:#4F6BED;--sc-soft:#ECEFFE"><span class="sico"><svg viewBox="0 0 24 24"><path d="M7 18a5 5 0 0 1-.6-9.96A6 6 0 0 1 18 9a4.5 4.5 0 0 1-1 8.9H7z"/></svg></span><h2>数据备份</h2><div class="r"><span class="hintchip">仅自己可见</span></div></div>
     <div class="card">
@@ -2866,6 +2930,12 @@ async function ceSave(val){
 document.addEventListener('keydown', e => { if (!S.ui.ce || e.target.id!=='ceIn') return;
   if (e.key==='Escape'){ const k=S.ui.ce.kind; S.ui.ce=null; ceRender(k); }
   else if (e.key==='Enter' && e.target.tagName!=='TEXTAREA'){ e.preventDefault(); ceSave(e.target.value); } });
+
+
+/* ---------- appearance: liquid glass / classic ---------- */
+function applyLook(v){ document.documentElement.classList.toggle('glass', v==='glass'); document.querySelectorAll('#lookSeg button').forEach(b=>b.setAttribute('aria-pressed', b.dataset.look===v)); try{ localStorage.setItem('hearth-look', v); }catch(e){} }
+document.querySelectorAll('#lookSeg button').forEach(b => b.onclick = () => applyLook(b.dataset.look));
+applyLook(document.documentElement.classList.contains('glass') ? 'glass' : 'classic');
 
 /* ---------- render + boot ---------- */
 function renderAll(){ renderKids(); renderIns(); renderOverview(); renderHistory(); if (!$('monthView').hidden) renderMonth(); renderChart(); renderExams(); renderCheckups(); renderMine(); renderPeople(); renderFam(); }
