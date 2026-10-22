@@ -1204,6 +1204,58 @@ html.glass .box,html.glass input:not([type=checkbox]):not([type=radio]),html.gla
 html.glass .sh .sico{box-shadow:inset 0 1px 0 rgba(255,255,255,.45)}
 html.glass .btn:not(.soft){box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 6px 16px -10px rgba(0,0,0,.4)}
 html.glass .btn.soft,html.glass .chip2,html.glass .addmini,html.glass .xback{background:var(--g-fill)!important;box-shadow:inset 0 1px 0 var(--g-hi),inset 0 0 0 .5px var(--g-edge)}
+
+/* v45 */
+.xc.xd.grp{padding:0 2px}.xc.xd.grp .yr{white-space:nowrap;font-size:13px;letter-spacing:-.3px}
+.xc.xd.grp .yr i{font-style:normal;font-family:var(--f-body);font-size:10.5px;font-weight:600;opacity:.6;margin-left:1px}
+html.glass nav.tabs{left:0!important;right:0!important;bottom:0!important;max-width:none;margin:0;border-radius:22px 22px 0 0!important;border-left:0!important;border-right:0!important;border-bottom:0!important;
+ padding:6px max(12px,env(safe-area-inset-right,0px)) calc(4px + env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px))!important;
+ background:linear-gradient(180deg,rgba(255,255,255,.38),rgba(255,255,255,.22))!important;-webkit-backdrop-filter:blur(26px) saturate(200%);backdrop-filter:blur(26px) saturate(200%);
+ box-shadow:inset 0 1px 0 rgba(255,255,255,.85),0 -10px 28px -18px rgba(50,20,80,.35)!important}
+html.glass nav.tabs button[aria-selected="true"]{background:rgba(255,255,255,.45)!important}
+html.glass body{padding-bottom:calc(84px + env(safe-area-inset-bottom,0px))!important}
+@media (prefers-color-scheme:dark){html.glass:not([data-theme="light"]) nav.tabs{background:linear-gradient(180deg,rgba(40,32,52,.42),rgba(28,22,38,.30))!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.12)!important}
+ html.glass:not([data-theme="light"]) nav.tabs button[aria-selected="true"]{background:rgba(255,255,255,.12)!important}}
+
+/* v46: iOS 26 floating tab capsule */
+html.glass nav.tabs{left:50%!important;right:auto!important;transform:translateX(-50%)!important;width:min(calc(100% - 40px),400px)!important;max-width:none;
+ bottom:max(6px,calc(env(safe-area-inset-bottom,0px) - 20px))!important;border-radius:999px!important;padding:5px!important;gap:2px!important;
+ background:rgba(255,255,255,.28)!important;-webkit-backdrop-filter:blur(14px) saturate(200%);backdrop-filter:blur(14px) saturate(200%);
+ border:1px solid rgba(255,255,255,.65)!important;
+ box-shadow:inset 0 1px 0 rgba(255,255,255,.95),inset 0 -1px 0 rgba(0,0,0,.03),0 0 0 .5px rgba(0,0,0,.06),0 14px 34px -14px rgba(40,20,70,.35)!important}
+html.glass nav.tabs button{border-radius:999px!important;padding:7px 4px 5px!important;font-size:11px!important;font-weight:600;color:var(--ink)}
+html.glass nav.tabs button[aria-selected="true"]{background:rgba(120,120,135,.13)!important;box-shadow:inset 0 .5px 0 rgba(255,255,255,.6)!important;color:var(--blue)}
+html.glass body{padding-bottom:calc(80px + env(safe-area-inset-bottom,0px))!important}
+@media (prefers-color-scheme:dark){html.glass:not([data-theme="light"]) nav.tabs{background:rgba(44,40,54,.32)!important;border-color:rgba(255,255,255,.12)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 14px 34px -14px rgba(0,0,0,.7)!important}
+ html.glass:not([data-theme="light"]) nav.tabs button[aria-selected="true"]{background:rgba(255,255,255,.14)!important}}
+
+/* v47: drink toggle in daily rows */
+.dcells,.dh-cells{grid-template-columns:minmax(0,1.6fr) minmax(0,1fr) minmax(0,1fr) 40px!important}
+.dh-cells .dh-dr{padding-left:0;text-align:center}
+.dc.dr2{align-items:center;justify-content:center;background:var(--fill);cursor:pointer;transition:background .15s ease,transform .1s ease;-webkit-tap-highlight-color:transparent}
+.dc.dr2 svg{width:19px;height:19px;fill:none;stroke:var(--faint);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.dc.dr2.yes{background:#FDDCE3!important}
+.dc.dr2.yes svg{stroke:#E0466B;fill:rgba(224,70,107,.18)}
+.dc.dr2:active{transform:scale(.94)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .dc.dr2.yes{background:#4A1E2A!important}}
+:root[data-theme="dark"] .dc.dr2.yes{background:#4A1E2A!important}
+@media (max-width:380px){.dcells,.dh-cells{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr) minmax(0,1fr) 34px!important}}
+
+/* v48: drink icon, month & trend */
+.dc.dr2 svg .liq,.cd .dk .liq{fill:none;stroke:none}
+.dc.dr2.yes svg{fill:none!important}
+.dc.dr2.yes svg .liq{fill:#E0466B;opacity:.55}
+.cd{position:relative}
+.cd .dk{position:absolute;top:4px;right:4px;width:15px;height:15px;border-radius:5px;background:#FDDCE3;display:grid;place-items:center}
+.cd .dk svg{width:11px;height:11px;fill:none;stroke:#E0466B;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.cd .dk svg .liq{fill:#E0466B;stroke:none;opacity:.6}
+#mvSum{grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+#mvSum .ms{padding:8px 7px;min-width:0}
+#mvSum .ms span{font-size:11px;white-space:nowrap}
+#mvSum .ms b{font-size:19px;white-space:nowrap}
+#mvSum .ms b small{font-size:10px}
+html.glass,html.glass body{overflow-x:clip}
+html.glass .topbar::before{left:-16px!important;right:-16px!important}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
@@ -1258,6 +1310,7 @@ html.glass .btn.soft,html.glass .chip2,html.glass .addmini,html.glass .xback{bac
         <button type="button" data-m="weight" aria-pressed="true"><i style="background:var(--c-weight)"></i>体重</button>
         <button type="button" data-m="waist" aria-pressed="false"><i style="background:var(--c-waist)"></i>腰围</button>
         <button type="button" data-m="run" aria-pressed="false"><i style="background:var(--c-run)"></i>跑步</button>
+        <button type="button" data-m="drink" aria-pressed="false"><i style="background:#E0466B"></i>喝酒</button>
       </div>
       <div class="chart-wrap" id="chartWrap"></div>
       <div class="tstats" id="trendStats"></div>
@@ -1726,10 +1779,10 @@ function renderHistory(){
   $('histCount').textContent = S.daily.length ? String(S.daily.length) : '';
   if (!rows.length){ $('histList').innerHTML = `<div class="empty"><b>还没有记录</b>点上方的“记录”填入今天的数据，就会按天出现在这里。</div>`; return; }
   const sel = $('rDate').value, tS = ds(today());
-  const GL = '<svg viewBox="0 0 24 24"><path d="M7 3h10l-1 7a4 4 0 0 1-8 0zM12 14v6M8 20h8"/></svg>';
+  const GL = DRINK_SVG;
   const cell = (cls, f, k, v, u) => `<div class="dc ${cls} ${v==null?'none':''}" data-f="${f}" role="button" tabindex="0" aria-label="修改${k}"><b>${v==null?'＋':v}</b></div>`;
-  $('histList').innerHTML = `<div class="dhead"><span>日</span><span class="dh-cells"><span>体重 <i>kg</i></span><span>腰围 <i>cm</i></span><span>跑步 <i>km</i></span></span></div>` + rows.map(r=>{ const d = pd(r.date);
-    return `<div class="drow ${r.date===sel?'sel':''}" data-d="${r.date}"><div class="ddate ${r.date===tS?'today':''}" data-open role="button" tabindex="0" aria-label="在表单中修改这天"><span class="md"><b>${d.getDate()}</b></span></div><div class="dcells">${cell('w','weight','体重',r.weight!=null?f1(r.weight):null,'kg')}${cell('wa','waist','腰围',r.waist!=null?f1(r.waist):null,'cm')}${cell('r','run','跑步',r.run?f2(r.run):null,'km')}</div></div>`;
+  $('histList').innerHTML = `<div class="dhead"><span>日</span><span class="dh-cells"><span>体重 <i>kg</i></span><span>腰围 <i>cm</i></span><span>跑步 <i>km</i></span><span class="dh-dr">喝酒</span></span></div>` + rows.map(r=>{ const d = pd(r.date);
+    return `<div class="drow ${r.date===sel?'sel':''}" data-d="${r.date}"><div class="ddate ${r.date===tS?'today':''}" data-open role="button" tabindex="0" aria-label="在表单中修改这天"><span class="md"><b>${d.getDate()}</b></span></div><div class="dcells">${cell('w','weight','体重',r.weight!=null?f1(r.weight):null,'kg')}${cell('wa','waist','腰围',r.waist!=null?f1(r.waist):null,'cm')}${cell('r','run','跑步',r.run?f2(r.run):null,'km')}<div class="dc dr2 ${r.drink?'yes':''}" data-f="drink" role="button" tabindex="0" aria-label="${r.drink?'取消喝酒标记':'标记喝酒'}" aria-pressed="${!!r.drink}">${GL}</div></div></div>`;
   }).join('') + `<button class="more" id="moreHist" type="button"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="3"/><path d="M4 10h16M9 3v4M15 3v4"/></svg>${all.length>rows.length ? `查看全部 ${all.length} 天 · 按月` : '按月查看'}</button>`;
 }
 const LIM = { weight:[20,300,'体重','kg'], waist:[30,200,'腰围','cm'], run:[0,200,'跑步','km'] };
@@ -1794,6 +1847,7 @@ function openMonth(){
 }
 function closeMonth(){ $('monthView').hidden = true; if (!anyOverlay()) document.body.classList.remove('noscroll'); }
 function shiftMonth(n){ const [y,m] = S.ui.month.split('-').map(Number); const d = new Date(y, m-1+n, 1); S.ui.month = `${d.getFullYear()}-${pad2(d.getMonth()+1)}`; renderMonth(); }
+const DRINK_SVG = '<svg viewBox="0 0 24 24"><path class="liq" d="M7.3 7.5h9.4c-.3 2.6-2.1 4.3-4.7 4.3s-4.4-1.7-4.7-4.3z"/><path d="M6.8 3.5h10.4c.4 5.3-1.6 8.8-5.2 8.8S6.4 8.8 6.8 3.5zM12 12.3v7.2M8.3 20.5h7.4"/></svg>';
 function renderMonth(){
   const [y,m] = S.ui.month.split('-').map(Number);
   const first = new Date(y, m-1, 1), nDays = new Date(y, m, 0).getDate(), off = (first.getDay()+6)%7;
@@ -1805,13 +1859,13 @@ function renderMonth(){
   const ws = recs.filter(r=>r.weight!=null), run = recs.reduce((a,r)=>a+(r.run||0),0); const avgW = ws.length ? ws.reduce((a,r)=>a+r.weight,0)/ws.length : null;
   const wch = ws.length>1 ? ws[ws.length-1].weight-ws[0].weight : null;
   const blk = (c,k,v) => `<div class="ms" style="background:var(${c}-soft)"><span>${k}</span><b>${v}</b></div>`;
-  $('mvSum').innerHTML = blk('--c-weight','体重变化', wch==null?'—':`${wch>0?'+':''}${wch.toFixed(1)}<small>kg</small>`) + blk('--c-run','月跑量', `${f2(run)}<small>km</small>`) + blk('--c-waist','平均体重', avgW==null?'—':`${avgW.toFixed(1)}<small>kg</small>`) + blk('--c-month','记录', `${recs.length}<small>天</small>`);
+  $('mvSum').innerHTML = blk('--c-weight','体重变化', wch==null?'—':`${wch>0?'+':''}${wch.toFixed(1)}<small>kg</small>`) + blk('--c-run','月跑量', `${f2(run)}<small>km</small>`) + blk('--c-waist','平均体重', avgW==null?'—':`${avgW.toFixed(1)}<small>kg</small>`) + blk('--c-check','喝酒', `${recs.filter(r=>r.drink).length}<small>天</small>`) + blk('--c-month','记录', `${recs.length}<small>天</small>`);
   let h = '';
   for (let i=0;i<off;i++) h += '<div class="cd blank"></div>';
   for (let d=1; d<=nDays; d++){
     const dt = `${S.ui.month}-${pad2(d)}`, r = map.get(dt), fut = dt > tS;
     const cls = ['cd', r?'has':'', dt===tS?'today':'', fut?'future':''].join(' ');
-    h += `<button class="${cls}" type="button" data-cd="${dt}" ${fut?'disabled':''} aria-label="${m}月${d}日"><span class="n">${d}</span>${r?.weight!=null?`<span class="w">${f1(r.weight)}</span>`:''}${r?.waist!=null?`<span class="wa">${f1(r.waist)}</span>`:''}${r?.run?`<span class="r">${Math.round(r.run*10)/10}</span>`:''}</button>`;
+    h += `<button class="${cls}" type="button" data-cd="${dt}" ${fut?'disabled':''} aria-label="${m}月${d}日"><span class="n">${d}</span>${r?.weight!=null?`<span class="w">${f1(r.weight)}</span>`:''}${r?.waist!=null?`<span class="wa">${f1(r.waist)}</span>`:''}${r?.run?`<span class="r">${Math.round(r.run*10)/10}</span>`:''}${r?.drink?`<span class="dk">${DRINK_SVG}</span>`:''}</button>`;
   }
   $('cal').innerHTML = h;
 }
@@ -1839,7 +1893,7 @@ function niceTicks(lo, hi, n=4){
   for (let v=a; v<=b+step/1e6; v+=step) t.push(+v.toFixed(6));
   return t;
 }
-const META = { weight:{label:'体重', unit:'kg', color:'--c-weight'}, waist:{label:'腰围', unit:'cm', color:'--c-waist'}, run:{label:'跑步距离', unit:'km', color:'--c-run'} };
+const META = { weight:{label:'体重', unit:'kg', color:'--c-weight'}, waist:{label:'腰围', unit:'cm', color:'--c-waist'}, run:{label:'跑步距离', unit:'km', color:'--c-run'}, drink:{label:'喝酒', unit:'天', color:'--c-drk'} };
 const stat = (k,v) => `<div><span>${k}</span><b>${v}</b></div>`;
 function renderChart(){
   const wrap = $('chartWrap'); if ($('page-daily').hidden) return;
@@ -1859,7 +1913,7 @@ function renderChart(){
   if ((end-start)/864e5 < 6) start = addDays(end,-6);
   const sS = ds(start), eS = ds(end);
   const inRange = data.filter(r=>r.date>=sS && r.date<=eS);
-  const pts = inRange.filter(r=>r[m]!=null && (m!=='run' || r[m]>0));
+  const pts = m==='drink' ? inRange.filter(r=>r.drink) : inRange.filter(r=>r[m]!=null && (m!=='run' || r[m]>0));
   const drinks = inRange.filter(r=>r.drink);
 
   const Wd = Math.max(280, wrap.clientWidth || 480), H = Wd < 480 ? 220 : 250;
@@ -1874,7 +1928,22 @@ function renderChart(){
   for (let i=0;i<nT;i++) xt.push(ds(addDays(start, Math.round(i*(nDays-1)/(nT-1)))));
   const xLabel = s => nDays>200 ? `${pd(s).getFullYear()%100}/${pd(s).getMonth()+1}` : md(s);
 
-  if (m === 'run'){
+  if (m === 'drink'){
+    const map = new Map(); for (const r of drinks){ const k = ds(weekStart(pd(r.date))); map.set(k,(map.get(k)||0)+1); }
+    const bars = []; for (let d = weekStart(start); d<=end; d=addDays(d,7)){ const k=ds(d); bars.push({date:k, v:map.get(k)||0}); }
+    const yt = [0,2,4,6,7].filter((v,i,a)=> v<=Math.max(2,...bars.map(b=>b.v)) || i<2 ); const y1 = Math.max(2, Math.ceil(Math.max(...bars.map(b=>b.v))/2)*2);
+    const yt2 = []; for (let v=0; v<=y1; v+= y1>4?2:1) yt2.push(v);
+    const Y = v => P.t + ph - v/y1*ph;
+    yt2.forEach(v=>{ svg += `<line x1="${P.l}" x2="${Wd-P.r}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--line)"/><text x="${P.l-8}" y="${Y(v)+3.5}" text-anchor="end">${v}</text>`; });
+    const slot = pw/Math.max(1,Math.ceil(nDays/7)); const bw = Math.max(4, Math.min(22, slot*0.6));
+    bars.forEach(b=>{ const cx = X(b.date)+slot/2; const x = Math.min(Math.max(cx-bw/2, P.l), Wd-P.r-bw); const y=Y(b.v);
+      if (b.v) svg += `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${bw.toFixed(1)}" height="${(P.t+ph-y).toFixed(1)}" rx="${Math.min(5,bw/2)}" fill="#E0466B" opacity=".85"/>`;
+      model.push({x:cx, y: b.v?y:P.t+ph-6, label:`${md(b.date)} 当周`, val:`喝酒 ${b.v} 天`}); });
+    svg += `<text x="${P.l}" y="${P.t-6}">每周喝酒天数</text>`;
+    let best=0, cur=0; for (let d=new Date(start); d<=end; d=addDays(d,1)){ if (inRange.some(r=>r.date===ds(d)&&r.drink)) cur=0; else { cur++; best=Math.max(best,cur); } }
+    const weeks = Math.max(1, nDays/7);
+    $('trendStats').innerHTML = stat('喝酒天数', `${drinks.length} 天`) + stat('平均每周', `${(drinks.length/weeks).toFixed(1)} 天`) + stat('最长没喝', `${best} 天`) + stat('最近一次', drinks.length?md(drinks[drinks.length-1].date):'—');
+  } else if (m === 'run'){
     const weekly = nDays > 120; let bars = [];
     if (weekly){
       const map = new Map();
@@ -1919,6 +1988,7 @@ function renderChart(){
     $('trendStats').innerHTML = stat('区间变化', `<span class="delta ${Math.abs(ch)<.05?'':ch<0?'down':'up'}">${ch>0?'+':''}${ch.toFixed(1)}</span>`) + stat('平均', f1(avg)) + stat('最低 / 最高', `${f1(Math.min(...vals))}/${f1(Math.max(...vals))}`) + stat('记录次数', `${vals.length} 次`);
   }
   const by = P.t+ph;
+  if (m !== 'drink') drinks.forEach(r=>{ const x = X(r.date); svg += `<circle cx="${x.toFixed(1)}" cy="${by-3}" r="2.6" fill="#E0466B" opacity=".75"><title>${md(r.date)} 喝酒</title></circle>`; });
   xt.forEach((s,i)=>{ svg += `<text x="${X(s)}" y="${by+16}" text-anchor="${i===0?'start':i===xt.length-1?'end':'middle'}">${xLabel(s)}</text>`; });
   svg += `<line id="guide" x1="0" x2="0" y1="${P.t}" y2="${by}" stroke="var(--faint)" stroke-dasharray="3 3" visibility="hidden"/>`;
   wrap.innerHTML = `<svg viewBox="0 0 ${Wd} ${H}" width="${Wd}" height="${H}" role="img" aria-label="${meta.label}趋势图">${svg}</svg><div class="tip" id="tip" hidden></div>`;
@@ -2079,7 +2149,7 @@ function renderExams(){
     const ys = ms.map(x=>(x.date||'').slice(0,4)).filter(Boolean).sort(), y0 = ys[0], y1 = ys[ys.length-1];
     const hs = [...new Set(ms.map(x=>x.hospital).filter(Boolean))], nf = ms.reduce((a,x)=>a+(x.files||[]).length,0);
     return `<div class="rowwrap xwrap xgrp ${sel('g:'+gid)?'xpicked':''}"><div class="xrow ex">
-      <span class="xgbg"></span><span class="xc xd grp"><b class="yr">${y0===y1?y0:`${y0.slice(2)}–${y1.slice(2)}`}</b><small>年</small></span>
+      <span class="xgbg"></span><span class="xc xd grp"><b class="yr">${y0===y1?y0:`${y0.slice(2)}–${y1.slice(2)}`}<i>年</i></b></span>
       <button type="button" class="xc xg" data-xgroup="${esc(gid)}"><b>${esc(ms[0].groupName||'检查分组')}</b></button><button type="button" class="xc xgc" data-xgroup="${esc(gid)}"><svg viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><em>${ms.length} 项</em><span class="chev">›</span></button>
       <span class="xc xh ${hs.length?'':'none'}">${hs.length>1?`${hs.length}家`:hs.length?esc(hs[0]):'—'}</span>
       <span class="xc xf ${nf?'':'none'}">${CLIP}<b>${nf||''}</b></span>
