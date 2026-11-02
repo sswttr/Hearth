@@ -1260,6 +1260,140 @@ html.glass .topbar::before{left:-16px!important;right:-16px!important}
 /* v49: today date readable */
 .ddate.today,.grp .ddate.today,html.glass .ddate.today{color:var(--ink)!important;background:var(--g-fill,var(--fill))!important;box-shadow:inset 0 0 0 1.5px var(--blue)!important}
 .ddate.today *{color:var(--ink)!important}
+
+/* ===== v50: restrained glass — glass only on controls, content stays calm ===== */
+html.glass{--g-bg:#F2F2F6;--g-card:#FFFFFF;--g-fill:#F2F2F6;--g-edge:rgba(0,0,0,.05);--g-hi:rgba(255,255,255,0);--fill:#F2F2F6;--line:rgba(0,0,0,.07)}
+@media (prefers-color-scheme:dark){html.glass:not([data-theme="light"]){--g-bg:#000;--g-card:#1C1C1E;--g-fill:#2C2C2E;--g-edge:rgba(255,255,255,.06);--fill:#2C2C2E;--line:rgba(255,255,255,.08)}}
+html.glass[data-theme="dark"]{--g-bg:#000;--g-card:#1C1C1E;--g-fill:#2C2C2E;--g-edge:rgba(255,255,255,.06);--fill:#2C2C2E;--line:rgba(255,255,255,.08)}
+/* softer backdrop: one faint warm wash at the top only */
+html.glass body::before{inset:0!important;height:340px!important;background:radial-gradient(70% 100% at 15% 0%,rgba(255,170,190,.22),transparent 70%),radial-gradient(60% 90% at 95% 0%,rgba(255,205,160,.20),transparent 70%)!important;opacity:1!important}
+html.glass .mv::before{display:none}
+/* content cards: solid, quiet */
+html.glass .grp,html.glass .card:not([class*="hero"]):not(.prof),html.glass .ins-p,html.glass .cmx,html.glass .tile:not([style*="--tc-soft"]){
+ background:var(--g-card)!important;border:0!important;box-shadow:0 1px 2px rgba(0,0,0,.04),0 6px 18px -12px rgba(0,0,0,.12)!important;border-radius:24px}
+/* colored panels: no extra sheen or glow */
+html.glass [class*="hero-"],html.glass .ins-hero,html.glass .watchc,html.glass .prof{box-shadow:0 8px 22px -16px rgba(0,0,0,.35)!important;border-radius:20px}
+html.glass .ins-hero::after,html.glass .watchc::after,html.glass .hero-blue::after{display:none}
+html.glass .hero-amber.wlite{background:var(--c-waist-soft)!important;box-shadow:none!important}
+/* cells & chips: flat */
+html.glass .xc:not([style]):not(.hi):not(.ok),html.glass .ddate{background:var(--g-fill)!important;box-shadow:none!important}
+html.glass .xc[style],html.glass .dc{box-shadow:none!important}
+html.glass .xgrp .xgbg{background:var(--c-exam-soft);box-shadow:none}
+html.glass .seg{box-shadow:none}
+html.glass .seg button[aria-pressed="true"]{background:var(--g-card);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+html.glass .btn:not(.soft){box-shadow:none}
+html.glass .btn.soft,html.glass .chip2,html.glass .addmini,html.glass .xback{background:var(--g-fill)!important;box-shadow:none!important}
+html.glass .sh .sico{box-shadow:none}
+html.glass .avatar{box-shadow:0 2px 8px -4px rgba(0,0,0,.3)!important}
+html.glass .sheet{background:var(--g-card)!important;border:0;box-shadow:0 -10px 40px -16px rgba(0,0,0,.3)!important}
+/* glass kept only where iOS uses it: top buttons + tab bar */
+html.glass .cbtn{background:rgba(255,255,255,.7)!important;border:.5px solid rgba(0,0,0,.06)!important;-webkit-backdrop-filter:blur(16px) saturate(180%);backdrop-filter:blur(16px) saturate(180%);box-shadow:0 2px 10px -6px rgba(0,0,0,.25)!important}
+html.glass nav.tabs{background:rgba(250,250,252,.55)!important;-webkit-backdrop-filter:blur(18px) saturate(180%)!important;backdrop-filter:blur(18px) saturate(180%)!important;border:.5px solid rgba(0,0,0,.06)!important;box-shadow:0 8px 24px -12px rgba(0,0,0,.25)!important}
+html.glass nav.tabs button[aria-selected="true"]{background:rgba(0,0,0,.06)!important;box-shadow:none!important}
+@media (prefers-color-scheme:dark){html.glass:not([data-theme="light"]) .cbtn{background:rgba(44,44,46,.7)!important;border-color:rgba(255,255,255,.08)!important}
+ html.glass:not([data-theme="light"]) nav.tabs{background:rgba(30,30,32,.55)!important;border-color:rgba(255,255,255,.08)!important}
+ html.glass:not([data-theme="light"]) nav.tabs button[aria-selected="true"]{background:rgba(255,255,255,.1)!important}
+ html.glass:not([data-theme="light"]) body::before{opacity:.35!important}}
+
+/* ===== v51: mature palette for 个人信息 + 3-up stat row ===== */
+#page-daily{--c-weight:#3E5C82;--c-weight-soft:#EDF1F6;--c-waist:#7A6488;--c-waist-soft:#F2EFF4;--c-run:#4E7C68;--c-run-soft:#EDF3F0;--c-month:#8A6D4A;--c-month-soft:#F4F0EA;--hero-blue:linear-gradient(145deg,#1C2533 0%,#2A3A52 60%,#3A5272 100%)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) #page-daily{--c-weight:#8FAED3;--c-weight-soft:#1D2530;--c-waist:#B9A3C8;--c-waist-soft:#251F2A;--c-run:#8CC2A8;--c-run-soft:#1B2622;--c-month:#D2B48C;--c-month-soft:#29231C}}
+:root[data-theme="dark"] #page-daily{--c-weight:#8FAED3;--c-weight-soft:#1D2530;--c-waist:#B9A3C8;--c-waist-soft:#251F2A;--c-run:#8CC2A8;--c-run-soft:#1B2622;--c-month:#D2B48C;--c-month-soft:#29231C}
+#page-daily .hero-blue .delta.down{color:#9BE3BF!important}
+#page-daily .duo{display:block}
+.stat3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.s3{background:var(--fill);border-radius:16px;padding:11px 12px 10px;min-width:0;display:flex;flex-direction:column;gap:3px}
+.s3l{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--muted);white-space:nowrap}
+.s3l i{width:6px;height:6px;border-radius:50%;flex:none}
+.s3l em{font-style:normal;margin-left:auto;font-size:11px;color:var(--faint)}
+.s3 > b{font-family:var(--f-num);font-size:26px;font-weight:700;line-height:1.05;color:var(--ink);white-space:nowrap}
+.s3 > b small{font-family:var(--f-body);font-size:11.5px;font-weight:500;color:var(--muted);margin-left:2px}
+.s3s{display:flex;flex-direction:column;gap:1px;font-size:11px;color:var(--muted);line-height:1.35;min-width:0}
+.s3s span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.s3s b{font-weight:600;color:var(--ink-2)}
+.s3s .prog{margin-top:4px;height:4px}
+@media (max-width:370px){.s3{padding:10px 9px}.s3 > b{font-size:22px}}
+/* calmer section icons + buttons on this page */
+#page-daily .sh .sico{background:color-mix(in srgb,var(--sc) 12%,var(--card))!important}
+#page-daily .sh .sico svg{stroke:var(--sc)}
+#page-daily .sh[style*="--c-dark"] .sico{background:var(--fill)!important}
+#page-daily .sh[style*="--c-dark"] .sico svg{stroke:var(--ink)}
+#page-daily .blk{background:var(--ink)!important;color:var(--card)!important}
+#page-daily .rng button[aria-pressed="true"]{background:var(--ink)!important;color:var(--card)!important}
+#page-daily .tstats > div{background:var(--fill)!important}
+/* daily rows: quieter cells, numbers carry the color */
+#page-daily .dc.w b{color:var(--ink)}
+#page-daily .dc.wa b{color:var(--c-waist)}
+#page-daily .dc.r b{color:var(--c-run)}
+#page-daily .more{background:var(--fill)!important;color:var(--ink-2)!important}
+#page-daily .more svg{stroke:var(--ink-2)}
+#page-daily .dc.dr2.yes{background:#F4E4E8!important}
+#page-daily .dc.dr2.yes svg{stroke:#B04A62}
+#page-daily .dc.dr2.yes svg .liq{fill:#B04A62}
+
+/* ===== v52: color back, but mature (deep jewel tones) ===== */
+#page-daily{--c-weight:#2F5F98;--c-weight-soft:#E3ECF7;--c-waist:#7B4F9E;--c-waist-soft:#EEE6F5;--c-run:#1F8A6E;--c-run-soft:#DFF1EA;--c-month:#C07A2C;--c-month-soft:#F8EBDA;--hero-blue:linear-gradient(145deg,#17263F 0%,#22406A 55%,#2F5F98 100%)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) #page-daily{--c-weight:#7FA9DE;--c-weight-soft:#17263A;--c-waist:#C3A2E0;--c-waist-soft:#261C30;--c-run:#6FD0B0;--c-run-soft:#122A23;--c-month:#E8B070;--c-month-soft:#2C2114}}
+:root[data-theme="dark"] #page-daily{--c-weight:#7FA9DE;--c-weight-soft:#17263A;--c-waist:#C3A2E0;--c-waist-soft:#261C30;--c-run:#6FD0B0;--c-run-soft:#122A23;--c-month:#E8B070;--c-month-soft:#2C2114}
+/* stat tiles: tinted with colored numbers */
+.stat3 .s3:nth-child(1){background:var(--c-waist-soft)}
+.stat3 .s3:nth-child(2){background:var(--c-run-soft)}
+.stat3 .s3:nth-child(3){background:var(--c-month-soft)}
+.stat3 .s3:nth-child(1) > b{color:var(--c-waist)}
+.stat3 .s3:nth-child(2) > b{color:var(--c-run)}
+.stat3 .s3:nth-child(3) > b{color:var(--c-month)}
+.s3l{color:var(--ink-2)}
+.s3l i{width:7px;height:7px}
+/* section icons: solid color again */
+#page-daily .sh .sico{background:var(--sc)!important}
+#page-daily .sh .sico svg{stroke:#fff}
+#page-daily .sh[style*="--c-dark"] .sico{background:#2B2F38!important}
+#page-daily .sh[style*="--c-dark"] .sico svg{stroke:#fff}
+#page-daily .blk{background:var(--c-weight)!important;color:#fff!important}
+#page-daily .rng button[aria-pressed="true"]{background:var(--c-run)!important;color:#fff!important}
+#page-daily .tstats > div{background:var(--c-run-soft)!important}
+/* daily rows: tinted cells, colored values */
+#page-daily .dc.w b{color:var(--c-weight)}
+#page-daily .more{background:var(--c-weight-soft)!important;color:var(--c-weight)!important}
+#page-daily .more svg{stroke:var(--c-weight)}
+#page-daily .dc.dr2.yes{background:#F8DCE3!important}
+#page-daily .dc.dr2.yes svg{stroke:#C2385A}
+#page-daily .dc.dr2.yes svg .liq{fill:#C2385A}
+
+/* ===== v53: brighter, clean iOS palette + compact stat row ===== */
+#page-daily{--c-weight:#2563EB;--c-weight-soft:#E6EEFE;--c-waist:#8B5CF6;--c-waist-soft:#F0EBFE;--c-run:#10B981;--c-run-soft:#E1F7EF;--c-month:#F97316;--c-month-soft:#FFEEDF;--hero-blue:linear-gradient(140deg,#1E3A8A 0%,#2563EB 60%,#3B82F6 100%)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) #page-daily{--c-weight:#60A5FA;--c-weight-soft:#15233F;--c-waist:#A78BFA;--c-waist-soft:#231A3D;--c-run:#34D399;--c-run-soft:#0F2A22;--c-month:#FB923C;--c-month-soft:#2E1E10}}
+:root[data-theme="dark"] #page-daily{--c-weight:#60A5FA;--c-weight-soft:#15233F;--c-waist:#A78BFA;--c-waist-soft:#231A3D;--c-run:#34D399;--c-run-soft:#0F2A22;--c-month:#FB923C;--c-month-soft:#2E1E10}
+#page-daily .sh[style*="--c-dark"] .sico{background:linear-gradient(140deg,#FF6B6B,#F97316)!important}
+#page-daily .dc.dr2.yes{background:#FFE1E8!important}
+#page-daily .dc.dr2.yes svg{stroke:#F43F5E}
+#page-daily .dc.dr2.yes svg .liq{fill:#F43F5E}
+/* compact stat row */
+.stat3{gap:7px}
+.s3{padding:9px 11px 9px;gap:1px;border-radius:14px}
+.s3l{font-size:11.5px}
+.s3 > b{font-size:23px}
+.s3s{flex-direction:row;font-size:10.5px}
+.s3s span + span{display:none}
+.s3s .prog{display:none}
+
+/* ===== v54: palette B 暮光莓 (matches Hearth icon) ===== */
+#page-daily{--c-weight:#8E3E6A;--c-weight-soft:#F7E9F0;--c-waist:#7A5BC7;--c-waist-soft:#EFEAFA;--c-run:#1E9E72;--c-run-soft:#E1F4EC;--c-month:#E5772E;--c-month-soft:#FDEDE1;
+ --hero-blue:radial-gradient(120% 90% at 100% 0%,rgba(255,170,120,.40),transparent 55%),linear-gradient(145deg,#2A1838 0%,#5A2A5C 55%,#A8476F 100%)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) #page-daily{--c-weight:#E58CB5;--c-weight-soft:#2E1724;--c-waist:#B9A0F0;--c-waist-soft:#231C38;--c-run:#4FD1A0;--c-run-soft:#10291F;--c-month:#F8A060;--c-month-soft:#2F1F12}}
+:root[data-theme="dark"] #page-daily{--c-weight:#E58CB5;--c-weight-soft:#2E1724;--c-waist:#B9A0F0;--c-waist-soft:#231C38;--c-run:#4FD1A0;--c-run-soft:#10291F;--c-month:#F8A060;--c-month-soft:#2F1F12}
+#page-daily .hero-blue{background:var(--hero-blue)!important}
+#page-daily .sh[style*="--c-dark"] .sico{background:linear-gradient(140deg,#F0507A,#FF8A3D)!important}
+#page-daily .rng button[aria-pressed="true"]{background:var(--c-weight)!important}
+#page-daily .tstats > div{background:var(--c-weight-soft)!important}
+#page-daily .sh[style*="--c-run"] .sico{background:var(--c-weight)!important}
+
+/* ===== v55: no pink — night indigo weight, run/month share one green ===== */
+#page-daily{--c-weight:#3F57A6;--c-weight-soft:#E9EDF8;--c-run:#1E9E72;--c-run-soft:#E1F4EC;--c-month:#1E9E72;--c-month-soft:#E1F4EC;
+ --hero-blue:radial-gradient(120% 90% at 100% 0%,rgba(255,180,110,.32),transparent 55%),linear-gradient(145deg,#1B1430 0%,#2D2A5E 55%,#4459A6 100%)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) #page-daily{--c-weight:#93A8E8;--c-weight-soft:#1A2038;--c-run:#4FD1A0;--c-run-soft:#10291F;--c-month:#4FD1A0;--c-month-soft:#10291F}}
+:root[data-theme="dark"] #page-daily{--c-weight:#93A8E8;--c-weight-soft:#1A2038;--c-run:#4FD1A0;--c-run-soft:#10291F;--c-month:#4FD1A0;--c-month-soft:#10291F}
+#page-daily .sh[style*="--c-dark"] .sico{background:linear-gradient(140deg,#FF8A3D,#F5B041)!important}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
@@ -1289,16 +1423,11 @@ html.glass .topbar::before{left:-16px!important;right:-16px!important}
         <div class="wrow"><div class="val big" id="hWeight">—</div><div class="spark" id="hWeightSpark"></div></div>
         <div class="meta" id="hWeightMeta"><span>暂无记录</span></div>
       </div>
-      <div class="card hero hero-amber big2 wlite">
-        <div class="lbl">腰围 <span class="chip" id="tWaistDate">暂无</span></div>
-        <div class="val big" id="tWaist">—</div>
-        <div class="meta" id="tWaistSub"><span>暂无记录</span></div>
-      </div>
     </div>
-
-    <div class="tiles duo2">
-      <div class="tile" style="--tc:var(--c-run);--tc-soft:var(--c-run-soft)"><div class="ico" style="background:var(--c-run)"><svg viewBox="0 0 24 24"><circle cx="15" cy="4.5" r="1.8"/><path d="M8 21l3-6 3 2 1 5M6 12l3-4 4 1 2 4 3 1"/></svg></div><div class="t"><span>本周跑量</span><b id="tWeek">0<small>km</small></b><em id="tWeekSub"></em></div></div>
-      <div class="tile" style="--tc:var(--c-month);--tc-soft:var(--c-month-soft)"><div class="ico" style="background:var(--c-month)"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="3"/><path d="M4 10h16M9 3v4M15 3v4"/></svg></div><div class="t"><span>本月跑量</span><b id="tMonth">0<small>km</small></b><em id="tMonthSub"></em></div></div>
+    <div class="stat3">
+      <div class="s3"><span class="s3l"><i style="background:var(--c-waist)"></i>腰围<em id="tWaistDate"></em></span><b id="tWaist">—</b><div class="s3s" id="tWaistSub"></div></div>
+      <div class="s3"><span class="s3l"><i style="background:var(--c-run)"></i>本周跑量</span><b id="tWeek">0<small>km</small></b><div class="s3s" id="tWeekSub"></div></div>
+      <div class="s3"><span class="s3l"><i style="background:var(--c-month)"></i>本月跑量</span><b id="tMonth">0<small>km</small></b><div class="s3s" id="tMonthSub"></div></div>
     </div>
     </section>
 
@@ -1370,7 +1499,7 @@ html.glass .topbar::before{left:-16px!important;right:-16px!important}
 
     <section class="grp">
     <div class="sh soft" style="--sc:#A35BD6;--sc-soft:#F3E8FC"><span class="sico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 0 0 16z" fill="currentColor"/></svg></span><h2>外观</h2></div>
-    <div class="seg" id="lookSeg"><button type="button" data-look="glass" aria-pressed="true">液态玻璃</button><button type="button" data-look="classic" aria-pressed="false">经典</button></div>
+    <div class="seg" id="lookSeg"><button type="button" data-look="glass" aria-pressed="true">简约玻璃</button><button type="button" data-look="classic" aria-pressed="false">经典</button></div>
     </section>
     <section class="grp">
     <div class="sh soft" style="--sc:#4F6BED;--sc-soft:#ECEFFE"><span class="sico"><svg viewBox="0 0 24 24"><path d="M7 18a5 5 0 0 1-.6-9.96A6 6 0 0 1 18 9a4.5 4.5 0 0 1-1 8.9H7z"/></svg></span><h2>数据备份</h2><div class="r"><span class="hintchip">仅自己可见</span></div></div>
@@ -1731,20 +1860,20 @@ function renderOverview(){
   const Wa = latest('waist');
   $('tWaist').innerHTML = Wa ? `${f1(Wa.waist)}<small>cm</small>` : '—';
   const line = st.sex==='m'?90:st.sex==='f'?85:null;
-  $('tWaistDate').textContent = Wa ? (Wa.date===tS ? '今天' : cn(Wa.date)) : '暂无';
+  $('tWaistDate').textContent = Wa ? (Wa.date===tS ? '今天' : md(Wa.date)) : '';
   const wm = [];
   if (Wa){ const pw = valueNear('waist', ds(addDays(pd(Wa.date), -7))); if (pw && pw.date!==Wa.date){ const d=Wa.waist-pw.waist; wm.push(`较上周 <b class="delta ${Math.abs(d)<.05?'':d<0?'down':'up'}">${d>0?'+':''}${d.toFixed(1)} cm</b>`); }
     if (line) wm.push(Wa.waist>=line ? `<b class="delta up">超风险线</b>` : `风险线内`);
     if (st.targetWaist) wm.push(`目标差 <b>${(Wa.waist-st.targetWaist).toFixed(1)}</b>`); }
-  $('tWaistSub').innerHTML = metaLines(wm.length ? wm : [Wa ? '设置性别可看风险线' : '暂无记录']);
+  $('tWaistSub').innerHTML = (wm.length ? wm.slice(0,2) : [Wa ? '设置性别可看风险线' : '暂无记录']).map(x=>`<span>${x}</span>`).join('');
 
   const wkS = ds(weekStart(t)), moS = ds(new Date(t.getFullYear(), t.getMonth(), 1));
   const wk = sumRun(wkS, tS), mo = sumRun(moS, tS);
   $('tWeek').innerHTML = `${f2(wk)}<small>km</small>`;
   $('tMonth').innerHTML = `${f2(mo)}<small>km</small>`;
   const prog = (v,g,c) => `<div class="prog"><i style="width:${Math.min(100,v/g*100)}%;background:var(${c})"></i></div>`;
-  $('tWeekSub').innerHTML = st.weekGoal ? `目标 ${st.weekGoal} km${prog(wk,st.weekGoal,'--c-run')}` : `跑了 ${S.daily.filter(r=>r.date>=wkS && r.run>0).length} 天`;
-  $('tMonthSub').innerHTML = st.monthGoal ? `目标 ${st.monthGoal} km${prog(mo,st.monthGoal,'--c-month')}` : `跑了 ${S.daily.filter(r=>r.date>=moS && r.run>0).length} 天`;
+  $('tWeekSub').innerHTML = st.weekGoal ? `<span>目标 ${st.weekGoal}</span>${prog(wk,st.weekGoal,'--c-run')}` : `跑了 ${S.daily.filter(r=>r.date>=wkS && r.run>0).length} 天`;
+  $('tMonthSub').innerHTML = st.monthGoal ? `<span>目标 ${st.monthGoal}</span>${prog(mo,st.monthGoal,'--c-month')}` : `跑了 ${S.daily.filter(r=>r.date>=moS && r.run>0).length} 天`;
 }
 
 /* ---------- 日常: record form ---------- */
