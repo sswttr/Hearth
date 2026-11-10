@@ -1394,6 +1394,60 @@ html.glass nav.tabs button[aria-selected="true"]{background:rgba(0,0,0,.06)!impo
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) #page-daily{--c-weight:#93A8E8;--c-weight-soft:#1A2038;--c-run:#4FD1A0;--c-run-soft:#10291F;--c-month:#4FD1A0;--c-month-soft:#10291F}}
 :root[data-theme="dark"] #page-daily{--c-weight:#93A8E8;--c-weight-soft:#1A2038;--c-run:#4FD1A0;--c-run-soft:#10291F;--c-month:#4FD1A0;--c-month-soft:#10291F}
 #page-daily .sh[style*="--c-dark"] .sico{background:linear-gradient(140deg,#FF8A3D,#F5B041)!important}
+
+/* ===== v57: one design system across all four pages ===== */
+:root{--brand:#3F57A6;--brand-soft:#E9EDF8;--blue:#3F57A6;--blue-soft:#E9EDF8;--btn:#3F57A6;--btn-ink:#fff;
+ --c-weight:#3F57A6;--c-weight-soft:#E9EDF8;--c-waist:#7A5BC7;--c-waist-soft:#EFEAFA;--c-run:#1E9E72;--c-run-soft:#E1F4EC;--c-month:#1E9E72;--c-month-soft:#E1F4EC;
+ --c-exam:#1B8FA6;--c-exam-soft:#E0F1F5;--c-check:#D24B63;--c-check-soft:#FBE9ED;--warn:#E08A2E;--bad:#D24B63;--bad-soft:#FBE9ED;--good:#1E9E72;
+ --hero-night:radial-gradient(120% 90% at 100% 0%,rgba(255,180,110,.30),transparent 55%),linear-gradient(145deg,#1B1430 0%,#2D2A5E 55%,#4459A6 100%);
+ --hero-wine:radial-gradient(120% 90% at 100% 0%,rgba(255,160,120,.26),transparent 55%),linear-gradient(145deg,#2A1226 0%,#5C1B3A 55%,#9A2F4C 100%)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--brand:#93A8E8;--brand-soft:#1A2038;--blue:#93A8E8;--blue-soft:#1A2038;--btn:#5670C4;--btn-ink:#fff;
+ --c-weight:#93A8E8;--c-weight-soft:#1A2038;--c-waist:#B9A0F0;--c-waist-soft:#231C38;--c-run:#4FD1A0;--c-run-soft:#10291F;--c-month:#4FD1A0;--c-month-soft:#10291F;
+ --c-exam:#5CC3D8;--c-exam-soft:#0F2A31;--c-check:#F08098;--c-check-soft:#35161E;--bad:#F08098;--bad-soft:#35161E;--good:#4FD1A0}}
+:root[data-theme="dark"]{--brand:#93A8E8;--brand-soft:#1A2038;--blue:#93A8E8;--blue-soft:#1A2038;--btn:#5670C4;--btn-ink:#fff;
+ --c-weight:#93A8E8;--c-weight-soft:#1A2038;--c-waist:#B9A0F0;--c-waist-soft:#231C38;--c-run:#4FD1A0;--c-run-soft:#10291F;--c-month:#4FD1A0;--c-month-soft:#10291F;
+ --c-exam:#5CC3D8;--c-exam-soft:#0F2A31;--c-check:#F08098;--c-check-soft:#35161E;--bad:#F08098;--bad-soft:#35161E;--good:#4FD1A0}
+/* one hero family */
+.hero-blue,.prof,.ins-hero.v2{background:var(--hero-night)!important}
+.watchc{background:var(--hero-wine)!important}
+html.glass [class*="hero-"]:not(.wlite),html.glass .ins-hero,html.glass .watchc,html.glass .prof{border-radius:22px!important}
+/* neutral page wash (no pink) */
+html.glass body::before{background:radial-gradient(70% 100% at 10% 0%,rgba(110,130,220,.16),transparent 70%),radial-gradient(60% 90% at 95% 0%,rgba(255,196,140,.18),transparent 70%)!important}
+/* no nested shadows inside a section card */
+html.glass .grp .card:not([class*="hero"]):not(.prof):not(#_){box-shadow:none!important}
+/* section header icons: same solid style everywhere */
+.sh .sico,.sh.soft .sico{background:var(--sc)!important;box-shadow:none}
+.sh .sico svg,.sh.soft .sico svg{stroke:#fff!important}
+#page-set .sh[style*="#4F6BED"]{--sc:var(--brand)}
+#page-set .sh[style*="#A35BD6"]{--sc:var(--c-waist)}
+#page-ins .sh[style*="--c-check"]{--sc:var(--brand)}
+/* buttons */
+.pill2.solid{background:var(--brand)!important;color:#fff!important}
+.ins-sec.t .pill2.solid{background:var(--warn)!important}
+.ins-sec.t .h b{color:var(--ink)!important}
+.ins-sec.t .h b::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--warn);margin-right:7px;vertical-align:middle;transform:translateY(-2px)}
+.ins-sec{flex-wrap:nowrap!important}
+.ins-sec .h{min-width:0;flex:1}
+.ins-sec .h b{white-space:nowrap}
+.ins-sec .h span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.ins-sec .acts{flex:none}
+.sh[style*="--c-check"]:not(.grp-h){--sc:var(--brand)!important}
+/* quieter row actions */
+.frow2 .linkbtn{background:var(--fill);color:var(--ink-2);font-size:12.5px;font-weight:600;padding:5px 10px;margin-left:4px}
+.frow2 .linkbtn:not(.mg){color:var(--bad)}
+/* daily rows: cells already separate the rows — drop the extra rules */
+.grp .drow + .drow{border-top:0!important}
+.grp .drow{padding:4px 0!important}
+.dhead{border-bottom:0!important;padding-bottom:4px!important}
+/* lighter data cells on white cards */
+html.glass .xc:not([style]):not(.hi):not(.ok),html.glass .ddate{background:#F5F5F8!important}
+@media (prefers-color-scheme:dark){html.glass:not([data-theme="light"]) .xc:not([style]):not(.hi):not(.ok),html.glass:not([data-theme="light"]) .ddate{background:#26262A!important}}
+.xa.hi{background:var(--bad-soft)!important;color:var(--bad)!important}
+/* consistent rhythm */
+html.glass .grp{padding-bottom:16px}
+.cm-c.none{background:#F5F5F8;opacity:1;color:var(--faint)}
+html.glass nav.tabs button[aria-selected="true"]{color:var(--brand)!important}
+#page-ins .sh .sico{background:var(--brand)!important}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
@@ -2635,7 +2689,7 @@ $('pfBack').onclick = closeProfile;
 
 /* ---------- family insurance ---------- */
 const PTYPES = ['重疾险','医疗险','意外险','寿险','年金险','教育金','车险','财产险','其他'];
-const PCOL = {'重疾险':'#E0567A','医疗险':'#16A394','意外险':'#E5852A','寿险':'#7C5CD6','年金险':'#3E9A52','教育金':'#2F86CC','车险':'#4F63D2','财产险':'#B4683F','其他':'#8E8E93'};
+const PCOL = {'重疾险':'#D24B63','医疗险':'#1E9E72','意外险':'#E08A2E','寿险':'#7A5BC7','年金险':'#3E9A52','教育金':'#2F86CC','车险':'#4F63D2','财产险':'#B4683F','其他':'#8E8E93'};
 const money = n => '¥' + Number(n||0).toLocaleString('zh-CN', {maximumFractionDigits:2});
 const fee = p => Number(p.premium)||0;
 const b64Blob = (d,type) => { const bin=atob(d); const u=new Uint8Array(bin.length); for(let i=0;i<bin.length;i++) u[i]=bin.charCodeAt(i); return new Blob([u],{type:type||'application/octet-stream'}); };
